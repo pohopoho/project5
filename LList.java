@@ -9,6 +9,7 @@
  */
 package prj5;
 
+import org.w3c.dom.Node;
 // import linkedlist.SinglyLinkedList;
 // import linkedlist.SinglyLinkedList.Node;
 import list.ListInterface;
@@ -32,7 +33,6 @@ public class LList<T> implements ListInterface<T> {
     public LList() {
         head = new Node<T>(null);
         tail = new Node<T>(null);
-        current = head;
         size = 0;
     }
 
@@ -61,7 +61,8 @@ public class LList<T> implements ListInterface<T> {
                 head.setNext(newEntry);
             }
             else {
-                for (int i = 0; i < position; i++) {
+                current = head.nextNode;
+                for (int i = 1; i < position; i++) {
                     current = current.nextNode;
                 }
                 current.setNext(newEntry);
@@ -77,10 +78,7 @@ public class LList<T> implements ListInterface<T> {
 
     @Override
     public void clear() {
-        if (head != null) {
-            head.nextNode = null;
-            head = null;
-        }
+        head.nextNode = null;
         size = 0;
     }
 
@@ -90,6 +88,7 @@ public class LList<T> implements ListInterface<T> {
         if (anEntry == null || isEmpty()) {
             return false;
         }
+        current = head.nextNode;
         for (int i = 0; i < size; i++) {
             if (current.data.equals(anEntry)) {
                 return true;
@@ -102,8 +101,9 @@ public class LList<T> implements ListInterface<T> {
 
     @Override
     public T getEntry(int position) {
+        current = head.nextNode;
         if (position == 0) {
-            return current.getData();
+            return current.nextNode.getData();
         }
         else if (position < 0 || position >= size) {
             throw new IndexOutOfBoundsException(
@@ -111,7 +111,7 @@ public class LList<T> implements ListInterface<T> {
         }
         else {
             for (int i = 0; i <= position; i++) {
-                current = current.next();
+                current = current.nextNode;
             }
             return current.getData();
         }
@@ -132,17 +132,17 @@ public class LList<T> implements ListInterface<T> {
 
     @Override
     public T remove(int index) {
-        if (index) {
-            return false;
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException(
+                "Illegal index value! Please enter a valid index value.");
         }
-        for (int i = 0; i < size; i++) {
-            if (current.nextNode.getData().equals(anEntry)) {
-                current.setNext(current.nextNode.nextNode);
-                return true;
-            }
+        for (int i = 0; i < index; i++) {
             current = current.nextNode;
         }
-        return false;
+        Node<T> result = current.nextNode;
+        current.nextNode = current.nextNode.nextNode;
+        size--;
+        return result.getData();
     }
 
 
@@ -163,14 +163,28 @@ public class LList<T> implements ListInterface<T> {
 
     @Override
     public T replace(int index, T anEntry) {
-
+        if (anEntry == null || index < 0 || index > size) {
+            throw new IllegalArgumentException(
+                "Invalid argument! Please pass a valid argument.");
+        }
+        for (int i = 0; i < index; i++) {
+            current = current.nextNode;
+        }
+        T result = current.nextNode.getData();
+        current.nextNode.setData(anEntry);
     }
 
 
     @Override
     public Object[] toArray() {
-        // TODO Auto-generated method stub
-        return null;
+        if (isEmpty()) {
+            throw new IllegalStateException("The queue is empty");
+        }
+        Object[] arr = new Object[size];
+        for (int i = 0; i < size; i++) {
+            arr[i] = getEntry(i);
+        }
+        return arr;
     }
 
 
@@ -225,6 +239,10 @@ public class LList<T> implements ListInterface<T> {
             return data;
         }
 
+
+        public void setData(D anEntry) {
+            data = anEntry;
+        }
     }
 
 }
