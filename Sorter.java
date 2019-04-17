@@ -30,9 +30,9 @@ public class Sorter {
     public void sortByArtist()
     {
         String temp = new String();
-        for (int i = 0; i < songList.length; i++)
+        for (int i = 0; i < songList.getLength(); i++)
         {
-            for (int j = i + 1; j < songList.length; j++)
+            for (int j = i + 1; j < songList.getLength(); j++)
             {
                 if (songList[i].getArtist().compareToIgnoreCase(
                 songList[j].getArtist()) < 0)
@@ -51,9 +51,9 @@ public class Sorter {
     public void sortByTitle()
     {
         String temp = new String();
-        for (int i = 0; i < songList.length; i++)
+        for (int i = 0; i < songList.getLength(); i++)
         {
-            for (int j = i + 1; j < songList.length; j++)
+            for (int j = i + 1; j < songList.getLength(); j++)
             {
                 if (songList[i].getTitle().compareToIgnoreCase(
                 songList[j].getTitle()) < 0)
@@ -72,9 +72,9 @@ public class Sorter {
     public void sortByYear()
     {
         int temp = 0;
-        for (int i = 0; i < songList.length; i++)
+        for (int i = 0; i < songList.getLength(); i++)
         {
-            for (int j = i + 1; j < songList.length; j++)
+            for (int j = i + 1; j < songList.getLength(); j++)
             {
                 if (songList[i].getYear() <= songList[j].getYear())
                 {
@@ -92,14 +92,16 @@ public class Sorter {
     public void sortByGenre()
     {
         String temp = new String();
-        for (int i = 0; i < songList.length; i++)
+        for (int i = 0; i < songList.getLength(); i++)
         {
-            for (int j = i + 1; j < songList.length; j++)
+            for (int j = i + 1; j < songList.getLength(); j++)
             {
                 if (songList[i].getGenre().compareToIgnoreCase(
                     songList[j].getGenre()) == 0)
                 {
-                    
+                    temp = songList[i].getGenre();
+                    songList[i].getGenre() = songList[j].getGenre();
+                    songList[j].getGenre() = temp;
                 }
             }
         }
