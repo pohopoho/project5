@@ -167,18 +167,16 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
             throw new IllegalArgumentException(
                 "Invalid argument! Please pass a valid argument.");
         }
-        current = head;
-        if (index == 0) {
-            return head.nextNode.getData();
-        }
+        current = head.nextNode;
         int counter = 0;
-        while (counter != index) { 
-            current = current.nextNode; 
+        while(counter != index)
+        {
+            current = current.nextNode;
             counter++;
         }
         T result = current.getData();
-        current.nextNode.setData(anEntry);
-        return result; 
+        current.setData(anEntry);
+        return result;  
     }
  
  

@@ -173,7 +173,7 @@ public class LListTest extends student.TestCase {
         list.add("rihanna"); 
         assertEquals(list.replace(0, "kanye"), "mJ");
         list.add("oprah");
-        assertEquals(list.replace(3, "nick"), "oprah");
+        assertEquals(list.replace(1, "nick"), "rihanna");
          
     }
 }
