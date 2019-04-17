@@ -21,7 +21,7 @@ import list.ListInterface;
  * @version 04.14.2019
  *
  */
-public class LList<T> implements ListInterface<T> {
+public class LList<T> implements ListInterface<T>, Iterable<T> {
 
     private Node head;
     private Node tail;
@@ -39,7 +39,7 @@ public class LList<T> implements ListInterface<T> {
 
     @Override
     public void add(T anEntry) {
-        add(size, anEntry);
+        add(size+1, anEntry);
     }
 
 
@@ -150,7 +150,7 @@ public class LList<T> implements ListInterface<T> {
         current = head.nextNode;
         if (contains(anEntry)) {
             while (current != null) {
-                if (current.nextNode.getData().equals(anEntry)) {
+                if (current.getData().equals(anEntry)) {
                     current.setNext(current.nextNode.nextNode);
                     return true;
                 }
@@ -167,15 +167,21 @@ public class LList<T> implements ListInterface<T> {
             throw new IllegalArgumentException(
                 "Invalid argument! Please pass a valid argument.");
         }
-        for (int i = 0; i < index; i++) {
-            current = current.nextNode;
+        current = head;
+        if (index == 0) {
+            return head.nextNode.getData();
         }
-        T result = current.nextNode.getData();
+        int counter = 0;
+        while (counter != index) { 
+            current = current.nextNode; 
+            counter++;
+        }
+        T result = current.getData();
         current.nextNode.setData(anEntry);
-        return result;
+        return result; 
     }
-
-
+ 
+ 
     @Override
     public Object[] toArray() {
         if (isEmpty()) {
@@ -190,7 +196,7 @@ public class LList<T> implements ListInterface<T> {
 
 
     public int size() {
-        return size;
+        return size; 
     }
 
 

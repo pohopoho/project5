@@ -131,8 +131,49 @@ public class LListTest extends student.TestCase {
         list.add("cyrus");
         list.add("carly");
         list.add("rae");
-        assertTrue(list.remove("carly"));
+        assertTrue(list.remove("carly")); 
         //assertFalse(list.remove("drake"));
         
+    }
+    
+    /**
+     * Tests the replace method
+     */
+    public void testReplace() {
+        boolean thrown = false;
+        try {
+            list.replace(1, "s");
+        }
+        catch (IllegalArgumentException e) {
+            thrown = true;
+        }
+        assertTrue(thrown);
+        try {
+            list.replace(-1, "s");
+        }
+        catch (IllegalArgumentException e) {
+            thrown = true;
+        }
+        assertTrue(thrown);
+        try {
+            list.replace(1, null);
+        }
+        catch (IllegalArgumentException e) {
+            thrown = true;
+        }
+        assertTrue(thrown);
+        try {
+            list.replace(42, "s");
+        }
+        catch (IllegalArgumentException e) { 
+            thrown = true;
+        }
+        assertTrue(thrown);
+        list.add("mJ");
+        list.add("rihanna"); 
+        assertEquals(list.replace(0, "kanye"), "mJ");
+        list.add("oprah");
+        assertEquals(list.replace(3, "nick"), "oprah");
+         
     }
 }
