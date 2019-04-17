@@ -34,12 +34,17 @@ public class Sorter {
         {
             for (int j = i + 1; j < songList.getLength(); j++)
             {
-                if (songList[i].getArtist().compareToIgnoreCase(
-                songList[j].getArtist()) < 0)
+                if (songList.getEntry(i).getArtist().compareToIgnoreCase(
+                songList.getEntry(i).getArtist()) < 0)
                 {
-                    temp = songList[i].getArtist();
-                    songList[i].getArtist() = songList[j].getArtist();
-                    songList[j].getArtist() = temp;
+                    
+                    songList.replace(i, songList.getEntry(j));
+                    
+                    temp = songList.getEntry(i).getArtist();
+                    String strI = songList.getEntry(i).getArtist();
+                    strI = songList.getEntry(j).getArtist();
+                    String strJ = songList.getEntry(j).getArtist();
+                    strJ = temp;
                 }
             }
         }
@@ -55,12 +60,12 @@ public class Sorter {
         {
             for (int j = i + 1; j < songList.getLength(); j++)
             {
-                if (songList[i].getTitle().compareToIgnoreCase(
-                songList[j].getTitle()) < 0)
+                if (songList.getEntry(i).getTitle().compareToIgnoreCase(
+                songList.getEntry(j).getTitle()) < 0)
                 {
-                    temp = songList[i].getTitle();
-                    songList[i].getTitle() = songList[j].getTitle();
-                    songList[j].getTitle() = temp;
+                    temp = songList.getEntry(i).getTitle();
+                    songList.getEntry(i).getTitle() = songList[j].getTitle();
+                    songList.getEntry(j).getTitle() = temp;
                 }
             }
         }
@@ -76,11 +81,11 @@ public class Sorter {
         {
             for (int j = i + 1; j < songList.getLength(); j++)
             {
-                if (songList[i].getYear() <= songList[j].getYear())
+                if (songList.getEntry(i).getYear() <= songList.getEntry(j).getYear())
                 {
-                    temp = songList[i].getYear();
-                    songList[i].getYear() = songList[j].getYear();
-                    songList[j].getYear() = temp;
+                    temp = songList.getEntry(i).getYear();
+                    songList.getEntry(i).getYear() = songList[j].getYear();
+                    songList.getEntry(j).getYear() = temp;
                 }
             }
         }
@@ -96,12 +101,12 @@ public class Sorter {
         {
             for (int j = i + 1; j < songList.getLength(); j++)
             {
-                if (songList[i].getGenre().compareToIgnoreCase(
-                    songList[j].getGenre()) == 0)
+                if (songList.getEntry(i).getGenre().compareToIgnoreCase(
+                    songList.getEntry(j).getGenre()) == 0)
                 {
-                    temp = songList[i].getGenre();
-                    songList[i].getGenre() = songList[j].getGenre();
-                    songList[j].getGenre() = temp;
+                    temp = songList.getEntry(i).getGenre();
+                    songList.getEntry(i).getGenre() = songList[j].getGenre();
+                    songList.getEntry(j).getGenre() = temp;
                 }
             }
         }
