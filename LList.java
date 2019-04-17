@@ -9,7 +9,7 @@
  */
 package prj5;
 
-//import org.w3c.dom.Node;
+// import org.w3c.dom.Node;
 // import linkedlist.SinglyLinkedList;
 // import linkedlist.SinglyLinkedList.Node;
 import list.ListInterface;
@@ -23,46 +23,46 @@ import list.ListInterface;
  */
 public class LList<T> implements ListInterface<T> {
 
-    private Node<T> head;
-    private Node<T> tail;
-    // private Node lastNode;
+    private Node head;
+    private Node tail;
     private int size;
-    private Node<T> current;
+    private Node current;
 
 
     public LList() {
-        head = new Node<T>(null);
-        tail = new Node<T>(null);
+        head = new Node(null);
+        tail = new Node(null);
         size = 0;
+        head.setNext(tail);
     }
 
 
     @Override
     public void add(T anEntry) {
-        add(size+1, anEntry);
+        add(size, anEntry);
     }
 
 
     @Override
     public void add(int position, T anEntry) {
-        if ((position >= 1) && (position <= size+1)) {
-            Node<T> newEntry = new Node<T>(anEntry);
+        if ((position >= 0) && (position <= size + 1)) {
+            Node newEntry = new Node(anEntry);
             if (position == 1) {
                 head.setNext(newEntry);
-            } 
+            }
             else {
                 current = head;
                 for (int i = 1; i < position; i++) {
                     current = current.nextNode;
                 }
-                Node<T> nodeBefore = current;
-                Node<T> nodeAfter = current.nextNode;
+                Node nodeBefore = current;
+                Node nodeAfter = current.nextNode;
                 nodeBefore.setNext(newEntry);
                 newEntry.setNext(nodeAfter);
             }
-            size++; 
+            size++;
         }
-        else { 
+        else {
             throw new IndexOutOfBoundsException(
                 "Position for new entry is invalid:/ Please try again!");
         }
@@ -82,7 +82,7 @@ public class LList<T> implements ListInterface<T> {
             return false;
         }
         current = head.nextNode;
-        for (int i = 0; i < size; i++) {
+        while (current != null) {
             if (current.data.equals(anEntry)) {
                 return true;
             }
@@ -102,7 +102,7 @@ public class LList<T> implements ListInterface<T> {
             throw new IndexOutOfBoundsException(
                 "Position entered is invalid:/ Please try again!");
         }
-        else {
+        else {  
             for (int i = 0; i < position; i++) {
                 current = current.nextNode;
             }
@@ -126,16 +126,20 @@ public class LList<T> implements ListInterface<T> {
     @Override
     public T remove(int index) {
         if (index < 0 || index >= size) {
-            throw new IllegalArgumentException(
+            throw new IndexOutOfBoundsException(
                 "Illegal index value! Please enter a valid index value.");
         }
+        current = head.nextNode;
+        /*if (index == 0) {
+            return current.nextNode.getData();
+        }*/
         for (int i = 0; i < index; i++) {
             current = current.nextNode;
         }
-        Node<T> result = current.nextNode;
+        Node result = current.nextNode;
         current.nextNode = current.nextNode.nextNode;
         size--;
-        return result.getData();
+        return result.getData(); 
     }
 
 
@@ -143,12 +147,15 @@ public class LList<T> implements ListInterface<T> {
         if (anEntry == null || isEmpty()) {
             return false;
         }
-        for (int i = 0; i < size; i++) {
-            if (current.nextNode.getData().equals(anEntry)) {
-                current.setNext(current.nextNode.nextNode);
-                return true;
+        current = head.nextNode;
+        if (contains(anEntry)) {
+            while (current != null) {
+                if (current.nextNode.getData().equals(anEntry)) {
+                    current.setNext(current.nextNode.nextNode);
+                    return true;
+                }
+                current = current.nextNode;
             }
-            current = current.nextNode;
         }
         return false;
     }
@@ -168,6 +175,7 @@ public class LList<T> implements ListInterface<T> {
         return result;
     }
 
+
     @Override
     public Object[] toArray() {
         if (isEmpty()) {
@@ -182,7 +190,7 @@ public class LList<T> implements ListInterface<T> {
 
 
     public int size() {
-        return size; 
+        return size;
     }
 
 
@@ -197,7 +205,7 @@ public class LList<T> implements ListInterface<T> {
             @SuppressWarnings("unchecked")
             LList<T> other = ((LList<T>)obj);
             if (other.size() == this.size()) {
-                Node<T> otherCurrent = other.head;
+                Node otherCurrent = other.head;
                 while (current != null) {
                     if (!current.getData().equals(otherCurrent.getData())) {
                         return false;
@@ -213,27 +221,27 @@ public class LList<T> implements ListInterface<T> {
     }
 
 
-    private class Node<D> {
-        private D data;
-        private Node<D> nextNode;
+    private class Node {
+        private T data;
+        private Node nextNode;
 
 
-        public Node(D d) {
-            data = d;
+        public Node(T t) {
+            data = t;
         }
 
 
-        public void setNext(Node<D> next) {
+        public void setNext(Node next) {
             nextNode = next;
         }
 
 
-        public D getData() {
+        public T getData() {
             return data;
         }
 
 
-        public void setData(D anEntry) {
+        public void setData(T anEntry) {
             data = anEntry;
         }
     }

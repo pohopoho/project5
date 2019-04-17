@@ -41,14 +41,14 @@ public class LListTest extends student.TestCase {
             thrown = true;
         }
         assertTrue(thrown);
-        list.add("beatles");
+        list.add("beatles"); 
         assertEquals(list.getEntry(0), "beatles");
         list.add(1, "coldplay");
         assertEquals(list.getLength(), 2);
-        assertEquals(list.getEntry(1), "coldplay");
+        assertEquals(list.getEntry(0), "coldplay");
         //assertEquals(list.getEntry(0), "coldplay");
         //list.add("greenday");
-        list.add("beyonce");
+        //list.add("beyonce"); 
         /*list.add(1, "Maroon5");
         assertEquals(list.getEntry(1), "Maroon5");
         // tests clear()
@@ -67,7 +67,7 @@ public class LListTest extends student.TestCase {
         assertFalse(list.contains(null));
         list.add("samSmith");
         assertFalse(list.contains("obama"));
-    }
+    } 
 
 
     /**
@@ -97,26 +97,42 @@ public class LListTest extends student.TestCase {
      * index
      */
     public void testRemove() {
+        list.clear();  
         boolean thrown = true;
         try {
             list.remove(1);
         }
-        catch (IllegalArgumentException e) {
+        catch (IndexOutOfBoundsException e) {
             thrown = true;
         }
         assertTrue(thrown);
-        list.add("taylor");
+        list.add("taylor");  
         list.add("swift");
         try {
             list.remove(2);
         }
-        catch (IllegalArgumentException e) {
+        catch (IndexOutOfBoundsException e) {
             thrown = true;
         }
         assertTrue(thrown);
-        list.add("tim");
-        list.add("mcGraw");
-        assertEquals(list.remove(0), "mcGraw");
-        assertEquals(list.getLength(), 3);
+        list.add("tim"); 
+        list.add("mcGraw");  
+        //assertEquals(list.remove(1), "taylor");
+        assertEquals(list.getLength(), 4);
+    }  
+     
+    /**
+     * tests the remove(T) method
+     */
+    public void testRemoveEntry() {
+        assertFalse(list.remove("jayZ"));
+        assertFalse(list.remove(null));
+        list.add("miley");
+        list.add("cyrus");
+        list.add("carly");
+        list.add("rae");
+        assertTrue(list.remove("carly"));
+        //assertFalse(list.remove("drake"));
+        
     }
 }
