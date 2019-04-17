@@ -9,7 +9,7 @@
  */
 package prj5;
 
-import org.w3c.dom.Node;
+//import org.w3c.dom.Node;
 // import linkedlist.SinglyLinkedList;
 // import linkedlist.SinglyLinkedList.Node;
 import list.ListInterface;
@@ -39,37 +39,30 @@ public class LList<T> implements ListInterface<T> {
 
     @Override
     public void add(T anEntry) {
-        if (anEntry != null) {
-            add(size(), anEntry);
-        }
-        else {
-            throw new IllegalArgumentException(
-                "Entry passed is Illegal:/ Please try again!");
-        }
+        add(size+1, anEntry);
     }
 
 
     @Override
     public void add(int position, T anEntry) {
-        if (anEntry == null) {
-            throw new IllegalArgumentException(
-                "Entry passed is Illegal:/ Please try again!");
-        }
-        if (position >= 0 && position <= size) {
+        if ((position >= 1) && (position <= size+1)) {
             Node<T> newEntry = new Node<T>(anEntry);
-            if (position == 0) {
+            if (position == 1) {
                 head.setNext(newEntry);
-            }
+            } 
             else {
-                current = head.nextNode;
+                current = head;
                 for (int i = 1; i < position; i++) {
                     current = current.nextNode;
                 }
-                current.setNext(newEntry);
+                Node<T> nodeBefore = current;
+                Node<T> nodeAfter = current.nextNode;
+                nodeBefore.setNext(newEntry);
+                newEntry.setNext(nodeAfter);
             }
-            size++;
+            size++; 
         }
-        else {
+        else { 
             throw new IndexOutOfBoundsException(
                 "Position for new entry is invalid:/ Please try again!");
         }
@@ -103,14 +96,14 @@ public class LList<T> implements ListInterface<T> {
     public T getEntry(int position) {
         current = head.nextNode;
         if (position == 0) {
-            return current.nextNode.getData();
+            return current.getData();
         }
         else if (position < 0 || position >= size) {
             throw new IndexOutOfBoundsException(
                 "Position entered is invalid:/ Please try again!");
         }
         else {
-            for (int i = 0; i <= position; i++) {
+            for (int i = 0; i < position; i++) {
                 current = current.nextNode;
             }
             return current.getData();
@@ -132,7 +125,7 @@ public class LList<T> implements ListInterface<T> {
 
     @Override
     public T remove(int index) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             throw new IllegalArgumentException(
                 "Illegal index value! Please enter a valid index value.");
         }
@@ -172,8 +165,8 @@ public class LList<T> implements ListInterface<T> {
         }
         T result = current.nextNode.getData();
         current.nextNode.setData(anEntry);
+        return result;
     }
-
 
     @Override
     public Object[] toArray() {
@@ -189,7 +182,7 @@ public class LList<T> implements ListInterface<T> {
 
 
     public int size() {
-        return size;
+        return size; 
     }
 
 
