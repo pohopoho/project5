@@ -25,14 +25,34 @@ public class InputReader {
     private LList<Song> songList;
 
 
+    /**
+     * constructor
+     * 
+     * @param surveyFile
+     * @param songInfoFile
+     * @throws FileNotFoundException
+     * @throws ParseException
+     */
     public InputReader(String surveyFile, String songInfoFile)
         throws FileNotFoundException,
         ParseException {
         songList = readSongInfoFile(songInfoFile);
         readSurveyFile(surveyFile);
+        Sorter sorter = new Sorter(songList);
+        sorter.repByHobby();
+        sorter.sortByGenre();
+        sorter.sortByTitle();
     }
 
 
+    /**
+     * helper method fro reading song info file
+     * 
+     * @param fileName
+     * @return
+     * @throws FileNotFoundException
+     * @throws ParseException
+     */
     private LList<Song> readSongInfoFile(String fileName)
         throws FileNotFoundException,
         ParseException {
@@ -57,6 +77,13 @@ public class InputReader {
     }
 
 
+    /**
+     * helper method for reading survey file
+     * 
+     * @param fileName
+     * @throws FileNotFoundException
+     * @throws ParseException
+     */
     @SuppressWarnings("unused")
     private void readSurveyFile(String fileName)
         throws FileNotFoundException,
@@ -72,11 +99,11 @@ public class InputReader {
         int mIndex = 0;
         while (file.hasNextLine()) {
             parse = file.nextLine().split(", *", -1);
-            if (parse.length != 149) {
-                file.close();
-                throw new ParseException(
-                    "There are not 149 comma separated values", 1);
-            }
+            // if (parse.length != 149) {
+            // file.close();
+            // throw new ParseException(
+            // "There are not 149 comma separated values", 1);
+            // }
             if (parse[2].length() > 0 && parse[3].length() > 0 && parse[4]
                 .length() > 0) {
                 switch (parse[2]) {
@@ -94,7 +121,7 @@ public class InputReader {
                         break;
                 }
                 int songTracker = 1;
-                for (int i = 5; i < 149; i += 2) {
+                for (int i = 5; i < parse.length; i += 2) {
                     tempHeardYes = songList.getEntry(songTracker).getHeardYes();
                     tempLikedYes = songList.getEntry(songTracker).getLikedYes();
                     tempHeardNo = songList.getEntry(songTracker).getHeardNo();
@@ -130,7 +157,7 @@ public class InputReader {
                         break;
                 }
                 songTracker = 1;
-                for (int i = 5; i < 149; i += 2) {
+                for (int i = 5; i < parse.length; i += 2) {
                     tempHeardYes = songList.getEntry(songTracker).getHeardYes();
                     tempLikedYes = songList.getEntry(songTracker).getLikedYes();
                     tempHeardNo = songList.getEntry(songTracker).getHeardNo();
@@ -164,10 +191,11 @@ public class InputReader {
                         break;
                     case "music":
                         mIndex = 3;
+                        break;
                 }
 
                 songTracker = 1;
-                for (int i = 5; i < 149; i += 2) {
+                for (int i = 5; i < parse.length; i += 2) {
                     tempHeardYes = songList.getEntry(songTracker).getHeardYes();
                     tempLikedYes = songList.getEntry(songTracker).getLikedYes();
                     tempHeardNo = songList.getEntry(songTracker).getHeardNo();
