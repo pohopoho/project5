@@ -18,6 +18,7 @@ public class Input {
         
     }
     
+    @SuppressWarnings("unused")
     public static void main(String[] args) throws FileNotFoundException, ParseException
     {
         InputReader reader = new InputReader("MusicSurveyData2018.csv", "SongList2018.csv");
