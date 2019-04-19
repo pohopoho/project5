@@ -9,9 +9,6 @@
  */
 package prj5;
 
-import java.util.Iterator;
-
-//import java.util.Iterator;
 
 /**
  * This class sorts the glyphs based on 
@@ -23,7 +20,10 @@ import java.util.Iterator;
 public class Sorter {
     private LList<Song> songList;
 
-    
+    /**
+     * Constructor
+     * @param songs the list of songs
+     */
     public Sorter(LList<Song> songs)
     {
         songList = songs;
@@ -153,10 +153,29 @@ public class Sorter {
     }
     
     /**
-     * 
+     * Changes the int[] that contains the size of the bars in the songs in the songList 
+     * @return an int[] of percentages that has been updated by hobby
      */
-    public void repByHobby()
+    public int[] repByHobby()
     {
-        
+        int[] temp = new int[8];
+        int[] tempHeardYes, tempHeardNo, tempLikedYes;
+        int totalAnswered;
+        for(int i = 1; i<= songList.getLength(); i++)
+        {
+            tempHeardYes = songList.getEntry(i).getHeardYes();
+            tempHeardNo = songList.getEntry(i).getHeardNo();
+            tempLikedYes = songList.getEntry(i).getLikedYes();
+            for(int j = 0; j < 4; j++)
+            {
+                totalAnswered = tempHeardYes[j] + tempHeardNo[j];
+                double percentHeard = tempHeardYes[j]/totalAnswered;
+                double percentLiked = tempLikedYes[j]/totalAnswered;
+                
+                temp[j] = (int)percentHeard;
+                temp[j+4] = (int)percentLiked;
+            }            
+        }
+        return temp;
     }
 }
