@@ -1,12 +1,3 @@
-// Virginia Tech Honor Code Pledge:
-//
-// As a Hokie, I will conduct myself with honor and integrity at all times.
-// I will not lie, cheat, or steal, nor will I accept the actions of those who
-// do.
-// -- punitav9
-/**
- * 
- */
 package prj5;
 
 /**
@@ -93,4 +84,25 @@ public class Song {
     public String getGenre() {
         return genre;
     }
+
+
+ /**
+  * This is the equals method.
+  */
+ public boolean equals(Object obj) {
+     if (obj == null) {
+         return false;
+     }
+     if (obj == this) {
+         return true;
+     }
+     if (this.getClass() == obj.getClass()) {
+         Song s1 = (Song)obj;
+         return s1.getTitle().equals(this.getTitle())
+             && s1.getArtist().equals(this.getArtist())
+             && s1.getYear()==(this.getYear())
+             && s1.getGenre().equals(this.getGenre());
+     }
+     return false;
+}
 }
