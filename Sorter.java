@@ -37,11 +37,11 @@ public class Sorter {
     {
         String lowest = new String();
         String comparing = new String();
-        for(int i = 1; i < songList.getLength() - 1; i++)
+        for(int i = 1; i <= songList.getLength() - 1; i++)
         {
             int minIndex = i;
             lowest = songList.getEntry(minIndex).getArtist();
-            for(int j = i + 1; j < songList.getLength() + 1; j++)
+            for(int j = i + 1; j <= songList.getLength(); j++)
             {
                 comparing = songList.getEntry(j).getArtist();
                 if(comparing.toLowerCase().compareTo(lowest.toLowerCase()) < 0)
@@ -53,6 +53,10 @@ public class Sorter {
             songList.replace(minIndex, songList.getEntry(i));
             songList.replace(i, temp);
         }
+        for(int x = 1; x <= songList.getLength(); x++)
+        {
+            System.out.println(songList.getEntry(x).getArtist());
+        }
         
     }
     
@@ -63,11 +67,11 @@ public class Sorter {
     {
         String lowest = new String();
         String comparing = new String();
-        for(int i = 1; i < songList.getLength() - 1; i++)
+        for(int i = 1; i <= songList.getLength() - 1; i++)
         {
             int minIndex = i;
             lowest = songList.getEntry(minIndex).getTitle();
-            for(int j = i + 1; j < songList.getLength() + 1; j++)
+            for(int j = i + 1; j <= songList.getLength(); j++)
             {
                 comparing = songList.getEntry(j).getTitle();
                 if(comparing.toLowerCase().compareTo(lowest.toLowerCase()) < 0)
@@ -79,6 +83,10 @@ public class Sorter {
             songList.replace(minIndex, songList.getEntry(i));
             songList.replace(i, temp);
         }
+        for(int x = 1; x <= songList.getLength(); x++)
+        {
+            System.out.println(songList.getEntry(x).getTitle());
+        }
     }
     
     /**
@@ -88,11 +96,11 @@ public class Sorter {
     {
         int lowest;
         int comparing;
-        for(int i = 1; i < songList.getLength() - 1; i++)
+        for(int i = 1; i <= songList.getLength() - 1; i++)
         {
             int minIndex = i;
             lowest = songList.getEntry(minIndex).getYear();
-            for(int j = i + 1; j < songList.getLength() + 1; j++)
+            for(int j = i + 1; j <= songList.getLength(); j++)
             {
                 comparing = songList.getEntry(j).getYear();
                 if(comparing < lowest)
@@ -104,6 +112,10 @@ public class Sorter {
             songList.replace(minIndex, songList.getEntry(i));
             songList.replace(i, temp);
         }
+        for(int x = 1; x <= songList.getLength(); x++)
+        {
+            System.out.println(songList.getEntry(x).getYear());
+        }
     }
     
     /**
@@ -113,11 +125,11 @@ public class Sorter {
     {
         String lowest = new String();
         String comparing = new String();
-        for(int i = 1; i < songList.getLength() - 1; i++)
+        for(int i = 1; i <= songList.getLength() - 1; i++)
         {
             int minIndex = i;
             lowest = songList.getEntry(minIndex).getGenre();
-            for(int j = i + 1; j < songList.getLength() + 1; j++)
+            for(int j = i + 1; j <= songList.getLength(); j++)
             {
                 comparing = songList.getEntry(j).getGenre();
                 if(comparing.compareTo(lowest) < 0)
@@ -129,9 +141,17 @@ public class Sorter {
             songList.replace(minIndex, songList.getEntry(i));
             songList.replace(i, temp);
         }
+        for(int x = 1; x <= songList.getLength(); x++)
+        {
+            System.out.println(songList.getEntry(x).getGenre());
+        }
     }
     
     /**
      * 
      */
+    public void repByHobby()
+    {
+        
+    }
 }

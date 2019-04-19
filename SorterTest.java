@@ -31,5 +31,20 @@ public class SorterTest extends TestCase{
     {
         sort.sortByYear();
     }
+    
+    public void testSortTitle()
+    {
+        sort.sortByTitle();
+    }
+    
+    public void testSortArtist()
+    {
+        sort.sortByArtist();
+    }
+    
+    public void testSortPop()
+    {
+        sort.sortByGenre();
+    }
 
 }
