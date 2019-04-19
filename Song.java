@@ -216,4 +216,23 @@ public class Song {
         }
         return false;
     }
+
+
+    /**
+     * converts song to string
+     */
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append("song title " + title.toLowerCase() + "\n");
+        result.append("song artist " + artist.toLowerCase() + "\n");
+        result.append("song genre " + genre.toLowerCase() + "\n");
+        result.append("song year " + year + "\n");
+        result.append("heard\n");
+        result.append("reading" + barPercents[0] + " art" + barPercents[1]
+            + " sports" + barPercents[2] + " music" + barPercents[3] + "\n");
+        result.append("likes\n");
+        result.append("reading" + barPercents[4] + " art" + barPercents[5]
+            + " sports" + barPercents[6] + " music" + barPercents[7] + "\n");
+        return result.toString();
+    }
 }
