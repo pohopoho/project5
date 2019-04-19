@@ -12,118 +12,96 @@ package prj5;
 import student.TestCase;
 
 /**
- * Test class for Sorter.
+ * This is the SorterTest class. It tests the Sorter class by calling the four
+ * different methods on a list of song objects.
+ * 
+ * @author Michael Cheung
+ * @version 19.04.2019
  *
- * @author Daniel Moreno (danielrm)
- * @version 04/16/2019
  */
+
 public class SorterTest extends TestCase {
-    private Sorter sorter;
-    private LList<Song> songs;
 
-    /**
-     * Setup for the test methods
-     */
-    public void setUp() {
-        Song songs1 = new Song("titleB", "artistB", 1990, "genreB");
-        Song songs2 = new Song("titleC", "artistC", 2000, "genreC");
-        Song songs3 = new Song("titleD", "artistD", 2010, "genreD");
-        Song songs4 = new Song("titleA", "artistA", 1980, "genreA");
-        songs = new LList<Song>();
-        songs.add(songs1);
-        songs.add(songs2);
-        songs.add(songs3);
-        songs.add(songs4);
-        
-        sorter = new Sorter(songs);
-    }
-
-
-    /**
-     * Tests the sortByArtist method
-     */
-    public void testSortByArtist() {
-        sorter.sortByArtist();
-        assertEquals(songs.getEntry(1).getArtist(), "artistA");
-        assertEquals(songs.getEntry(2).getArtist(), "artistB");
-        assertEquals(songs.getEntry(3).getArtist(), "artistC");
-        assertEquals(songs.getEntry(4).getArtist(), "artistD");
-    }
-
-
-    /**
-     * Tests the sortByTitle method
-     */
-    public void testSortByTitle() {
-        sorter.sortByTitle();
-        assertEquals(songs.getEntry(1).getTitle(), "titleA");
-        assertEquals(songs.getEntry(2).getTitle(), "titleB");
-        assertEquals(songs.getEntry(3).getTitle(), "titleC");
-        assertEquals(songs.getEntry(4).getTitle(), "titleD");
-    }
-
-
-    /**
-     * Tests the sortByYear method
-     */
-    public void testSortByYear() {
-        sorter.sortByYear();
-        assertEquals(songs.getEntry(1).getYear(), 1980);
-        assertEquals(songs.getEntry(2).getYear(), 1990);
-        assertEquals(songs.getEntry(3).getYear(), 2000);
-        assertEquals(songs.getEntry(4).getYear(), 2010);
-    }
-
-
-    /**
-     * Tests the sortByGenre method
-     */
-    public void testSortByGenre() {
-        sorter.sortByGenre();
-        assertEquals(songs.getEntry(1).getGenre(), "genreA");
-        assertEquals(songs.getEntry(2).getGenre(), "genreB");
-        assertEquals(songs.getEntry(3).getGenre(), "genreC");
-        assertEquals(songs.getEntry(4).getGenre(), "genreD");
-    }
-}
-
-/*public class SorterTest extends TestCase{
-    
+    // fields
     private LList<Song> songList;
     private Sorter sort;
-    
-    public void setUp()
-    {
+
+
+    /**
+     * This is the setUp method. It is called before every test method to
+     * instantiate the list and sorter objects.
+     */
+    public void setUp() {
         songList = new LList<Song>();
         songList.add(new Song("Dogs", "Peep", 2000, "R&B"));
         songList.add(new Song("Cars", "Alice", 1999, "pop"));
         songList.add(new Song("Apples", "Bob", 1900, "rock"));
-        songList.add(new Song("Zap", "George", 2045, "pop"));
-        songList.add(new Song("Lightbulb", "Light", 1616, "country"));
-        songList.add(new Song("IwearCrocs", "Croc", 1989, "pop"));
-        songList.add(new Song("Boats", "Frog", 2020, "country"));
+        songList.add(new Song("zap", "George", 2045, "pop"));
+        songList.add(new Song("ocean", "walt", 3000, "country"));
+        Song song = new Song("lucy", "loius", 1792, "alternative");
+        songList.add(song);
 
         sort = new Sorter(songList);
     }
-    
-    public void testSortYear()
-    {
+
+
+    /**
+     * This test method tests the sortByYear() method and asserts the correct
+     * years for the songs in the order they should appear in the list.
+     */
+    public void testSortYear() {
         sort.sortByYear();
-    }
-    
-    public void testSortTitle()
-    {
-        sort.sortByTitle();
-    }
-    
-    public void testSortArtist()
-    {
-        sort.sortByArtist();
-    }
-    
-    public void testSortPop()
-    {
-        sort.sortByGenre();
+        assertEquals(songList.getEntry(1).getYear(), 1792);
+        assertEquals(songList.getEntry(2).getYear(), 1900);
+        assertEquals(songList.getEntry(3).getYear(), 1999);
+        assertEquals(songList.getEntry(4).getYear(), 2000);
+        assertEquals(songList.getEntry(5).getYear(), 2045);
+        assertEquals(songList.getEntry(6).getYear(), 3000);
     }
 
-}*/
+
+    /**
+     * This test method tests the sortByTitle() method and asserts the correct
+     * titles for the songs in the order they should appear in the list.
+     */
+    public void testSortTitle() {
+        sort.sortByTitle();
+        assertEquals(songList.getEntry(1).getTitle(), "Apples");
+        assertEquals(songList.getEntry(2).getTitle(), "Cars");
+        assertEquals(songList.getEntry(3).getTitle(), "Dogs");
+        assertEquals(songList.getEntry(4).getTitle(), "lucy");
+        assertEquals(songList.getEntry(5).getTitle(), "ocean");
+        assertEquals(songList.getEntry(6).getTitle(), "zap");
+    }
+
+
+    /**
+     * This test method tests the sortByArtist() method and asserts the correct
+     * artists for the songs in the order they should appear in the list.
+     */
+    public void testSortArtist() {
+        sort.sortByArtist();
+        assertEquals(songList.getEntry(1).getArtist(), "Alice");
+        assertEquals(songList.getEntry(2).getArtist(), "Bob");
+        assertEquals(songList.getEntry(3).getArtist(), "George");
+        assertEquals(songList.getEntry(4).getArtist(), "loius");
+        assertEquals(songList.getEntry(5).getArtist(), "Peep");
+        assertEquals(songList.getEntry(6).getArtist(), "walt");
+    }
+
+
+    /**
+     * This test method tests the sortByGenre() method and asserts the correct
+     * genres for the songs in the order they should appear in the list.
+     */
+    public void testSortGenre() {
+        sort.sortByGenre();
+        assertEquals(songList.getEntry(1).getGenre(), "R&B");
+        assertEquals(songList.getEntry(2).getGenre(), "alternative");
+        assertEquals(songList.getEntry(3).getGenre(), "country");
+        assertEquals(songList.getEntry(4).getGenre(), "pop");
+        assertEquals(songList.getEntry(5).getGenre(), "pop");
+        assertEquals(songList.getEntry(6).getGenre(), "rock");
+    }
+
+}
