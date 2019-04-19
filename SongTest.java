@@ -61,4 +61,32 @@ public class SongTest extends student.TestCase {
         assertEquals(song1.getGenre(), "Pop");
         assertEquals(song2.getGenre(), "Country");
     }
+    
+    public void testEquals() {
+      Song song3 = new Song("Bad and Boujee", "Migos", 2018, "Rap");
+      song3 = null;
+      assertNull(song3);
+      assertTrue(song1.equals(song1));
+      assertFalse(song2.equals(song1));
+      assertNotNull(song1);
+      assertFalse(song1.equals(2));
+      
+      assertFalse(song1.equals(song2));
+      assertFalse(song1.equals(song3));
+      
+      Song song4 = new Song("Body", "Loud Luxury", 2016, "EDM");
+      Song song5 = new Song("Body", "Loud Luxury", 2016, "EDM");
+      assertTrue(song4.equals(song5));
+      
+      Song song6 = new Song("Thank you, next", "Michael Jackson", 2018, "Pop");
+      assertFalse(song6.equals(song4));
+      
+      Song song7 = new Song("Thank you, next", "Ariana Grande", 2017, "Pop");
+      assertFalse(song7.equals(song4));
+      
+      Song song8 = new Song("Thank you, next", "Ariana Grande", 2018, "Rap");
+      assertFalse(song8.equals(song4));
+      
+      assertTrue(song4.getTitle().equals(song5.getTitle()));
+    }
 }
