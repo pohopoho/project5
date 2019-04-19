@@ -23,7 +23,7 @@ import list.ListInterface;
  * @version 04.14.2019
  *
  */
-public class LList<T> implements ListInterface<T>, Iterable<T> {
+public class LList<T> implements ListInterface<T>, Iterable<T>{
 
     private Node head;
     private Node tail;
@@ -42,12 +42,19 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
     public void add(T anEntry) {
         Node newNode = new Node(anEntry);
         if (isEmpty()) {
-            head = newNode;
+            head = newNode;  
+            tail = newNode;
         }
         else {
+            
             tail.setNext(newNode);
             tail = newNode;
             
+            Node curr = head;
+            for (int i = 1; i < size(); i++) {
+                curr = curr.nextNode;
+            }
+            curr.setNext(newNode);
         }
         numberOfEntries++;
     }
@@ -57,17 +64,15 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
     public void add(int position, T anEntry) {
         if ((position >= 1) && (position <= numberOfEntries + 1)) {
             Node newNode = new Node(anEntry);
-            if (isEmpty())
-            {
+            if (isEmpty()) {
                 head = newNode;
                 tail = newNode;
             }
             else if (position == 1) {
                 newNode.setNext(head);
                 head = newNode;
-            }
-            else if(position == numberOfEntries)
-            {
+            } 
+            else if (position == numberOfEntries) {
                 tail.setNext(newNode);
                 tail = newNode;
             }
@@ -141,24 +146,24 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
             assert !isEmpty();
             if (position == 1) {
                 result = head.getData();
-                head = head.getNext();
-                if(numberOfEntries == 1)
-                {
+                head = head.getNext(); 
+                if (numberOfEntries == 1) {
                     tail = null;
                 }
             }
-            else {
+            else {  
                 Node before = getNodeAt(position - 1);
                 Node toRemove = before.getNext();
-                Node after = toRemove.getNext();
+                if (toRemove != tail){
+                    Node after = toRemove.getNext();
+                    before.setNext(after);
+                }  
                 result = toRemove.getData();
-                before.setNext(after);
-                if(position == numberOfEntries)
-                {
+                /*if (position == numberOfEntries) {
                     tail = before;
-                }
-            }
-            numberOfEntries--;
+                }*/
+            }  
+            numberOfEntries--; 
             return result;
         }
         else {
@@ -166,6 +171,7 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         }
 
     }
+
 
     @Override
     public T replace(int position, T anEntry) {
@@ -176,10 +182,10 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
             desiredNode.setData(anEntry);
             return originalEntry;
         }
-        else {
-            throw new IndexOutOfBoundsException();
-        }
-    }
+        else { 
+            throw new IndexOutOfBoundsException(); 
+        } 
+    } 
 
 
     @Override
@@ -188,13 +194,12 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         T[] result = (T[])new Object[numberOfEntries];
         int index = 0;
         Node current = head;
-        while ((index < numberOfEntries) && current != null)
-        {
+        while ((index < numberOfEntries) && current != null) {
             result[index] = current.getData();
             current = current.getNext();
             index++;
         }
-        return result;
+        return result; 
     }
 
 
@@ -207,7 +212,7 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         assert (head != null) && (1 <= index) && (index <= numberOfEntries);
 
         Node curr = head;
-        int counter = 0;
+        int counter = 1;
         while (counter != index && curr.getNext() != null) {
             curr = curr.getNext();
             counter++;
@@ -267,9 +272,9 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         public void setData(T anEntry) {
             data = anEntry;
         }
-        
-        public Node getNext()
-        {
+
+
+        public Node getNext() {
             return nextNode;
         }
     }
@@ -280,22 +285,23 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         return new LListIterator();
     }
 
+
     private class LListIterator implements Iterator<T> {
-        
+
         private Node curr;
-        
-        public LListIterator()
-        {
+
+
+        public LListIterator() {
             curr = new Node(null);
             curr.setNext(head);
         }
+ 
 
         @Override
         public boolean hasNext() {
             return (curr.nextNode != null);
         }
-        
-        
+
 
         @Override
         public T next() {
@@ -308,6 +314,5 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         }
 
     }
-
 
 }
