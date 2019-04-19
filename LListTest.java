@@ -1,14 +1,35 @@
+/**
+ * Virginia Tech Honor Code Pledge:
+ *
+ * As a Hokie, I will conduct myself with honor
+ * and integrity at all times.
+ * I will not lie, cheat, or steal, nor will I
+ * accept the actions of those who do.
+ * -- Daniel Moreno (danielrm)
+ */
 package prj5;
 
+import student.TestCase;
+
+/**
+ * Test class for the LList class
+ *
+ * @author Daniel Moreno (danielrm)
+ * @version 04/18/2019
+ */
 public class LListTest extends student.TestCase {
     LList<String> list;
 
-
+    /**
+     * Setup for the LList methods
+     */
     public void setUp() {
         list = new LList<String>();
     }
 
-
+    /**
+     * Tests the getLength method
+     */
     public void testGetLength() {
         assertEquals(list.getLength(), 0);
         list.add("adele");
