@@ -1,11 +1,11 @@
-// Virginia Tech Honor Code Pledge:
-//
-// As a Hokie, I will conduct myself with honor and integrity at all times.
-// I will not lie, cheat, or steal, nor will I accept the actions of those who
-// do.
-// -- punitav9
 /**
- * 
+ * Virginia Tech Honor Code Pledge:
+ *
+ * As a Hokie, I will conduct myself with honor
+ * and integrity at all times.
+ * I will not lie, cheat, or steal, nor will I
+ * accept the actions of those who do.
+ * -- Daniel Moreno (danielrm)
  */
 package prj5;
 
@@ -14,17 +14,19 @@ import java.util.NoSuchElementException;
 import list.ListInterface;
 
 /**
- * 
+ * Creates the LList class
  * 
  * @author Punita Verma (punitav9)
  * @version 04.14.2019
- *
+ * @param <T>
+ *            the type for this class
  */
 public class LList<T> implements ListInterface<T>, Iterable<T> {
 
     private Node head;
     private Node tail;
     private int numberOfEntries;
+
 
     /**
      * Constructor
@@ -36,9 +38,12 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
 
     }
 
+
     /**
      * adds an entry to the list
-     * @param anEntry the entry to be added
+     * 
+     * @param anEntry
+     *            the entry to be added
      */
     @Override
     public void add(T anEntry) {
@@ -50,22 +55,26 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         else {
             tail.setNext(newNode);
             tail = newNode;
-            
+
         }
         numberOfEntries++;
     }
 
+
     /**
-     * adds and entry to the list at a specified position, if position is illegal, throws an IndexOutOfBoundsException
-     * @param position the position to be added at
-     * @param anEntry the entry to be added
+     * adds and entry to the list at a specified position,
+     * if position is illegal, throws an IndexOutOfBoundsException
+     * 
+     * @param position
+     *            the position to be added at
+     * @param anEntry
+     *            the entry to be added
      */
     @Override
     public void add(int position, T anEntry) {
         if ((position >= 1) && (position <= numberOfEntries + 1)) {
             Node newNode = new Node(anEntry);
-            if (isEmpty())
-            {
+            if (isEmpty()) {
                 head = newNode;
                 tail = newNode;
             }
@@ -73,8 +82,7 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
                 newNode.setNext(head);
                 head = newNode;
             }
-            else if(position == numberOfEntries)
-            {
+            else if (position == numberOfEntries) {
                 tail.setNext(newNode);
                 tail = newNode;
             }
@@ -91,6 +99,7 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         }
     }
 
+
     /**
      * clears the list
      */
@@ -101,9 +110,12 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         numberOfEntries = 0;
     }
 
+
     /**
      * checks if the list contains a given entry
-     * @param anEntry the entry to be added
+     * 
+     * @param anEntry
+     *            the entry to be added
      * @return true if entry is in the list, false if not
      */
     @Override
@@ -122,10 +134,14 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         return found;
     }
 
+
     /**
      * retrieves an entry at a given position
-     * @param position the position whose entry is to be returned
-     * @return the entry at the given position, if not found, throws a IndexOutOfBoundsException
+     * 
+     * @param position
+     *            the position whose entry is to be returned
+     * @return the entry at the given position, if not found, throws a
+     *         IndexOutOfBoundsException
      */
     @Override
     public T getEntry(int position) {
@@ -138,8 +154,10 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         }
     }
 
+
     /**
      * accessor for list length(numberOfEntries)
+     * 
      * @return the length(numberOfEntries) of the list
      */
     @Override
@@ -147,8 +165,10 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         return numberOfEntries;
     }
 
+
     /**
      * checks if the list is empty
+     * 
      * @return true if empty, false if not empty
      */
     @Override
@@ -156,10 +176,14 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         return numberOfEntries == 0;
     }
 
+
     /**
      * removes an entry in the list at a given position
-     * @param position the position whose entry to be removed
-     * @return the removed entry, if position is illegal, throws IndexOutOfBoundsException
+     * 
+     * @param position
+     *            the position whose entry to be removed
+     * @return the removed entry, if position is illegal, throws
+     *         IndexOutOfBoundsException
      */
     @Override
     public T remove(int position) {
@@ -169,8 +193,7 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
             if (position == 1) {
                 result = head.getData();
                 head = head.getNext();
-                if(numberOfEntries == 1)
-                {
+                if (numberOfEntries == 1) {
                     tail = null;
                 }
             }
@@ -180,8 +203,7 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
                 Node after = toRemove.getNext();
                 result = toRemove.getData();
                 before.setNext(after);
-                if(position == numberOfEntries)
-                {
+                if (position == numberOfEntries) {
                     tail = before;
                 }
             }
@@ -194,11 +216,17 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
 
     }
 
+
     /**
-     * replaces the data in the node at a given position with a new given data (entry)
-     * @param position the position at which to replace node's data
-     * @param anEntry the data to replace with
-     * @return the replaced data, if position is illegal, throws IndexOutOfBoundsException
+     * replaces the data in the node at a given position
+     * with a new given data (entry)
+     * 
+     * @param position
+     *            the position at which to replace node's data
+     * @param anEntry
+     *            the data to replace with
+     * @return the replaced data, if position is illegal, throws
+     *         IndexOutOfBoundsException
      */
     @Override
     public T replace(int position, T anEntry) {
@@ -214,8 +242,10 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         }
     }
 
+
     /**
      * creates and returns an array representation of the list
+     * 
      * @return the array representation of the list
      */
     @Override
@@ -224,8 +254,7 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         T[] result = (T[])new Object[numberOfEntries];
         int index = 0;
         Node current = head;
-        while ((index < numberOfEntries) && current != null)
-        {
+        while ((index < numberOfEntries) && current != null) {
             result[index] = current.getData();
             current = current.getNext();
             index++;
@@ -233,9 +262,12 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         return result;
     }
 
+
     /**
      * helper method to retrieve a node at a given position
-     * @param index the index to find a node at
+     * 
+     * @param index
+     *            the index to find a node at
      * @return the node at the given index
      */
     private Node getNodeAt(int index) {
@@ -250,9 +282,12 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         return curr;
     }
 
+
     /**
      * compares this object with another object
-     * @param obj the object to be compared to
+     * 
+     * @param obj
+     *            the object to be compared to
      * @return true if equal, false if not equal
      */
     public boolean equals(Object obj) {
@@ -282,8 +317,10 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         return false;
     }
 
+
     /**
      * Inner node class
+     * 
      * @author Michael Cheung
      *
      */
@@ -292,33 +329,63 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         private Node nextNode;
 
 
+        /**
+         * Constructor for Node
+         * 
+         * @param t
+         *            the object t
+         */
         public Node(T t) {
             data = t;
         }
 
 
+        /**
+         * Sets the next node
+         * 
+         * @param next
+         *            the next node
+         */
         public void setNext(Node next) {
             nextNode = next;
         }
 
 
+        /**
+         * Gets the data
+         * 
+         * @return the data
+         */
         public T getData() {
             return data;
         }
 
 
+        /**
+         * Sets the data for the entry
+         * 
+         * @param anEntry
+         *            the data being used for the set
+         */
         public void setData(T anEntry) {
             data = anEntry;
         }
-        
-        public Node getNext()
-        {
+
+
+        /**
+         * Gets the next node
+         * 
+         * @return the next node
+         */
+        public Node getNext() {
             return nextNode;
         }
     }
 
+
     /**
      * creates an Iterator for this list
+     * 
      * @return a new Iterator
      */
     @Override
@@ -326,28 +393,43 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         return new LListIterator();
     }
 
+
     /**
      * Iterator inner class
+     * 
      * @author Michael Cheung
      *
      */
     private class LListIterator implements Iterator<T> {
-        
+
         private Node curr;
-        
-        public LListIterator()
-        {
+
+
+        /**
+         * Constructor for the LListIterator
+         */
+        public LListIterator() {
             curr = new Node(null);
             curr.setNext(head);
         }
 
+
+        /**
+         * Checks whether the next node is null or not
+         * 
+         * @return true if not null, false otherwise
+         */
         @Override
         public boolean hasNext() {
             return (curr.nextNode != null);
         }
-        
-        
 
+
+        /**
+         * Finds the data of the next element
+         * 
+         * @return the data t
+         */
         @Override
         public T next() {
             if (!hasNext()) {
@@ -359,6 +441,5 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         }
 
     }
-
 
 }
