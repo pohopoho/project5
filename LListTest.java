@@ -140,19 +140,19 @@ public class LListTest extends student.TestCase {
     /**
      * tests the remove(T) method
      */
-    /*
-     * public void testRemoveEntry() {
-     * assertFalse(list.remove("jayZ"));
-     * assertFalse(list.remove(null));
-     * list.add("miley");
-     * list.add("cyrus");
-     * list.add("carly");
-     * list.add("rae");
-     * assertTrue(list.remove("carly"));
-     * //assertFalse(list.remove("drake"));
-     * 
-     * }
-     */
+    
+     /*public void testRemoveEntry() {
+     assertFalse(list.remove("jayZ"));
+     assertFalse(list.remove(null));
+     list.add("miley");
+     list.add("cyrus");
+     list.add("carly");
+     list.add("rae");
+     assertTrue(list.remove("carly"));
+     //assertFalse(list.remove("drake"));
+     
+     }*/
+     
 
     /**
      * Tests the replace method
@@ -185,7 +185,7 @@ public class LListTest extends student.TestCase {
         }
         catch (IndexOutOfBoundsException e) {
             thrown = true;
-        }
+        } 
         assertTrue(thrown);
         list.clear();
         list.add("mJ");
