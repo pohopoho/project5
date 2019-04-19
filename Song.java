@@ -1,11 +1,11 @@
+// Virginia Tech Honor Code Pledge:
+//
+// As a Hokie, I will conduct myself with honor and integrity at all times.
+// I will not lie, cheat, or steal, nor will I accept the actions of those who
+// do.
+// -- punitav9
 /**
- * Virginia Tech Honor Code Pledge:
- *
- * As a Hokie, I will conduct myself with honor
- * and integrity at all times.
- * I will not lie, cheat, or steal, nor will I
- * accept the actions of those who do.
- * -- Daniel Moreno (danielrm)
+ * 
  */
 package prj5;
 
@@ -14,8 +14,8 @@ package prj5;
  * parameters passed into the constructor and allows access to these fields with
  * getter methods.
  * 
- * @author Daniel Moreno (danielrm)
- * @version 04/16/2019
+ * @author Punita Verma (punitav9)
+ * @version 04.14.2019
  *
  */
 public class Song {
@@ -23,10 +23,11 @@ public class Song {
     private String artist;
     private int year;
     private String genre;
-    private int[] heardYes;
-    private int[] likedYes;
-    private int[] heardNo;
-    private int[] likedNo;
+    private int[] heardYes; // 0-3 Hobbies, 4-7 majors, 8-11 Regions
+    private int[] likedYes; // 0-3 Hobbies, 4-7 majors, 8-11 Regions
+    private int[] heardNo; // 0-3 Hobbies, 4-7 majors, 8-11 Regions
+    private int[] barPercents; // 0-3 all heard percent (purple, blue, yellow,
+                               // green) 4-7 all like percent (p, b, y, g)
 
 
     /**
@@ -55,12 +56,11 @@ public class Song {
         heardYes = new int[12];
         likedYes = new int[12];
         heardNo = new int[12];
-        likedNo = new int[12];
+        barPercents = new int[8];
         for (int i = 0; i < 12; i++) {
             heardYes[i] = 0;
             likedYes[i] = 0;
             heardNo[i] = 0;
-            likedNo[i] = 0;
         }
     }
 
@@ -106,9 +106,10 @@ public class Song {
 
 
     /**
-     * Gets the amount of times the song was heard
+     * accessor for heardYes
      * 
-     * @return heardYes the amount of times the song was heard
+     * @return the array holding the amount of people who answered Yes to
+     *         hearing this song
      */
     public int[] getHeardYes() {
         return heardYes;
@@ -116,9 +117,10 @@ public class Song {
 
 
     /**
-     * Gets the amount of times the song was liked
+     * accessor for LikedYes
      * 
-     * @return likedYes the amount of times the song was liked
+     * @return the array holding the amount of people who answered Yes to liking
+     *         this song
      */
     public int[] getLikedYes() {
         return likedYes;
@@ -126,9 +128,10 @@ public class Song {
 
 
     /**
-     * Gets the amount of times the song was not heard
+     * accessor for heardNo
      * 
-     * @return heardNo the amount of times not heard
+     * @return the array holding the amount of people who answered No to hearing
+     *         this song
      */
     public int[] getHeardNo() {
         return heardNo;
@@ -136,20 +139,10 @@ public class Song {
 
 
     /**
-     * Gets the amount of times the song was not liked
-     * 
-     * @return likedNo the amount of times not liked
-     */
-    public int[] getLikedNo() {
-        return likedNo;
-    }
-
-
-    /**
-     * Sets the song as heard
+     * mutator for heardYes
      * 
      * @param newHeardYes
-     *            the amount of times the song was heard
+     *            an int[] containing updated values
      */
     public void setHeardYes(int[] newHeardYes) {
         heardYes = newHeardYes;
@@ -157,10 +150,10 @@ public class Song {
 
 
     /**
-     * Sets the song as liked
+     * mutator for likedYes
      * 
      * @param newLikedYes
-     *            the amount of times the song was liked
+     *            an int[] containing updated values
      */
     public void setLikedYes(int[] newLikedYes) {
         likedYes = newLikedYes;
@@ -168,10 +161,10 @@ public class Song {
 
 
     /**
-     * Sets the song as not heard
+     * mutator for heardNo
      * 
      * @param newHeardNo
-     *            the amount of times the song was not heard
+     *            an int[] containing updated values
      */
     public void setHeardNo(int[] newHeardNo) {
         heardNo = newHeardNo;
@@ -179,13 +172,25 @@ public class Song {
 
 
     /**
-     * Sets the song as not liked
+     * accessor for the int[] containing the percentage values(glyph bar sizes)
+     * of heard/liked
      * 
-     * @param newLikedNo
-     *            the amount of times the song was not liked
+     * @return the barPercents[]
      */
-    public void setLikedNo(int[] newLikedNo) {
-        likedNo = newLikedNo;
+    public int[] getBarPercents() {
+        return barPercents;
+    }
+
+
+    /**
+     * mutator for the int[] containing the percentage values(glyph bar sizes)
+     * of heard/liked
+     * 
+     * @param newBarPercents
+     *            an int[] containing updated values
+     */
+    public void setBarPercents(int[] newBarPercents) {
+        barPercents = newBarPercents;
     }
 
 
@@ -193,8 +198,8 @@ public class Song {
      * This is the equals method.
      * 
      * @param obj
-     *            the object being compared to
-     * @return true if equal, false otherwise
+     *            the object to be compared to
+     * @return true if equal, false if not equal
      */
     public boolean equals(Object obj) {
         if (obj == null) {
