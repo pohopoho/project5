@@ -61,37 +61,66 @@ public class SongTest extends student.TestCase {
         assertEquals(song1.getGenre(), "Pop");
         assertEquals(song2.getGenre(), "Country");
     }
-    
+
+
     /**
      * This is the test for the equals() method. This will test if
      * songs are equal depending on title, artist, release year, and
      * genre.
      */
     public void testEquals() {
-      Song song3 = new Song("Bad and Boujee", "Migos", 2018, "Rap");
-      song3 = null;
-      assertNull(song3);
-      assertTrue(song1.equals(song1));
-      assertFalse(song2.equals(song1));
-      assertNotNull(song1);
-      assertFalse(song1.equals(2));
-      
-      assertFalse(song1.equals(song2));
-      assertFalse(song1.equals(song3));
-      
-      Song song4 = new Song("Body", "Loud Luxury", 2016, "EDM");
-      Song song5 = new Song("Body", "Loud Luxury", 2016, "EDM");
-      assertTrue(song4.equals(song5));
-      
-      Song song6 = new Song("Thank you, next", "Michael Jackson", 2018, "Pop");
-      assertFalse(song6.equals(song4));
-      
-      Song song7 = new Song("Thank you, next", "Ariana Grande", 2017, "Pop");
-      assertFalse(song7.equals(song4));
-      
-      Song song8 = new Song("Thank you, next", "Ariana Grande", 2018, "Rap");
-      assertFalse(song8.equals(song4));
-      
-      assertTrue(song4.getTitle().equals(song5.getTitle()));
+        Song song3 = new Song("Bad and Boujee", "Migos", 2018, "Rap");
+        song3 = null;
+        assertNull(song3);
+        assertTrue(song1.equals(song1));
+        assertFalse(song2.equals(song1));
+        assertNotNull(song1);
+        assertFalse(song1.equals(2));
+
+        assertFalse(song1.equals(song2));
+        assertFalse(song1.equals(song3));
+
+        Song song4 = new Song("Body", "Loud Luxury", 2016, "EDM");
+        Song song5 = new Song("Body", "Loud Luxury", 2016, "EDM");
+        assertTrue(song4.equals(song5));
+
+        Song song6 = new Song("Thank you, next", "Michael Jackson", 2018,
+            "Pop");
+        assertFalse(song6.equals(song4));
+
+        Song song7 = new Song("Thank you, next", "Ariana Grande", 2017, "Pop");
+        assertFalse(song7.equals(song4));
+
+        Song song8 = new Song("Thank you, next", "Ariana Grande", 2018, "Rap");
+        assertFalse(song8.equals(song4));
+
+        assertTrue(song4.getTitle().equals(song5.getTitle()));
+    }
+
+
+    /**
+     * This test method tests the four getter and four setter methods for the
+     * four arrays that are initialized in the song contructor.
+     */
+    public void testArrayGettersAndSetters() {
+        assertEquals(song1.getHeardYes()[1], 0);
+        assertEquals(song1.getHeardNo()[3], 0);
+        assertEquals(song1.getLikedYes()[5], 0);
+        assertEquals(song1.getLikedNo()[11], 0);
+
+        int[] arr = new int[12];
+        for (int i = 0; i < 12; i++) {
+            arr[i] = i + 23;
+        }
+        song1.setHeardYes(arr);
+        song1.setLikedYes(arr);
+        song1.setHeardNo(arr);
+        song1.setLikedNo(arr);
+
+        assertEquals(song1.getHeardYes(), arr);
+        assertEquals(song1.getHeardNo(), arr);
+        assertEquals(song1.getLikedYes(), arr);
+        assertEquals(song1.getLikedNo(), arr);
+
     }
 }
