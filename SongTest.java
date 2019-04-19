@@ -62,6 +62,11 @@ public class SongTest extends student.TestCase {
         assertEquals(song2.getGenre(), "Country");
     }
     
+    /**
+     * This is the test for the equals() method. This will test if
+     * songs are equal depending on title, artist, release year, and
+     * genre.
+     */
     public void testEquals() {
       Song song3 = new Song("Bad and Boujee", "Migos", 2018, "Rap");
       song3 = null;
