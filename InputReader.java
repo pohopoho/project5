@@ -3,12 +3,12 @@
  */
 package prj5;
 
-//Virginia Tech Honor Code Pledge:
+// Virginia Tech Honor Code Pledge:
 //
-//As a Hokie, I will conduct myself with honor and integrity at all times.
-//I will not lie, cheat, or steal, nor will I accept the actions of those who
-//do.
-//-- Michael Cheung (michaelc97)
+// As a Hokie, I will conduct myself with honor and integrity at all times.
+// I will not lie, cheat, or steal, nor will I accept the actions of those who
+// do.
+// -- Michael Cheung (michaelc97)
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,40 +21,46 @@ import java.util.Scanner;
  *
  */
 public class InputReader {
-    
+
     private LList<Song> songList;
 
-    public InputReader(String surveyFile, String songInfoFile) throws FileNotFoundException, ParseException
-    {
+
+    public InputReader(String surveyFile, String songInfoFile)
+        throws FileNotFoundException,
+        ParseException {
         songList = readSongInfoFile(songInfoFile);
         readSurveyFile(surveyFile);
     }
-    
-    private LList<Song> readSongInfoFile(String fileName) throws FileNotFoundException, ParseException
-    {
+
+
+    private LList<Song> readSongInfoFile(String fileName)
+        throws FileNotFoundException,
+        ParseException {
         LList<Song> temp = new LList<Song>();
         File inputFile = new File(fileName);
         Scanner file = new Scanner(inputFile);
         String[] parse = new String[4];
         file.nextLine();
-        while(file.hasNextLine())
-        {
+        while (file.hasNextLine()) {
             parse = file.nextLine().split(", *");
-            if(parse.length != 4)
-            {
+            if (parse.length != 4) {
                 file.close();
-                throw new ParseException("There are not 4 comma separated values", 1);
+                throw new ParseException(
+                    "There are not 4 comma separated values", 1);
             }
-            temp.add(new Song(parse[0], parse[1], Integer.valueOf(parse[2]), parse[3]));
+            temp.add(new Song(parse[0], parse[1], Integer.valueOf(parse[2]),
+                parse[3]));
         }
-        
+
         file.close();
         return temp;
     }
-    
+
+
     @SuppressWarnings("unused")
-    private void readSurveyFile(String fileName) throws FileNotFoundException, ParseException
-    {
+    private void readSurveyFile(String fileName)
+        throws FileNotFoundException,
+        ParseException {
         File inputFile = new File(fileName);
         Scanner file = new Scanner(inputFile);
         String[] parse = new String[149];
@@ -64,88 +70,130 @@ public class InputReader {
         int[] tempLikedYes;
         int[] tempHeardNo;
         int mIndex = 0;
-        while(file.hasNextLine())
-        {
+        while (file.hasNextLine()) {
             parse = file.nextLine().split(", *", -1);
-            if(parse.length != 149)
-            {
+            if (parse.length != 149) {
                 file.close();
-                throw new ParseException("There are not 149 comma separated values", 1);
+                throw new ParseException(
+                    "There are not 149 comma separated values", 1);
             }
-            switch(parse[2])
-            {
-                case "Computer Science":
-                    mIndex = 4;
-                    break;
-                case "Other Engineering":
-                    mIndex = 5;
-                    break;
-                case "Math or CMDA":
-                    mIndex = 6;
-                    break;
-                case "Other":
-                    mIndex = 7;
-                    break;
-            }
-            switch(parse[3])
-            {
-                case "Northeast":
-                    mIndex = 8;
-                    break;
-                case "Southeast":
-                    mIndex = 9;
-                    break;
-                case "United States (other than Southeast or Northwest)":
-                    mIndex = 10;
-                    break;
-                case "Outside of United States":
-                    mIndex = 11;
-                    break;
-            }
-            switch(parse[4])
-            {
-                case "reading":
-                    mIndex = 0;
-                    break;
-                case "art":
-                    mIndex = 1;
-                    break;
-                case "sports":
-                    mIndex = 2;
-                    break;
-                case "music":
-                    mIndex = 3;
-            }
-            int songTracker = 1;
-            for(int i = 5; i < 149; i += 2)
-            {
-                tempHeardYes = songList.getEntry(songTracker).getHeardYes();
-                tempLikedYes = songList.getEntry(songTracker).getLikedYes();
-                tempHeardNo = songList.getEntry(songTracker).getHeardNo();
+            if (parse[2].length() > 0 && parse[3].length() > 0 && parse[4]
+                .length() > 0) {
+                switch (parse[2]) {
+                    case "Computer Science":
+                        mIndex = 4;
+                        break;
+                    case "Other Engineering":
+                        mIndex = 5;
+                        break;
+                    case "Math or CMDA":
+                        mIndex = 6;
+                        break;
+                    case "Other":
+                        mIndex = 7;
+                        break;
+                }
+                int songTracker = 1;
+                for (int i = 5; i < 149; i += 2) {
+                    tempHeardYes = songList.getEntry(songTracker).getHeardYes();
+                    tempLikedYes = songList.getEntry(songTracker).getLikedYes();
+                    tempHeardNo = songList.getEntry(songTracker).getHeardNo();
 
-                
-                if(parse[i].equals("Yes"))
-                {
-                    tempHeardYes[mIndex] += 1;
-                    songList.getEntry(songTracker).setHeardYes(tempHeardYes);
+                    if (parse[i].equals("Yes")) {
+                        tempHeardYes[mIndex] += 1;
+                        songList.getEntry(songTracker).setHeardYes(
+                            tempHeardYes);
+                    }
+                    else if (parse[i].equals("No")) {
+                        tempHeardNo[mIndex] += 1;
+                        songList.getEntry(songTracker).setHeardNo(tempHeardNo);
+                    }
+                    if (parse[i + 1].equals("Yes")) {
+                        tempLikedYes[mIndex] += 1;
+                        songList.getEntry(songTracker).setLikedYes(
+                            tempLikedYes);
+                    }
+                    songTracker++;
                 }
-                else if(parse[i].equals("No"))
-                {
-                    tempHeardNo[mIndex] += 1;
-                    songList.getEntry(songTracker).setHeardNo(tempHeardNo);
+                switch (parse[3]) {
+                    case "Northeast":
+                        mIndex = 8;
+                        break;
+                    case "Southeast":
+                        mIndex = 9;
+                        break;
+                    case "United States (other than Southeast or Northwest)":
+                        mIndex = 10;
+                        break;
+                    case "Outside of United States":
+                        mIndex = 11;
+                        break;
                 }
-                if(parse[i+1].equals("Yes"))
-                {
-                    tempLikedYes[mIndex] += 1;
-                    songList.getEntry(songTracker).setLikedYes(tempLikedYes);
+                songTracker = 1;
+                for (int i = 5; i < 149; i += 2) {
+                    tempHeardYes = songList.getEntry(songTracker).getHeardYes();
+                    tempLikedYes = songList.getEntry(songTracker).getLikedYes();
+                    tempHeardNo = songList.getEntry(songTracker).getHeardNo();
+
+                    if (parse[i].equals("Yes")) {
+                        tempHeardYes[mIndex] += 1;
+                        songList.getEntry(songTracker).setHeardYes(
+                            tempHeardYes);
+                    }
+                    else if (parse[i].equals("No")) {
+                        tempHeardNo[mIndex] += 1;
+                        songList.getEntry(songTracker).setHeardNo(tempHeardNo);
+                    }
+                    if (parse[i + 1].equals("Yes")) {
+                        tempLikedYes[mIndex] += 1;
+                        songList.getEntry(songTracker).setLikedYes(
+                            tempLikedYes);
+                    }
+
+                    songTracker++;
                 }
-                
-                songTracker++;
+                switch (parse[4]) {
+                    case "reading":
+                        mIndex = 0;
+                        break;
+                    case "art":
+                        mIndex = 1;
+                        break;
+                    case "sports":
+                        mIndex = 2;
+                        break;
+                    case "music":
+                        mIndex = 3;
+                }
+
+                songTracker = 1;
+                for (int i = 5; i < 149; i += 2) {
+                    tempHeardYes = songList.getEntry(songTracker).getHeardYes();
+                    tempLikedYes = songList.getEntry(songTracker).getLikedYes();
+                    tempHeardNo = songList.getEntry(songTracker).getHeardNo();
+
+                    if (parse[i].equals("Yes")) {
+                        tempHeardYes[mIndex] += 1;
+                        songList.getEntry(songTracker).setHeardYes(
+                            tempHeardYes);
+                    }
+                    else if (parse[i].equals("No")) {
+                        tempHeardNo[mIndex] += 1;
+                        songList.getEntry(songTracker).setHeardNo(tempHeardNo);
+                    }
+                    if (parse[i + 1].equals("Yes")) {
+                        tempLikedYes[mIndex] += 1;
+                        songList.getEntry(songTracker).setLikedYes(
+                            tempLikedYes);
+                    }
+
+                    songTracker++;
+
+                }
             }
-           
-           totalStudents++;
+
+            totalStudents++;
         }
         file.close();
     }
 }
-
