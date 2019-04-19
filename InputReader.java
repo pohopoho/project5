@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 /**
  * @author Michael Cheung
- * @version 4/16/2019
+ * @version 4/16/2019  
  *
  */
 public class InputReader {
@@ -39,6 +39,7 @@ public class InputReader {
                 throw new ParseException("There are not 4 comma separated values", 1);
             }
             temp.add(new Song(parse[0], parse[1], Integer.valueOf(parse[2]), parse[3]));
+            System.out.println(parse[1]);
         }
         
         file.close();
@@ -60,8 +61,8 @@ public class InputReader {
         int mIndex = 0;
         while(file.hasNextLine())
         {
-            parse = file.nextLine().split(", *");
-
+            parse = file.nextLine().split(", *", -1);
+            System.out.println(parse.length);
             switch(parse[2])
             {
                 case "Computer Science":
@@ -106,7 +107,7 @@ public class InputReader {
                 case "music":
                     mIndex = 3;
             }
-            int songTracker = 0;
+            int songTracker = 1;
             for(int i = 5; i < 149; i += 2)
             {
                 tempHeardYes = songList.getEntry(songTracker).getHeardYes();
@@ -142,4 +143,3 @@ public class InputReader {
         file.close();
     }
 }
-
