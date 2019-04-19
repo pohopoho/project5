@@ -9,9 +9,8 @@
  */
 package prj5;
 
-
 /**
- * This class sorts the glyphs based on 
+ * This class sorts the glyphs based on
  * artist, title, year, and genre.
  *
  * @author Daniel Moreno (danielrm)
@@ -20,32 +19,32 @@ package prj5;
 public class Sorter {
     private LList<Song> songList;
 
+
     /**
      * Constructor
-     * @param songs the list of songs
+     * 
+     * @param songs
+     *            the list of songs
      */
-    public Sorter(LList<Song> songs)
-    {
+    public Sorter(LList<Song> songs) {
         songList = songs;
-        
+
     }
-    
+
+
     /**
      * Sorts the glyphs alphabetically by the names of the artists
      */
-    public void sortByArtist()
-    {
+    public void sortByArtist() {
         String lowest = new String();
         String comparing = new String();
-        for(int i = 1; i <= songList.getLength() - 1; i++)
-        {
+        for (int i = 1; i <= songList.getLength() - 1; i++) {
             int minIndex = i;
-            for(int j = i + 1; j <= songList.getLength(); j++)
-            {
+            for (int j = i + 1; j <= songList.getLength(); j++) {
                 lowest = songList.getEntry(minIndex).getArtist();
                 comparing = songList.getEntry(j).getArtist();
-                if(comparing.toLowerCase().compareTo(lowest.toLowerCase()) < 0)
-                {
+                if (comparing.toLowerCase().compareTo(lowest
+                    .toLowerCase()) < 0) {
                     minIndex = j;
                 }
             }
@@ -53,31 +52,28 @@ public class Sorter {
             songList.replace(minIndex, songList.getEntry(i));
             songList.replace(i, temp);
         }
-        for(int x = 1; x <= songList.getLength(); x++)
-        {
-            System.out.println(songList.getEntry(x).getArtist());
+        for (int x = 1; x <= songList.getLength(); x++) {
+            System.out.println(songList.getEntry(x).toString());
         }
-        System.out.println();
-        
+
+
     }
-    
+
+
     /**
      * Sorts the glyphs alphabetically by song title
      */
-    public void sortByTitle()
-    {
+    public void sortByTitle() {
         String lowest = new String();
         String comparing = new String();
-        for(int i = 1; i <= songList.getLength() - 1; i++)
-        {
+        for (int i = 1; i <= songList.getLength() - 1; i++) {
             int minIndex = i;
-            
-            for(int j = i + 1; j <= songList.getLength(); j++)
-            {
+
+            for (int j = i + 1; j <= songList.getLength(); j++) {
                 lowest = songList.getEntry(minIndex).getTitle();
                 comparing = songList.getEntry(j).getTitle();
-                if(comparing.toLowerCase().compareTo(lowest.toLowerCase()) < 0)
-                {
+                if (comparing.toLowerCase().compareTo(lowest
+                    .toLowerCase()) < 0) {
                     minIndex = j;
                 }
             }
@@ -85,29 +81,24 @@ public class Sorter {
             songList.replace(minIndex, songList.getEntry(i));
             songList.replace(i, temp);
         }
-        for(int x = 1; x <= songList.getLength(); x++)
-        {
-            System.out.println(songList.getEntry(x).getTitle());
+        for (int x = 1; x <= songList.getLength(); x++) {
+            System.out.println(songList.getEntry(x).toString());
         }
-        System.out.println();
     }
-    
+
+
     /**
      * Sorts the glyphs by the year the song came out, early songs first
      */
-    public void sortByYear()
-    {
+    public void sortByYear() {
         int lowest;
         int comparing;
-        for(int i = 1; i <= songList.getLength() - 1; i++)
-        {
+        for (int i = 1; i <= songList.getLength() - 1; i++) {
             int minIndex = i;
-            for(int j = i + 1; j <= songList.getLength(); j++)
-            {
+            for (int j = i + 1; j <= songList.getLength(); j++) {
                 lowest = songList.getEntry(minIndex).getYear();
                 comparing = songList.getEntry(j).getYear();
-                if(comparing < lowest)
-                {
+                if (comparing < lowest) {
                     minIndex = j;
                 }
             }
@@ -115,29 +106,24 @@ public class Sorter {
             songList.replace(minIndex, songList.getEntry(i));
             songList.replace(i, temp);
         }
-        for(int x = 1; x <= songList.getLength(); x++)
-        {
-            System.out.println(songList.getEntry(x).getYear());
+        for (int x = 1; x <= songList.getLength(); x++) {
+            System.out.println(songList.getEntry(x).toString());
         }
-        System.out.println();
     }
-    
+
+
     /**
      * Sorts the glyphs by song genre
      */
-    public void sortByGenre()
-    {
+    public void sortByGenre() {
         String lowest = new String();
         String comparing = new String();
-        for(int i = 1; i <= songList.getLength() - 1; i++)
-        {
+        for (int i = 1; i <= songList.getLength() - 1; i++) {
             int minIndex = i;
-            for(int j = i + 1; j <= songList.getLength(); j++)
-            {
+            for (int j = i + 1; j <= songList.getLength(); j++) {
                 lowest = songList.getEntry(minIndex).getGenre();
                 comparing = songList.getEntry(j).getGenre();
-                if(comparing.compareTo(lowest) < 0)
-                {
+                if (comparing.compareTo(lowest) < 0) {
                     minIndex = j;
                 }
             }
@@ -145,37 +131,41 @@ public class Sorter {
             songList.replace(minIndex, songList.getEntry(i));
             songList.replace(i, temp);
         }
-        for(int x = 1; x <= songList.getLength(); x++)
-        {
-            System.out.println(songList.getEntry(x).getGenre());
+        for (int x = 1; x <= songList.getLength(); x++) {
+            System.out.println(songList.getEntry(x).toString());
         }
-        System.out.println();
     }
-    
+
+
     /**
-     * Changes the int[] that contains the size of the bars in the songs in the songList 
-     * @return an int[] of percentages that has been updated by hobby
+     * Changes the int[] that contains the size of the bars in the songs in the
+     * songList
+     * 
      */
-    public int[] repByHobby()
-    {
+    public void repByHobby() {
         int[] temp = new int[8];
         int[] tempHeardYes, tempHeardNo, tempLikedYes;
         int totalAnswered;
-        for(int i = 1; i<= songList.getLength(); i++)
-        {
+        for (int i = 1; i <= songList.getLength(); i++) {
             tempHeardYes = songList.getEntry(i).getHeardYes();
             tempHeardNo = songList.getEntry(i).getHeardNo();
             tempLikedYes = songList.getEntry(i).getLikedYes();
-            for(int j = 0; j < 4; j++)
-            {
+            for (int j = 0; j < 4; j++) {
                 totalAnswered = tempHeardYes[j] + tempHeardNo[j];
-                double percentHeard = tempHeardYes[j]/totalAnswered;
-                double percentLiked = tempLikedYes[j]/totalAnswered;
-                
-                temp[j] = (int)percentHeard;
-                temp[j+4] = (int)percentLiked;
-            }            
+                if(totalAnswered != 0)
+                {
+                    double percentHeard = tempHeardYes[j] / totalAnswered;
+                    double percentLiked = tempLikedYes[j] / totalAnswered;
+                    temp[j] = (int)percentHeard;
+                    temp[j + 4] = (int)percentLiked;
+                }
+                else
+                {
+                    temp[j] = 0;
+                    temp[j+4] = 0;
+                }                
+            }
+            songList.getEntry(i).setBarPercents(temp);
         }
-        return temp;
     }
 }
