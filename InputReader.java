@@ -3,6 +3,13 @@
  */
 package prj5;
 
+//Virginia Tech Honor Code Pledge:
+//
+//As a Hokie, I will conduct myself with honor and integrity at all times.
+//I will not lie, cheat, or steal, nor will I accept the actions of those who
+//do.
+//-- Michael Cheung (michaelc97)
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
@@ -10,7 +17,7 @@ import java.util.Scanner;
 
 /**
  * @author Michael Cheung
- * @version 4/16/2019  
+ * @version 4/16/2019
  *
  */
 public class InputReader {
@@ -39,7 +46,6 @@ public class InputReader {
                 throw new ParseException("There are not 4 comma separated values", 1);
             }
             temp.add(new Song(parse[0], parse[1], Integer.valueOf(parse[2]), parse[3]));
-            System.out.println(parse[1]);
         }
         
         file.close();
@@ -57,12 +63,15 @@ public class InputReader {
         int[] tempHeardYes;
         int[] tempLikedYes;
         int[] tempHeardNo;
-        int[] tempLikedNo;
         int mIndex = 0;
         while(file.hasNextLine())
         {
             parse = file.nextLine().split(", *", -1);
-            System.out.println(parse.length);
+            if(parse.length != 149)
+            {
+                file.close();
+                throw new ParseException("There are not 149 comma separated values", 1);
+            }
             switch(parse[2])
             {
                 case "Computer Science":
@@ -113,7 +122,7 @@ public class InputReader {
                 tempHeardYes = songList.getEntry(songTracker).getHeardYes();
                 tempLikedYes = songList.getEntry(songTracker).getLikedYes();
                 tempHeardNo = songList.getEntry(songTracker).getHeardNo();
-                tempLikedNo = songList.getEntry(songTracker).getLikedNo();
+
                 
                 if(parse[i].equals("Yes"))
                 {
@@ -130,11 +139,7 @@ public class InputReader {
                     tempLikedYes[mIndex] += 1;
                     songList.getEntry(songTracker).setLikedYes(tempLikedYes);
                 }
-                else if(parse[i+1].equals("No"))
-                {
-                    tempLikedNo[mIndex] += 1;
-                    songList.getEntry(songTracker).setLikedNo(tempLikedNo);
-                }
+                
                 songTracker++;
             }
            
@@ -143,3 +148,4 @@ public class InputReader {
         file.close();
     }
 }
+

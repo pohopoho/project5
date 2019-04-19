@@ -23,10 +23,10 @@ public class Song {
     private String artist;
     private int year;
     private String genre;
-    private int[] heardYes;
-    private int[] likedYes;
-    private int[] heardNo;
-    private int[] likedNo;
+    private int[] heardYes; //0-3 Hobbies, 4-7 majors, 8-11 Regions
+    private int[] likedYes; //0-3 Hobbies, 4-7 majors, 8-11 Regions
+    private int[] heardNo; //0-3 Hobbies, 4-7 majors, 8-11 Regions
+    private int[] barPercents; //0-3 all heard percent (purple, blue, yellow, green) 4-7 all like percent (p, b, y, g) 
 
 
     /**
@@ -55,12 +55,11 @@ public class Song {
         heardYes = new int[12];
         likedYes = new int[12];
         heardNo = new int[12];
-        likedNo = new int[12];
+        barPercents = new int[8];
         for (int i = 0; i < 12; i++) {
             heardYes[i] = 0;
             likedYes[i] = 0;
             heardNo[i] = 0;
-            likedNo[i] = 0;
         }
     }
 
@@ -104,48 +103,76 @@ public class Song {
         return genre;
     }
 
-
+    /**
+     * accessor for heardYes
+     * @return the array holding the amount of people who answered Yes to hearing this song
+     */
     public int[] getHeardYes() {
         return heardYes;
     }
 
-
+    /**
+     * accessor for LikedYes
+     * @return the array holding the amount of people who answered Yes to liking this song
+     */
     public int[] getLikedYes() {
         return likedYes;
     }
 
-
+    /**
+     * accessor for heardNo
+     * @return the array holding the amount of people who answered No to hearing this song
+     */
     public int[] getHeardNo() {
         return heardNo;
     }
 
-
-    public int[] getLikedNo() {
-        return likedNo;
-    }
-
-
+    /**
+     * mutator for heardYes
+     * @param newHeardYes an int[] containing updated values
+     */
     public void setHeardYes(int[] newHeardYes) {
         heardYes = newHeardYes;
     }
 
-
+    /**
+     * mutator for likedYes
+     * @param newLikedYes an int[] containing updated values
+     */
     public void setLikedYes(int[] newLikedYes) {
         likedYes = newLikedYes;
     }
 
-
+    /**
+     * mutator for heardNo
+     * @param newHeardNo an int[] containing updated values
+     */
     public void setHeardNo(int[] newHeardNo) {
         heardNo = newHeardNo;
     }
-
-
-    public void setLikedNo(int[] newLikedNo) {
-        likedNo = newLikedNo;
+    
+    /**
+     * accessor for the int[] containing the percentage values(glyph bar sizes) of heard/liked
+     * @return the barPercents[] 
+     */
+    public int[] getBarPercents()
+    {
+        return barPercents;
+    }
+    
+    /**
+     * mutator for the int[] containing the percentage values(glyph bar sizes) of heard/liked
+     * @param newBarPercents an int[] containing updated values 
+     */
+    public void setBarPercents(int[] newBarPercents)
+    {
+        barPercents = newBarPercents;
     }
     
     /**
      * This is the equals method.
+     * @param obj the object to be compared to
+     * @return true if equal, false if not equal
      */
     public boolean equals(Object obj) {
         if (obj == null) {
