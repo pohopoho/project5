@@ -9,6 +9,10 @@
  */
 package prj5;
 
+import java.util.Iterator;
+
+//import java.util.Iterator;
+
 /**
  * This class sorts the glyphs based on 
  * artist, title, year, and genre.
@@ -18,10 +22,12 @@ package prj5;
  */
 public class Sorter {
     private LList<Song> songList;
+
     
     public Sorter(LList<Song> songs)
     {
         songList = songs;
+        
     }
     
     /**
@@ -29,25 +35,25 @@ public class Sorter {
      */
     public void sortByArtist()
     {
-        String temp = new String();
-        for (int i = 0; i < songList.getLength(); i++)
+        String lowest = new String();
+        String comparing = new String();
+        for(int i = 1; i < songList.getLength() - 1; i++)
         {
-            for (int j = i + 1; j < songList.getLength(); j++)
+            int minIndex = i;
+            lowest = songList.getEntry(minIndex).getArtist();
+            for(int j = i + 1; j < songList.getLength() + 1; j++)
             {
-                if (songList.getEntry(i).getArtist().compareToIgnoreCase(
-                songList.getEntry(i).getArtist()) < 0)
+                comparing = songList.getEntry(j).getArtist();
+                if(comparing.toLowerCase().compareTo(lowest.toLowerCase()) < 0)
                 {
-                    
-                    songList.replace(i, songList.getEntry(j));
-                    
-                    temp = songList.getEntry(i).getArtist();
-                    String strI = songList.getEntry(i).getArtist();
-                    strI = songList.getEntry(j).getArtist();
-                    String strJ = songList.getEntry(j).getArtist();
-                    strJ = temp;
+                    minIndex = j;
                 }
             }
+            Song temp = songList.getEntry(minIndex);
+            songList.replace(minIndex, songList.getEntry(i));
+            songList.replace(i, temp);
         }
+        
     }
     
     /**
@@ -55,19 +61,23 @@ public class Sorter {
      */
     public void sortByTitle()
     {
-        String temp = new String();
-        for (int i = 0; i < songList.getLength(); i++)
+        String lowest = new String();
+        String comparing = new String();
+        for(int i = 1; i < songList.getLength() - 1; i++)
         {
-            for (int j = i + 1; j < songList.getLength(); j++)
+            int minIndex = i;
+            lowest = songList.getEntry(minIndex).getTitle();
+            for(int j = i + 1; j < songList.getLength() + 1; j++)
             {
-                if (songList.getEntry(i).getTitle().compareToIgnoreCase(
-                songList.getEntry(j).getTitle()) < 0)
+                comparing = songList.getEntry(j).getTitle();
+                if(comparing.toLowerCase().compareTo(lowest.toLowerCase()) < 0)
                 {
-                    temp = songList.getEntry(i).getTitle();
-                    songList.getEntry(i).getTitle() = songList[j].getTitle();
-                    songList.getEntry(j).getTitle() = temp;
+                    minIndex = j;
                 }
             }
+            Song temp = songList.getEntry(minIndex);
+            songList.replace(minIndex, songList.getEntry(i));
+            songList.replace(i, temp);
         }
     }
     
@@ -76,18 +86,23 @@ public class Sorter {
      */
     public void sortByYear()
     {
-        int temp = 0;
-        for (int i = 0; i < songList.getLength(); i++)
+        int lowest;
+        int comparing;
+        for(int i = 1; i < songList.getLength() - 1; i++)
         {
-            for (int j = i + 1; j < songList.getLength(); j++)
+            int minIndex = i;
+            lowest = songList.getEntry(minIndex).getYear();
+            for(int j = i + 1; j < songList.getLength() + 1; j++)
             {
-                if (songList.getEntry(i).getYear() <= songList.getEntry(j).getYear())
+                comparing = songList.getEntry(j).getYear();
+                if(comparing < lowest)
                 {
-                    temp = songList.getEntry(i).getYear();
-                    songList.getEntry(i).getYear() = songList[j].getYear();
-                    songList.getEntry(j).getYear() = temp;
+                    minIndex = j;
                 }
             }
+            Song temp = songList.getEntry(minIndex);
+            songList.replace(minIndex, songList.getEntry(i));
+            songList.replace(i, temp);
         }
     }
     
@@ -96,19 +111,27 @@ public class Sorter {
      */
     public void sortByGenre()
     {
-        String temp = new String();
-        for (int i = 0; i < songList.getLength(); i++)
+        String lowest = new String();
+        String comparing = new String();
+        for(int i = 1; i < songList.getLength() - 1; i++)
         {
-            for (int j = i + 1; j < songList.getLength(); j++)
+            int minIndex = i;
+            lowest = songList.getEntry(minIndex).getGenre();
+            for(int j = i + 1; j < songList.getLength() + 1; j++)
             {
-                if (songList.getEntry(i).getGenre().compareToIgnoreCase(
-                    songList.getEntry(j).getGenre()) == 0)
+                comparing = songList.getEntry(j).getGenre();
+                if(comparing.compareTo(lowest) < 0)
                 {
-                    temp = songList.getEntry(i).getGenre();
-                    songList.getEntry(i).getGenre() = songList[j].getGenre();
-                    songList.getEntry(j).getGenre() = temp;
+                    minIndex = j;
                 }
             }
+            Song temp = songList.getEntry(minIndex);
+            songList.replace(minIndex, songList.getEntry(i));
+            songList.replace(i, temp);
         }
     }
+    
+    /**
+     * 
+     */
 }
