@@ -39,8 +39,7 @@ public class InputReader {
         songList = readSongInfoFile(songInfoFile);
         readSurveyFile(surveyFile);
         Sorter sorter = new Sorter(songList);
-        for(int i = 1; i <= songList.getLength(); i++)
-        {
+        for (int i = 1; i <= songList.getLength(); i++) {
             sorter.repByHobby(songList.getEntry(i));
         }
         sorter.sortByGenre();
@@ -94,25 +93,22 @@ public class InputReader {
         ParseException {
         File inputFile = new File(fileName);
         Scanner file = new Scanner(inputFile);
-        String[] parse = new String[149];
+        String[] parse;
         file.nextLine();
-        int totalStudents = 0;
-        int[] tempHeardYes;
-        int[] tempLikedYes;
-        int[] tempHeardNo;
-        int[] tempLikedNo;
-        int mIndex = 0;
+        // temp arrays created in order to edit values
+        int[] tempHeardYes, tempLikedYes, tempHeardNo, tempLikedNo;
+        int mIndex = 0; // major index
+        int rIndex = 0; // region index
+        int hIndex = 0; // hobby index
         while (file.hasNextLine()) {
             parse = file.nextLine().split(", *", -1);
-            // if (parse.length != 149) {
-            // file.close();
-            // throw new ParseException(
-            // "There are not 149 comma separated values", 1);
-            // }
             if (parse[2].length() > 0 && parse[3].length() > 0 && parse[4]
                 .length() > 0) {
+                // look at index 2 of the line (major)
                 switch (parse[2]) {
                     case "Computer Science":
+                        // index for the appropriate index for accessing heard
+                        // and like arrays
                         mIndex = 4;
                         break;
                     case "Other Engineering":
@@ -125,121 +121,91 @@ public class InputReader {
                         mIndex = 7;
                         break;
                 }
-                int songTracker = 1;
-                for (int i = 5; i < parse.length; i += 2) {
-
-                    tempHeardYes = songList.getEntry(songTracker).getHeardYes();
-                    tempLikedYes = songList.getEntry(songTracker).getLikedYes();
-                    tempHeardNo = songList.getEntry(songTracker).getHeardNo();
-                    tempLikedNo = songList.getEntry(songTracker).getLikedNo();
-
-                    if (parse[i].equals("Yes")) {
-                        tempHeardYes[mIndex] += 1;
-                        songList.getEntry(songTracker).setHeardYes(
-                            tempHeardYes);
-                    }
-                    else if (parse[i].equals("No")) {
-                        tempHeardNo[mIndex] += 1;
-                        songList.getEntry(songTracker).setHeardNo(tempHeardNo);
-                    }
-                    if (parse[i + 1].equals("Yes")) {
-                        tempLikedYes[mIndex] += 1;
-                        songList.getEntry(songTracker).setLikedYes(
-                            tempLikedYes);
-                    }
-                    else if (parse[i].equals("No")) {
-                        tempLikedNo[mIndex] += 1;
-                        songList.getEntry(songTracker).setLikedNo(tempLikedNo);
-                    }
-                    songTracker++;
-                }
                 switch (parse[3]) {
                     case "Northeast":
-                        mIndex = 8;
+                        rIndex = 8;
                         break;
                     case "Southeast":
-                        mIndex = 9;
+                        rIndex = 9;
                         break;
                     case "United States (other than Southeast or Northwest)":
-                        mIndex = 10;
+                        rIndex = 10;
                         break;
                     case "Outside of United States":
-                        mIndex = 11;
+                        rIndex = 11;
                         break;
-                }
-                songTracker = 1;
-                for (int i = 5; i < parse.length; i += 2) {
-                    tempHeardYes = songList.getEntry(songTracker).getHeardYes();
-                    tempLikedYes = songList.getEntry(songTracker).getLikedYes();
-                    tempHeardNo = songList.getEntry(songTracker).getHeardNo();
-                    tempLikedNo = songList.getEntry(songTracker).getLikedNo();
-
-                    if (parse[i].equals("Yes")) {
-                        tempHeardYes[mIndex] += 1;
-                        songList.getEntry(songTracker).setHeardYes(
-                            tempHeardYes);
-                    }
-                    else if (parse[i].equals("No")) {
-                        tempHeardNo[mIndex] += 1;
-                        songList.getEntry(songTracker).setHeardNo(tempHeardNo);
-                    }
-                    if (parse[i + 1].equals("Yes")) {
-                        tempLikedYes[mIndex] += 1;
-                        songList.getEntry(songTracker).setLikedYes(
-                            tempLikedYes);
-                    }
-                    else if (parse[i].equals("No")) {
-                        tempLikedNo[mIndex] += 1;
-                        songList.getEntry(songTracker).setLikedNo(tempLikedNo);
-                    }
-
-                    songTracker++;
                 }
                 switch (parse[4]) {
                     case "reading":
-                        mIndex = 0;
+                        hIndex = 0;
                         break;
                     case "art":
-                        mIndex = 1;
+                        hIndex = 1;
                         break;
                     case "sports":
-                        mIndex = 2;
+                        hIndex = 2;
                         break;
                     case "music":
-                        mIndex = 3;
+                        hIndex = 3;
                         break;
                 }
-
-                songTracker = 1;
+                // songTracker is the list index
+                int songTracker = 1;
+                // increments by 2 because each iteration handles one pair of
+                // responses
                 for (int i = 5; i < parse.length; i += 2) {
+
+                    // retrieve the arrays for the appropriate songs
                     tempHeardYes = songList.getEntry(songTracker).getHeardYes();
                     tempLikedYes = songList.getEntry(songTracker).getLikedYes();
                     tempHeardNo = songList.getEntry(songTracker).getHeardNo();
                     tempLikedNo = songList.getEntry(songTracker).getLikedNo();
 
+                    // if they answered YES in the HEARD column, increment
+                    // arrays, index are based
+                    // on their major, region, hobby
                     if (parse[i].equals("Yes")) {
                         tempHeardYes[mIndex] += 1;
+                        tempHeardYes[rIndex] += 1;
+                        tempHeardYes[hIndex] += 1;
                         songList.getEntry(songTracker).setHeardYes(
                             tempHeardYes);
                     }
+                    // if they answered NO in the HEARD column, increment
+                    // arrays, index are based
+                    // on their major, region, hobby
                     else if (parse[i].equals("No")) {
                         tempHeardNo[mIndex] += 1;
+                        tempHeardNo[rIndex] += 1;
+                        tempHeardNo[hIndex] += 1;
                         songList.getEntry(songTracker).setHeardNo(tempHeardNo);
                     }
+
+                    // if they answered YES in the LIKED column, increment
+                    // arrays, index are based
+                    // on their major, region, hobby
                     if (parse[i + 1].equals("Yes")) {
                         tempLikedYes[mIndex] += 1;
+                        tempLikedYes[rIndex] += 1;
+                        tempLikedYes[hIndex] += 1;
                         songList.getEntry(songTracker).setLikedYes(
                             tempLikedYes);
                     }
-                    else if (parse[i].equals("No")) {
+                    // if they answered NO in the LIKED column, increment
+                    // arrays, index are based
+                    // on their major, region, hobby
+                    else if (parse[i + 1].equals("No")) {
                         tempLikedNo[mIndex] += 1;
+                        tempLikedNo[rIndex] += 1;
+                        tempLikedNo[hIndex] += 1;
                         songList.getEntry(songTracker).setLikedNo(tempLikedNo);
                     }
+                    //increment the song number in the list
                     songTracker++;
                 }
+
             }
 
-            totalStudents++;
         }
         file.close();
     }

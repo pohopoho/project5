@@ -11,6 +11,7 @@ package prj5;
 
 /**
  * This class sorts the glyphs based on
+ * 
  * artist, title, year, and genre.
  *
  * @author Daniel Moreno (danielrm)
@@ -142,52 +143,54 @@ public class Sorter {
      * 
      */
     public void repByHobby(Song song) {
-        int[] temp = new int[8];
+        int[] temp = new int[8]; // 0-3 is for heard Bar pecentages, 4-7 is for
+                                 // liked
         int[] tempHeardYes, tempHeardNo, tempLikedYes, tempLikedNo;
         int totalAnsweredHeard, totalAnsweredLiked;
 
+        // retrieve arrays from the song parameter and store them in temp
+        // variables
         tempHeardYes = song.getHeardYes();
         tempHeardNo = song.getHeardNo();
         tempLikedYes = song.getLikedYes();
         tempLikedNo = song.getLikedNo();
+
+        // since this is repByHobby, index can only be 0, 1, 2, 3
         for (int j = 0; j < 4; j++) {
+            // total answered for heard is equal to
+            // total # who answered yes + total # who answered no
             totalAnsweredHeard = tempHeardYes[j] + tempHeardNo[j];
+            // total answered for liked is equal to
+            // total # who answered yes + total # who answered no
             totalAnsweredLiked = tempLikedYes[j] + tempLikedNo[j];
+            // this if statement catches divide by zero
             if (totalAnsweredHeard != 0) {
                 // System.out.println("Heard");
-                if (tempHeardYes[j] == 0) {
-                    System.out.println("zero");
-                    temp[j] = 0;
-                }
-                else {
-                    double percentHeard = calc(tempHeardYes[j],
-                        totalAnsweredHeard) * 100;
-                    temp[j] = (int)percentHeard;
-                }
+                // calls a helper method for calculating percentage
+                double percentHeard = calc(tempHeardYes[j], totalAnsweredHeard)
+                    * 100;
+                temp[j] = (int)percentHeard;
             }
             else {
                 // System.out.println("Heard");
-                System.out.println("zero");
+                // System.out.println("zero");
                 temp[j] = 0;
             }
+            // this if statement catches divide by zero
             if (totalAnsweredLiked != 0) {
                 // System.out.println("Liked");
-                if (tempLikedYes[j] == 0) {
-                    System.out.println("zero");
-                    temp[j] = 0;
-                }
-                else {
-                    double percentLiked = calc(tempLikedYes[j],
-                        totalAnsweredLiked) * 100;
-                    temp[j + 4] = (int)percentLiked;
-                }
+                // calls a helper method for calculating percentage
+                double percentLiked = calc(tempLikedYes[j], totalAnsweredLiked)
+                    * 100;
+                temp[j + 4] = (int)percentLiked;
             }
             else {
                 // System.out.println("Liked");
-                System.out.println("zero");
+                // System.out.println("zero");
                 temp[j + 4] = 0;
             }
         }
+        //assigns the temp arrays 
         song.setBarPercents(temp);
     }
 
@@ -195,7 +198,7 @@ public class Sorter {
     private double calc(int numerator, int denominator) {
         double num = (double)numerator;
         double den = (double)denominator;
-        System.out.println(num + " h " + den);
+        // System.out.println(num + " h " + den);
         // System.out.println((num/den));
         return num / den;
     }
