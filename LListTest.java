@@ -1,35 +1,14 @@
-/**
- * Virginia Tech Honor Code Pledge:
- *
- * As a Hokie, I will conduct myself with honor
- * and integrity at all times.
- * I will not lie, cheat, or steal, nor will I
- * accept the actions of those who do.
- * -- Daniel Moreno (danielrm)
- */
 package prj5;
 
-/**
- * Test class for the LList class
- *
- * @author Daniel Moreno (danielrm)
- * @version 04/18/2019
- */
 public class LListTest extends student.TestCase {
-    private LList<String> list;
+    LList<String> list;
 
 
-    /**
-     * Setup for the LList methods
-     */
     public void setUp() {
         list = new LList<String>();
     }
 
 
-    /**
-     * Tests the getLength method
-     */
     public void testGetLength() {
         assertEquals(list.getLength(), 0);
         list.add("adele");
@@ -67,11 +46,24 @@ public class LListTest extends student.TestCase {
         list.add(2, "coldplay");
         assertEquals(list.getLength(), 2);
         assertEquals(list.getEntry(2), "coldplay");
-        // assertEquals(list.getEntry(0), "coldplay");
         list.add("greenday");
         list.add("beyonce");
         list.add(1, "Maroon5");
         assertEquals(list.getEntry(1), "Maroon5");
+        try {
+            list.add(-2, "madonna");
+        }
+        catch (IndexOutOfBoundsException e) {
+            thrown = true;
+        }
+        assertTrue(thrown);
+        list.clear();
+        list.add(1, "hello");
+        assertEquals(list.getEntry(1), "hello");
+        list.add("is it me");
+        list.add(2, "youre looking for");
+        assertEquals(list.getEntry(2), "youre looking for");
+
     }
 
 
@@ -120,6 +112,7 @@ public class LListTest extends student.TestCase {
             thrown = true;
         }
         assertTrue(thrown);
+
     }
 
 
@@ -154,26 +147,9 @@ public class LListTest extends student.TestCase {
         assertEquals(list.remove(2), "tim");
         assertEquals(list.getLength(), 2);
         list.clear();
-
+        list.add("im bored");
+        assertEquals(list.remove(1), "im bored");
     }
-
-    /**
-     * tests the remove(T) method
-     */
-
-    /*
-     * public void testRemoveEntry() {
-     * assertFalse(list.remove("jayZ"));
-     * assertFalse(list.remove(null));
-     * list.add("miley");
-     * list.add("cyrus");
-     * list.add("carly");
-     * list.add("rae");
-     * assertTrue(list.remove("carly"));
-     * //assertFalse(list.remove("drake"));
-     * 
-     * }
-     */
 
 
     /**
@@ -227,8 +203,10 @@ public class LListTest extends student.TestCase {
         list.add("timberlake");
         list.add("justin");
         list.add("beiber");
-        assertEquals(list.toArray().length, 3);
 
+        assertEquals(list.toArray().length, 3);
+        list.add(null);
+        assertEquals(list.toArray().length, 4);
     }
 
 
@@ -237,8 +215,7 @@ public class LListTest extends student.TestCase {
      */
     public void testEquals() {
         assertTrue(list.equals(list));
-        // assertFalse(list.equals(null));
-        assertNotNull(list);
+        assertFalse(list.equals(null));
         String s = "hello";
         assertFalse(list.equals(s));
         list.add("wiggles");
