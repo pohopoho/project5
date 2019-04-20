@@ -3,8 +3,19 @@ package prj5;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * This is the linked list testClass
+ * 
+ * @author Punita Verma (punitav9)
+ * @version 20.04.2019
+ *
+ */
 public class LListTest extends student.TestCase {
+    /**
+     * This is the field for the list
+     */
     LList<String> list;
+
 
     /**
      * Setup for the test methods
@@ -12,6 +23,7 @@ public class LListTest extends student.TestCase {
     public void setUp() {
         list = new LList<String>();
     }
+
 
     /**
      * Test for getLength
@@ -222,7 +234,7 @@ public class LListTest extends student.TestCase {
      */
     public void testEquals() {
         assertTrue(list.equals(list));
-        assertFalse(list.equals(null));
+        assertFalse(list==null);
         String s = "hello";
         assertFalse(list.equals(s));
         list.add("wiggles");
@@ -236,13 +248,13 @@ public class LListTest extends student.TestCase {
 
     }
 
+
     /**
      * Test for iterator
      */
-    public void testIterator()
-    {
+    public void testIterator() {
         Iterator<String> iter = list.iterator();
-        
+
         Exception e = null;
         try {
             iter.next();
@@ -251,17 +263,16 @@ public class LListTest extends student.TestCase {
             e = exception;
         }
         assertTrue(e instanceof NoSuchElementException);
-        
+
         list.add("one");
         list.add("two");
         list.add("three");
-        
+
         assertTrue(iter.hasNext());
         assertEquals(iter.next(), "one");
-        
-        //assertEquals(iter.next(), "two");
-        //assertFalse(iter.hasNext());
-        
-        
+
+        // assertEquals(iter.next(), "two");
+        // assertFalse(iter.hasNext());
+
     }
 }
