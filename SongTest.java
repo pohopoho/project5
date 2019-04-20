@@ -116,11 +116,25 @@ public class SongTest extends student.TestCase {
         song1.setLikedYes(arr);
         song1.setHeardNo(arr);
         song1.setLikedNo(arr);
+        song1.setBarPercents(arr);
 
         assertEquals(song1.getHeardYes(), arr);
         assertEquals(song1.getHeardNo(), arr);
         assertEquals(song1.getLikedYes(), arr);
         assertEquals(song1.getLikedNo(), arr);
-
+        assertEquals(song1.getBarPercents(), arr);
+    }
+    /**
+     * This is the test for the ToString() method.
+     */
+    public void testToString() {
+        assertEquals(song1.toString(), "song title year 3000\n" + 
+            "song artist jonas brothers\n" + 
+            "song genre pop\n" + 
+            "song year 2006\n" + 
+            "heard\n" + 
+            "reading0 art0 sports0 music0\n" + 
+            "likes\n" + 
+            "reading0 art0 sports0 music0\n");
     }
 }
