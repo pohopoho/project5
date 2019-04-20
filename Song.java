@@ -1,21 +1,22 @@
-// Virginia Tech Honor Code Pledge:
-//
-// As a Hokie, I will conduct myself with honor and integrity at all times.
-// I will not lie, cheat, or steal, nor will I accept the actions of those who
-// do.
-// -- punitav9
 /**
- * 
+ * Virginia Tech Honor Code Pledge:
+ *
+ * As a Hokie, I will conduct myself with honor
+ * and integrity at all times.
+ * I will not lie, cheat, or steal, nor will I
+ * accept the actions of those who do.
+ * -- Daniel Moreno (danielrm)
  */
 package prj5;
 
 /**
- * This is the class for a song object. It initializes the song fields using the
- * parameters passed into the constructor and allows access to these fields with
+ * This is the class for a song object. It initializes
+ * the song fields using the parameters passed into the
+ * constructor and allows access to these fields with
  * getter methods.
  * 
- * @author Punita Verma (punitav9)
- * @version 04.14.2019
+ * @author Daniel Moreno (danielrm)
+ * @version 04/16/2019
  *
  */
 public class Song {
@@ -33,7 +34,8 @@ public class Song {
 
     /**
      * This is the parameterized constructor for the class. It initializes the
-     * song fields with the parameters passed and initializes the heard and liked
+     * song fields with the parameters passed
+     * and initializes the heard and liked
      * arrays to new array of size 12.
      * 
      * @param songTitle
@@ -121,7 +123,9 @@ public class Song {
 
     /**
      * This getLikedYes() method returns value of people who like song.
-     * @return the array holding the amount of people who answered Yes to liking
+     * 
+     * @return the array holding the amount of
+     *         people who answered Yes to liking
      *         this song
      */
     public int[] getLikedYes() {
@@ -130,8 +134,11 @@ public class Song {
 
 
     /**
-     * This getLikedYes() method returns value of people who never heard the song.
-     * @return the array holding the amount of people who answered No to hearing
+     * This getHeardNo() method returns value
+     * of people who never heard the song.
+     * 
+     * @return the array holding the amount of people
+     *         who answered No to hearing
      *         this song
      */
     public int[] getHeardNo() {
@@ -140,7 +147,7 @@ public class Song {
 
 
     /**
-     * This is the newHeardYes() method. It is a mutator for heardYes.
+     * This is the setHeardYes() method. It is a mutator for heardYes.
      * 
      * @param newHeardYes
      *            an int[] containing updated values
@@ -170,28 +177,32 @@ public class Song {
     public void setHeardNo(int[] newHeardNo) {
         heardNo = newHeardNo;
     }
-    
+
+
     /**
      * This is the getLikedNo() method.
+     * 
      * @return likedNo contains people who do not like song
      */
-    public int[] getLikedNo()
-    {
+    public int[] getLikedNo() {
         return likedNo;
     }
 
+
     /**
      * This is the setLikedNo() method. This is a mutator for likedNo.
-     * @param newLikedNo contains people who do not like song
+     * 
+     * @param newLikedNo
+     *            contains people who do not like song
      */
-    public void setLikedNo(int [] newLikedNo)
-    {
+    public void setLikedNo(int[] newLikedNo) {
         likedNo = newLikedNo;
     }
 
+
     /**
-     * This is the getBarPercents(). This is an accessor for the 
-     * int[] containing the percentage values(glyph bar sizes) of 
+     * This is the getBarPercents(). This is an accessor for the
+     * int[] containing the percentage values(glyph bar sizes) of
      * heard/liked.
      * 
      * @return the barPercents[] returns the bar percents
@@ -202,7 +213,7 @@ public class Song {
 
 
     /**
-     * This is the setBarPercents methods. This is a mutator for the int[] 
+     * This is the setBarPercents methods. This is a mutator for the int[]
      * containing the percentage values(glyph bar sizes) of heard/liked.
      * 
      * @param newBarPercents
@@ -218,7 +229,7 @@ public class Song {
      * 
      * @param obj
      *            the object to be compared to
-     * @return true if equal, false if not equal    
+     * @return true if equal, false if not equal
      */
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -239,6 +250,8 @@ public class Song {
 
     /**
      * This toString() method converts song to string
+     * 
+     * @return the string of songs
      */
     public String toString() {
         StringBuilder result = new StringBuilder();
