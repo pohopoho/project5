@@ -17,11 +17,12 @@ import java.util.NoSuchElementException;
 import list.ListInterface;
 
 /**
- * @param<T>
+ * @param<T> this
+ *               is the T parameter for ListInterface and Iterable
  * 
  * @author Punita Verma (punitav9)
  * @version 04.14.2019
- *
+ *          This is the LList class.
  */
 public class LList<T> implements ListInterface<T>, Iterable<T> {
 
@@ -37,7 +38,9 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
 
     }
 
-
+/**
+ * This is the add(T anEntry) method. 
+ */
     @Override
     public void add(T anEntry) {
         Node newNode = new Node(anEntry);
@@ -59,7 +62,9 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         numberOfEntries++;
     }
 
-
+/**
+ * This is the add(int position, T anEntry) method.
+ */
     @Override
     public void add(int position, T anEntry) {
         if ((position >= 1) && (position <= numberOfEntries + 1)) {
@@ -94,6 +99,9 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
     }
 
 
+    /**
+     * This is the clear() method.
+     */
     @Override
     public void clear() {
         head = null;
@@ -102,6 +110,9 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
     }
 
 
+    /**
+     * This is the contains(T anEntry) method.
+     */
     @Override
     public boolean contains(T anEntry) {
         boolean found = false;
@@ -119,6 +130,9 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
     }
 
 
+    /**
+     * This is the getEntry method. It gets an entry from list.
+     */
     @Override
     public T getEntry(int position) {
         if ((position >= 1) && (position <= numberOfEntries)) {
@@ -130,18 +144,29 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
     }
 
 
+    /**
+     * This is the getLength() method. It returns the
+     * number of entries from list.
+     */
     @Override
     public int getLength() {
         return numberOfEntries;
     }
 
 
+    /**
+     * This is the isEmpty() method. It returns number of entries == 0.
+     */
     @Override
     public boolean isEmpty() {
         return numberOfEntries == 0;
     }
 
 
+    /**
+     * This is the remove(int position). It removes an int at a given
+     * position.
+     */
     @Override
     public T remove(int position) {
         T result = null;
@@ -173,6 +198,10 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
     }
 
 
+    /**
+     * This is the replace(int position, T anEntry). This removes a
+     * specific entry from a position.
+     */
     @Override
     public T replace(int position, T anEntry) {
         if ((position >= 1) && (position <= numberOfEntries)) {
@@ -187,6 +216,9 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
     }
 
 
+    /**
+     * This is the toArray() method.
+     */
     @Override
     public Object[] toArray() {
         @SuppressWarnings("unchecked")
@@ -202,11 +234,23 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
     }
 
 
+    /**
+     * This is the size() method.
+     * 
+     * @return numberOfEntries returns numberOfEntries
+     */
     public int size() {
         return numberOfEntries;
     }
 
 
+    /**
+     * This is the the getNodeAt(int index)
+     * 
+     * @param index
+     *            this is the parameter for index
+     * @return curr this returns current node
+     */
     private Node getNodeAt(int index) {
         Node curr = head;
         int counter = 1;
@@ -218,6 +262,10 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
     }
 
 
+    /**
+     * This is the equals(Object obj) method. This compares elements in
+     * the list to determine if they are equal.
+     */
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -246,61 +294,111 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
     }
 
 
+    /**
+     * This is the private Node class.
+     * 
+     * @author Natalia Jacobo
+     * @version 4.20.2019
+     *
+     */
     private class Node {
         private T data;
         private Node nextNode;
 
 
+        /**
+         * This Node(T t) is the constructor.
+         * 
+         * @param t
+         *            this is the parameter t.
+         */
         public Node(T t) {
             data = t;
         }
 
 
+        /**
+         * This is the setNext(Node next) method.
+         * 
+         * @param next
+         *            this is the parameter for next
+         */
         public void setNext(Node next) {
             nextNode = next;
         }
 
 
+        /**
+         * This is the getData() method.
+         * 
+         * @return data returns data
+         */
         public T getData() {
             return data;
         }
 
 
+        /**
+         * This is the setData(T anEntry).
+         * 
+         * @param anEntry
+         *            this is the anEntry parameter
+         */
         public void setData(T anEntry) {
             data = anEntry;
         }
 
 
+        /**
+         * This is the getNext() method.
+         * 
+         * @return nextNode returns nextNode
+         */
         public Node getNext() {
             return nextNode;
         }
     }
 
 
+    /**
+     * This is the iterator() constructor.
+     */
     @Override
     public Iterator<T> iterator() {
         return new LListIterator();
     }
 
 
+    /**
+     * This is the LListIterator private class.
+     * 
+     * @author Natalia Jacobo (natjac99)
+     * @version 4.20.2019
+     */
     private class LListIterator implements Iterator<T> {
 
         private Node curr;
 
-
+/**
+ * This is the LListIterator() constructor.
+ */
         public LListIterator() {
             curr = new Node(null);
             curr.setNext(head);
 
         }
 
-
+/**
+ * This is the hasNext() method.
+ */
         @Override
         public boolean hasNext() {
             return (curr.nextNode != null);
         }
 
-
+/**
+ * This is the next() method.
+ */
         @Override
         public T next() {
             if (!hasNext()) {
