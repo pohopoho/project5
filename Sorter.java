@@ -154,8 +154,11 @@ public class Sorter {
                 totalAnswered = tempHeardYes[j] + tempHeardNo[j];
                 if(totalAnswered != 0)
                 {
-                    double percentHeard = (tempHeardYes[j] / totalAnswered) * 100;
-                    double percentLiked = (tempLikedYes[j] / totalAnswered) * 100;
+                    double num = (double)tempHeardYes[j];
+                    double den = (double)totalAnswered;
+                    double percentHeard = (den) * 100;
+                    num = (double)tempLikedYes[j];
+                    double percentLiked = (den) * 100;
                     temp[j] = (int)percentHeard;
                     temp[j + 4] = (int)percentLiked;
                 }
