@@ -94,6 +94,27 @@ public class SongTest extends student.TestCase {
         Song song8 = new Song("Thank you, next", "Ariana Grande", 2018, "Rap");
         assertFalse(song8.equals(song4));
 
+        Song song9 = new Song("Sweetner", "Ariana Grande", 2017, "Pop");
+        assertFalse(song9.equals(song7));
+        
+        
+        //diff artist
+        Song song10 = new Song("Year 3000", "Disney", 2006, "Pop");
+        assertFalse(song10.equals(song1));
+        
+        //diff year
+        Song song11 = new Song("Year 3000", "Jonas Brothers", 2008, "Pop");
+        assertFalse(song11.equals(song1));
+        
+        //diff artist and year, 
+        Song song12 = new Song("Year 3000", "Jonas Brothers", 2006, "Rock");
+        assertFalse(song12.equals(song1));
+        
+        //same artist and year, diff 
+        Song song13 = new Song("Year 3000", "Disney", 2008, "Rock");
+        assertFalse(song13.equals(song1));
+        
+        //same artist and year, == diff year, same rest
         assertTrue(song4.getTitle().equals(song5.getTitle()));
     }
 
