@@ -26,6 +26,7 @@ public class Song {
     private int[] heardYes; // 0-3 Hobbies, 4-7 majors, 8-11 Regions
     private int[] likedYes; // 0-3 Hobbies, 4-7 majors, 8-11 Regions
     private int[] heardNo; // 0-3 Hobbies, 4-7 majors, 8-11 Regions
+    private int[] likedNo; // 0-3 Hobbies, 4-7 majors, 8-11 Regions
     private int[] barPercents; // 0-3 all heard percent (purple, blue, yellow,
                                // green) 4-7 all like percent (p, b, y, g)
 
@@ -56,11 +57,13 @@ public class Song {
         heardYes = new int[12];
         likedYes = new int[12];
         heardNo = new int[12];
+        likedNo = new int[12];
         barPercents = new int[8];
         for (int i = 0; i < 12; i++) {
             heardYes[i] = 0;
             likedYes[i] = 0;
             heardNo[i] = 0;
+            likedNo[i] = 0;
         }
     }
 
@@ -169,7 +172,16 @@ public class Song {
     public void setHeardNo(int[] newHeardNo) {
         heardNo = newHeardNo;
     }
+    
+    public int[] getLikedNo()
+    {
+        return likedNo;
+    }
 
+    public void setLikedNo(int [] newLikedNo)
+    {
+        likedNo = newLikedNo;
+    }
 
     /**
      * accessor for the int[] containing the percentage values(glyph bar sizes)

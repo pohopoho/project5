@@ -39,9 +39,13 @@ public class InputReader {
         songList = readSongInfoFile(songInfoFile);
         readSurveyFile(surveyFile);
         Sorter sorter = new Sorter(songList);
-        sorter.repByHobby();
+        for(int i = 1; i <= songList.getLength(); i++)
+        {
+            sorter.repByHobby(songList.getEntry(i));
+        }
         sorter.sortByGenre();
         sorter.sortByTitle();
+        GUIMusicWindow mWin = new GUIMusicWindow();
     }
 
 
@@ -96,6 +100,7 @@ public class InputReader {
         int[] tempHeardYes;
         int[] tempLikedYes;
         int[] tempHeardNo;
+        int[] tempLikedNo;
         int mIndex = 0;
         while (file.hasNextLine()) {
             parse = file.nextLine().split(", *", -1);
@@ -122,9 +127,11 @@ public class InputReader {
                 }
                 int songTracker = 1;
                 for (int i = 5; i < parse.length; i += 2) {
+
                     tempHeardYes = songList.getEntry(songTracker).getHeardYes();
                     tempLikedYes = songList.getEntry(songTracker).getLikedYes();
                     tempHeardNo = songList.getEntry(songTracker).getHeardNo();
+                    tempLikedNo = songList.getEntry(songTracker).getLikedNo();
 
                     if (parse[i].equals("Yes")) {
                         tempHeardYes[mIndex] += 1;
@@ -139,6 +146,10 @@ public class InputReader {
                         tempLikedYes[mIndex] += 1;
                         songList.getEntry(songTracker).setLikedYes(
                             tempLikedYes);
+                    }
+                    else if (parse[i].equals("No")) {
+                        tempLikedNo[mIndex] += 1;
+                        songList.getEntry(songTracker).setLikedNo(tempLikedNo);
                     }
                     songTracker++;
                 }
@@ -161,6 +172,7 @@ public class InputReader {
                     tempHeardYes = songList.getEntry(songTracker).getHeardYes();
                     tempLikedYes = songList.getEntry(songTracker).getLikedYes();
                     tempHeardNo = songList.getEntry(songTracker).getHeardNo();
+                    tempLikedNo = songList.getEntry(songTracker).getLikedNo();
 
                     if (parse[i].equals("Yes")) {
                         tempHeardYes[mIndex] += 1;
@@ -175,6 +187,10 @@ public class InputReader {
                         tempLikedYes[mIndex] += 1;
                         songList.getEntry(songTracker).setLikedYes(
                             tempLikedYes);
+                    }
+                    else if (parse[i].equals("No")) {
+                        tempLikedNo[mIndex] += 1;
+                        songList.getEntry(songTracker).setLikedNo(tempLikedNo);
                     }
 
                     songTracker++;
@@ -199,6 +215,7 @@ public class InputReader {
                     tempHeardYes = songList.getEntry(songTracker).getHeardYes();
                     tempLikedYes = songList.getEntry(songTracker).getLikedYes();
                     tempHeardNo = songList.getEntry(songTracker).getHeardNo();
+                    tempLikedNo = songList.getEntry(songTracker).getLikedNo();
 
                     if (parse[i].equals("Yes")) {
                         tempHeardYes[mIndex] += 1;
@@ -214,9 +231,11 @@ public class InputReader {
                         songList.getEntry(songTracker).setLikedYes(
                             tempLikedYes);
                     }
-
+                    else if (parse[i].equals("No")) {
+                        tempLikedNo[mIndex] += 1;
+                        songList.getEntry(songTracker).setLikedNo(tempLikedNo);
+                    }
                     songTracker++;
-
                 }
             }
 

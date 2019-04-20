@@ -56,7 +56,6 @@ public class Sorter {
             System.out.println(songList.getEntry(x).toString());
         }
 
-
     }
 
 
@@ -142,35 +141,62 @@ public class Sorter {
      * songList
      * 
      */
-    public void repByHobby() {
+    public void repByHobby(Song song) {
         int[] temp = new int[8];
-        int[] tempHeardYes, tempHeardNo, tempLikedYes;
-        int totalAnswered;
-        for (int i = 1; i <= songList.getLength(); i++) {
-            tempHeardYes = songList.getEntry(i).getHeardYes();
-            tempHeardNo = songList.getEntry(i).getHeardNo();
-            tempLikedYes = songList.getEntry(i).getLikedYes();
-            for (int j = 0; j < 4; j++) {
-                totalAnswered = tempHeardYes[j] + tempHeardNo[j];
-                if(totalAnswered != 0)
-                {
-                    //System.out.println(tempHeardYes[j] + "\n");
-                    double num = (double)tempHeardYes[j];
-                    System.out.println( num + "\n");
-                    double den = (double)totalAnswered;
-                    double percentHeard = (num/den) * 100;
-                    num = (double)tempLikedYes[j];
-                    double percentLiked = (num/den) * 100;
+        int[] tempHeardYes, tempHeardNo, tempLikedYes, tempLikedNo;
+        int totalAnsweredHeard, totalAnsweredLiked;
+
+        tempHeardYes = song.getHeardYes();
+        tempHeardNo = song.getHeardNo();
+        tempLikedYes = song.getLikedYes();
+        tempLikedNo = song.getLikedNo();
+        for (int j = 0; j < 4; j++) {
+            totalAnsweredHeard = tempHeardYes[j] + tempHeardNo[j];
+            totalAnsweredLiked = tempLikedYes[j] + tempLikedNo[j];
+            if (totalAnsweredHeard != 0) {
+                // System.out.println("Heard");
+                if (tempHeardYes[j] == 0) {
+                    System.out.println("zero");
+                    temp[j] = 0;
+                }
+                else {
+                    double percentHeard = calc(tempHeardYes[j],
+                        totalAnsweredHeard) * 100;
                     temp[j] = (int)percentHeard;
+                }
+            }
+            else {
+                // System.out.println("Heard");
+                System.out.println("zero");
+                temp[j] = 0;
+            }
+            if (totalAnsweredLiked != 0) {
+                // System.out.println("Liked");
+                if (tempLikedYes[j] == 0) {
+                    System.out.println("zero");
+                    temp[j] = 0;
+                }
+                else {
+                    double percentLiked = calc(tempLikedYes[j],
+                        totalAnsweredLiked) * 100;
                     temp[j + 4] = (int)percentLiked;
                 }
-                else
-                {
-                    temp[j] = 0;
-                    temp[j+4] = 0;
-                }                
             }
-            songList.getEntry(i).setBarPercents(temp);
+            else {
+                // System.out.println("Liked");
+                System.out.println("zero");
+                temp[j + 4] = 0;
+            }
         }
+        song.setBarPercents(temp);
+    }
+
+
+    private double calc(int numerator, int denominator) {
+        double num = (double)numerator;
+        double den = (double)denominator;
+        System.out.println(num + " h " + den);
+        // System.out.println((num/den));
+        return num / den;
     }
 }
