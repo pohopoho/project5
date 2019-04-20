@@ -100,7 +100,7 @@ public class SongTest extends student.TestCase {
 
     /**
      * This test method tests the four getter and four setter methods for the
-     * four arrays that are initialized in the song contructor.
+     * four arrays that are initialized in the song constructor.
      */
     public void testArrayGettersAndSetters() {
         assertEquals(song1.getHeardYes()[1], 0);
