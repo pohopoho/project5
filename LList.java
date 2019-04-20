@@ -17,8 +17,9 @@ import java.util.NoSuchElementException;
 import list.ListInterface;
 
 /**
- * @param<T> this
- *               is the T parameter for ListInterface and Iterable
+ * @param <T>
+ *            this
+ *            is the T parameter for ListInterface and Iterable
  * 
  * @author Punita Verma (punitav9)
  * @version 04.14.2019
@@ -30,9 +31,10 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
     private Node tail;
     private int numberOfEntries;
 
-/**
- * This is the LList() constructor.
- */
+
+    /**
+     * This is the LList() constructor.
+     */
     public LList() {
         head = null;
         tail = null;
@@ -269,6 +271,10 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
     /**
      * This is the equals(Object obj) method. This compares elements in
      * the list to determine if they are equal.
+     * 
+     * @return returns boolean value indicating equality of the object
+     * @param obj
+     *            the object being compared
      */
     public boolean equals(Object obj) {
         if (obj == this) {

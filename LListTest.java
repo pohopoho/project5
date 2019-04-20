@@ -14,7 +14,7 @@ public class LListTest extends student.TestCase {
     /**
      * This is the field for the list
      */
-    LList<String> list;
+    private LList<String> list;
 
 
     /**
@@ -234,7 +234,10 @@ public class LListTest extends student.TestCase {
      */
     public void testEquals() {
         assertTrue(list.equals(list));
-        assertFalse(list==null);
+        LList<String> listNull = new LList<>();
+        list.add("anEntry");
+        assertFalse(list.equals(listNull));
+        list.clear();
         String s = "hello";
         assertFalse(list.equals(s));
         list.add("wiggles");
@@ -253,6 +256,7 @@ public class LListTest extends student.TestCase {
      * Test for iterator
      */
     public void testIterator() {
+        list.clear();
         Iterator<String> iter = list.iterator();
 
         Exception e = null;
@@ -267,12 +271,15 @@ public class LListTest extends student.TestCase {
         list.add("one");
         list.add("two");
         list.add("three");
-
+        iter = list.iterator();
         assertTrue(iter.hasNext());
         assertEquals(iter.next(), "one");
 
-        // assertEquals(iter.next(), "two");
-        // assertFalse(iter.hasNext());
+        assertEquals(iter.next(), "two");
+        assertTrue(iter.hasNext());
+        list.clear();
+        iter = list.iterator();
+        assertFalse(iter.hasNext());
 
     }
 }
