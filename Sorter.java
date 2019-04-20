@@ -34,11 +34,11 @@ public class Sorter {
 
 
     /**
-     * Sorts the glyphs alphabetically by the names of the artists
+     * Selection Sorts the songs alphabetically by the names of the artists
      */
     public void sortByArtist() {
-        String lowest = new String();
-        String comparing = new String();
+        String lowest;
+        String comparing;
         for (int i = 1; i <= songList.getLength() - 1; i++) {
             int minIndex = i;
             for (int j = i + 1; j <= songList.getLength(); j++) {
@@ -61,11 +61,11 @@ public class Sorter {
 
 
     /**
-     * Sorts the glyphs alphabetically by song title
+     * Selection Sorts the songs alphabetically by song title
      */
     public void sortByTitle() {
-        String lowest = new String();
-        String comparing = new String();
+        String lowest;
+        String comparing;
         for (int i = 1; i <= songList.getLength() - 1; i++) {
             int minIndex = i;
 
@@ -88,7 +88,8 @@ public class Sorter {
 
 
     /**
-     * Sorts the glyphs by the year the song came out, early songs first
+     * Selection Sorts the songs by the year the song came out, early songs
+     * first
      */
     public void sortByYear() {
         int lowest;
@@ -113,11 +114,11 @@ public class Sorter {
 
 
     /**
-     * Sorts the glyphs by song genre
+     * Selection Sorts the songs by song genre
      */
     public void sortByGenre() {
-        String lowest = new String();
-        String comparing = new String();
+        String lowest;
+        String comparing;
         for (int i = 1; i <= songList.getLength() - 1; i++) {
             int minIndex = i;
             for (int j = i + 1; j <= songList.getLength(); j++) {
@@ -141,65 +142,64 @@ public class Sorter {
      * Changes the int[] that contains the size of the bars in the songs in the
      * songList
      * 
+     * @param song
+     *            the song to represent hobby for
      */
-    public void repByHobby(Song song) {
-        int[] temp = new int[8]; // 0-3 is for heard Bar pecentages, 4-7 is for
-                                 // liked
-        int[] tempHeardYes, tempHeardNo, tempLikedYes, tempLikedNo;
+    public void repByHobby() {
         int totalAnsweredHeard, totalAnsweredLiked;
-
-        // retrieve arrays from the song parameter and store them in temp
-        // variables
-        tempHeardYes = song.getHeardYes();
-        tempHeardNo = song.getHeardNo();
-        tempLikedYes = song.getLikedYes();
-        tempLikedNo = song.getLikedNo();
-
-        // since this is repByHobby, index can only be 0, 1, 2, 3
-        for (int j = 0; j < 4; j++) {
-            // total answered for heard is equal to
-            // total # who answered yes + total # who answered no
-            totalAnsweredHeard = tempHeardYes[j] + tempHeardNo[j];
-            // total answered for liked is equal to
-            // total # who answered yes + total # who answered no
-            totalAnsweredLiked = tempLikedYes[j] + tempLikedNo[j];
-            // this if statement catches divide by zero
-            if (totalAnsweredHeard != 0) {
-                // System.out.println("Heard");
-                // calls a helper method for calculating percentage
-                double percentHeard = calc(tempHeardYes[j], totalAnsweredHeard)
-                    * 100;
-                temp[j] = (int)percentHeard;
+        Song tempSong;
+        for (int i = 1; i <= songList.getLength(); i++) {
+            tempSong = songList.getEntry(i);
+            // since this is repByHobby, index can only be 0, 1, 2, 3
+            for (int j = 0; j < 4; j++) {
+                // total answered for heard is equal to
+                // total # who answered yes + total # who answered no
+                totalAnsweredHeard = tempSong.getHeardYes()[j] + tempSong
+                    .getHeardNo()[j];
+                // total answered for liked is equal to
+                // total # who answered yes + total # who answered no
+                totalAnsweredLiked = tempSong.getLikedYes()[j] + tempSong
+                    .getLikedNo()[j];
+                // this if statement catches divide by zero
+                if (totalAnsweredHeard != 0) {
+                    // calls a helper method for calculating percentage
+                    double percentHeard = calc(tempSong.getHeardYes()[j],
+                        totalAnsweredHeard);
+                    tempSong.getBarPercents()[j] = (int)percentHeard;
+                }
+                else {
+                    tempSong.getBarPercents()[j] = 0;
+                }
+                // this if statement catches divide by zero
+                if (totalAnsweredLiked != 0) {
+                    // calls a helper method for calculating percentage
+                    double percentLiked = calc(tempSong.getLikedYes()[j],
+                        totalAnsweredLiked);
+                    tempSong.getBarPercents()[j + 4] = (int)percentLiked;
+                }
+                else {
+                    tempSong.getBarPercents()[j + 4] = 0;
+                }
             }
-            else {
-                // System.out.println("Heard");
-                // System.out.println("zero");
-                temp[j] = 0;
-            }
-            // this if statement catches divide by zero
-            if (totalAnsweredLiked != 0) {
-                // System.out.println("Liked");
-                // calls a helper method for calculating percentage
-                double percentLiked = calc(tempLikedYes[j], totalAnsweredLiked)
-                    * 100;
-                temp[j + 4] = (int)percentLiked;
-            }
-            else {
-                // System.out.println("Liked");
-                // System.out.println("zero");
-                temp[j + 4] = 0;
-            }
+            songList.replace(i, tempSong);
         }
-        //assigns the temp arrays 
-        song.setBarPercents(temp);
+
     }
 
 
+    /**
+     * helper method for calculating percentage
+     * 
+     * @param numerator
+     *            numerator for division
+     * @param denominator
+     *            denominator for division
+     * 
+     * @return a percentage
+     */
     private double calc(int numerator, int denominator) {
         double num = (double)numerator;
         double den = (double)denominator;
-        // System.out.println(num + " h " + den);
-        // System.out.println((num/den));
-        return num / den;
+        return (num / den) * 100;
     }
 }

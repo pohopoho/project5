@@ -29,7 +29,9 @@ public class InputReader {
      * constructor
      * 
      * @param surveyFile
+     *            the survey file name
      * @param songInfoFile
+     *            the song info file name
      * @throws FileNotFoundException
      * @throws ParseException
      */
@@ -39,9 +41,7 @@ public class InputReader {
         songList = readSongInfoFile(songInfoFile);
         readSurveyFile(surveyFile);
         Sorter sorter = new Sorter(songList);
-        for (int i = 1; i <= songList.getLength(); i++) {
-            sorter.repByHobby(songList.getEntry(i));
-        }
+        sorter.repByHobby();
         sorter.sortByGenre();
         sorter.sortByTitle();
         GUIMusicWindow mWin = new GUIMusicWindow();
@@ -49,10 +49,11 @@ public class InputReader {
 
 
     /**
-     * helper method fro reading song info file
+     * helper method for reading song info file
      * 
      * @param fileName
-     * @return
+     *            the name of the song info file
+     * @return a LList of songs
      * @throws FileNotFoundException
      * @throws ParseException
      */
@@ -81,13 +82,14 @@ public class InputReader {
 
 
     /**
-     * helper method for reading survey file
+     * helper method for reading survey file and filling the heard and liked
+     * arrays for songs in the songList
      * 
      * @param fileName
+     *            the name of the survey file
      * @throws FileNotFoundException
      * @throws ParseException
      */
-    @SuppressWarnings("unused")
     private void readSurveyFile(String fileName)
         throws FileNotFoundException,
         ParseException {
@@ -200,7 +202,7 @@ public class InputReader {
                         tempLikedNo[hIndex] += 1;
                         songList.getEntry(songTracker).setLikedNo(tempLikedNo);
                     }
-                    //increment the song number in the list
+                    // increment the song number in the list
                     songTracker++;
                 }
 
