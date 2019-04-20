@@ -1,14 +1,21 @@
 package prj5;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class LListTest extends student.TestCase {
     LList<String> list;
 
-
+    /**
+     * Setup for the test methods
+     */
     public void setUp() {
         list = new LList<String>();
     }
 
-
+    /**
+     * Test for getLength
+     */
     public void testGetLength() {
         assertEquals(list.getLength(), 0);
         list.add("adele");
@@ -229,4 +236,32 @@ public class LListTest extends student.TestCase {
 
     }
 
+    /**
+     * Test for iterator
+     */
+    public void testIterator()
+    {
+        Iterator<String> iter = list.iterator();
+        
+        Exception e = null;
+        try {
+            iter.next();
+        }
+        catch (Exception exception) {
+            e = exception;
+        }
+        assertTrue(e instanceof NoSuchElementException);
+        
+        list.add("one");
+        list.add("two");
+        list.add("three");
+        
+        assertTrue(iter.hasNext());
+        assertEquals(iter.next(), "one");
+        
+        //assertEquals(iter.next(), "two");
+        //assertFalse(iter.hasNext());
+        
+        
+    }
 }
