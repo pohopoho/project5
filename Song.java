@@ -33,7 +33,7 @@ public class Song {
 
     /**
      * This is the parameterized constructor for the class. It initializes the
-     * song fields with the parameters passed and intializes the heard and liked
+     * song fields with the parameters passed and initializes the heard and liked
      * arrays to new array of size 12.
      * 
      * @param songTitle
@@ -109,7 +109,7 @@ public class Song {
 
 
     /**
-     * accessor for heardYes
+     * This getHeardYes() method returns value of people who heard song.
      * 
      * @return the array holding the amount of people who answered Yes to
      *         hearing this song
@@ -120,8 +120,7 @@ public class Song {
 
 
     /**
-     * accessor for LikedYes
-     * 
+     * This getLikedYes() method returns value of people who like song.
      * @return the array holding the amount of people who answered Yes to liking
      *         this song
      */
@@ -131,8 +130,7 @@ public class Song {
 
 
     /**
-     * accessor for heardNo
-     * 
+     * This getLikedYes() method returns value of people who never heard the song.
      * @return the array holding the amount of people who answered No to hearing
      *         this song
      */
@@ -142,7 +140,7 @@ public class Song {
 
 
     /**
-     * mutator for heardYes
+     * This is the newHeardYes() method. It is a mutator for heardYes.
      * 
      * @param newHeardYes
      *            an int[] containing updated values
@@ -153,7 +151,7 @@ public class Song {
 
 
     /**
-     * mutator for likedYes
+     * This is the setLikedYes() method. It is a mutator for the likedYes.
      * 
      * @param newLikedYes
      *            an int[] containing updated values
@@ -164,7 +162,7 @@ public class Song {
 
 
     /**
-     * mutator for heardNo
+     * This is the setHeardNo() method. This is a mutator for heardNo.
      * 
      * @param newHeardNo
      *            an int[] containing updated values
@@ -172,35 +170,31 @@ public class Song {
     public void setHeardNo(int[] newHeardNo) {
         heardNo = newHeardNo;
     }
-
-
+    
     /**
-     * accessor for likedNo
-     * 
-     * @return the array holding the amount of people who answered No to liking
-     *         this song
+     * This is the getLikedNo() method.
+     * @return likedNo contains people who do not like song
      */
-    public int[] getLikedNo() {
+    public int[] getLikedNo()
+    {
         return likedNo;
     }
 
-
     /**
-     * mutator for likedNo
-     * 
-     * @param newLikedNo
-     *            an int[] containing updated values
+     * This is the setLikedNo() method. This is a mutator for likedNo.
+     * @param newLikedNo contains people who do not like song
      */
-    public void setLikedNo(int[] newLikedNo) {
+    public void setLikedNo(int [] newLikedNo)
+    {
         likedNo = newLikedNo;
     }
 
-
     /**
-     * accessor for the int[] containing the percentage values(glyph bar sizes)
-     * of heard/liked
+     * This is the getBarPercents(). This is an accessor for the 
+     * int[] containing the percentage values(glyph bar sizes) of 
+     * heard/liked.
      * 
-     * @return the barPercents[]
+     * @return the barPercents[] returns the bar percents
      */
     public int[] getBarPercents() {
         return barPercents;
@@ -208,8 +202,8 @@ public class Song {
 
 
     /**
-     * mutator for the int[] containing the percentage values(glyph bar sizes)
-     * of heard/liked
+     * This is the setBarPercents methods. This is a mutator for the int[] 
+     * containing the percentage values(glyph bar sizes) of heard/liked.
      * 
      * @param newBarPercents
      *            an int[] containing updated values
@@ -224,7 +218,7 @@ public class Song {
      * 
      * @param obj
      *            the object to be compared to
-     * @return true if equal, false if not equal
+     * @return true if equal, false if not equal    
      */
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -244,9 +238,7 @@ public class Song {
 
 
     /**
-     * converts song to string
-     * 
-     * @return the Song as a string
+     * This toString() method converts song to string
      */
     public String toString() {
         StringBuilder result = new StringBuilder();
