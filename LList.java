@@ -30,7 +30,9 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
     private Node tail;
     private int numberOfEntries;
 
-
+/**
+ * This is the LList() constructor.
+ */
     public LList() {
         head = null;
         tail = null;
@@ -38,9 +40,10 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
 
     }
 
-/**
- * This is the add(T anEntry) method. 
- */
+
+    /**
+     * This is the add(T anEntry) method.
+     */
     @Override
     public void add(T anEntry) {
         Node newNode = new Node(anEntry);
@@ -62,9 +65,10 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         numberOfEntries++;
     }
 
-/**
- * This is the add(int position, T anEntry) method.
- */
+
+    /**
+     * This is the add(int position, T anEntry) method.
+     */
     @Override
     public void add(int position, T anEntry) {
         if ((position >= 1) && (position <= numberOfEntries + 1)) {
@@ -379,26 +383,29 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
 
         private Node curr;
 
-/**
- * This is the LListIterator() constructor.
- */
+
+        /**
+         * This is the LListIterator() constructor.
+         */
         public LListIterator() {
             curr = new Node(null);
             curr.setNext(head);
 
         }
 
-/**
- * This is the hasNext() method.
- */
+
+        /**
+         * This is the hasNext() method.
+         */
         @Override
         public boolean hasNext() {
             return (curr.nextNode != null);
         }
 
-/**
- * This is the next() method.
- */
+
+        /**
+         * This is the next() method.
+         */
         @Override
         public T next() {
             if (!hasNext()) {
