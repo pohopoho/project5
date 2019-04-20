@@ -17,7 +17,7 @@ import java.util.NoSuchElementException;
 import list.ListInterface;
 
 /**
- * 
+ * @param<T>
  * 
  * @author Punita Verma (punitav9)
  * @version 04.14.2019
@@ -195,11 +195,11 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         Node current = head;
         while (current != null) {
             result[index] = current.getData();
-            current = current.getNext();  
+            current = current.getNext();
             index++;
         }
-        return result;  
-    } 
+        return result;
+    }
 
 
     public int size() {
@@ -211,7 +211,7 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         Node curr = head;
         int counter = 1;
         while (counter != index) {
-            curr = curr.getNext(); 
+            curr = curr.getNext();
             counter++;
         }
         return curr;
@@ -291,7 +291,7 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         public LListIterator() {
             curr = new Node(null);
             curr.setNext(head);
-            
+
         }
 
 
@@ -309,6 +309,7 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
             T temp = curr.getData();
             curr = curr.getNext();
             return temp;
+
         }
 
     }
