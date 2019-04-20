@@ -172,16 +172,29 @@ public class Song {
     public void setHeardNo(int[] newHeardNo) {
         heardNo = newHeardNo;
     }
-    
-    public int[] getLikedNo()
-    {
+
+
+    /**
+     * accessor for likedNo
+     * 
+     * @return the array holding the amount of people who answered No to liking
+     *         this song
+     */
+    public int[] getLikedNo() {
         return likedNo;
     }
 
-    public void setLikedNo(int [] newLikedNo)
-    {
+
+    /**
+     * mutator for likedNo
+     * 
+     * @param newLikedNo
+     *            an int[] containing updated values
+     */
+    public void setLikedNo(int[] newLikedNo) {
         likedNo = newLikedNo;
     }
+
 
     /**
      * accessor for the int[] containing the percentage values(glyph bar sizes)
@@ -232,6 +245,8 @@ public class Song {
 
     /**
      * converts song to string
+     * 
+     * @return the Song as a string
      */
     public String toString() {
         StringBuilder result = new StringBuilder();

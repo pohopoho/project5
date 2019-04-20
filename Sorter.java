@@ -141,12 +141,10 @@ public class Sorter {
     /**
      * Changes the int[] that contains the size of the bars in the songs in the
      * songList
-     * 
-     * @param song
-     *            the song to represent hobby for
      */
     public void repByHobby() {
-        int totalAnsweredHeard, totalAnsweredLiked;
+        int totalAnsweredHeard;
+        int totalAnsweredLiked;
         Song tempSong;
         for (int i = 1; i <= songList.getLength(); i++) {
             tempSong = songList.getEntry(i);

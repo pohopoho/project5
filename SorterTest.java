@@ -42,6 +42,36 @@ public class SorterTest extends TestCase {
         songList.add(song);
 
         sort = new Sorter(songList);
+
+        int[] tempHeardYes = new int[12];
+        tempHeardYes[0] = 5;
+        tempHeardYes[1] = 0;
+        tempHeardYes[2] = 2;
+        tempHeardYes[3] = 2;
+
+        int[] tempHeardNo = new int[12];
+        tempHeardNo[0] = 5;
+        tempHeardNo[1] = 2;
+        tempHeardNo[2] = 0;
+        tempHeardNo[3] = 6;
+
+        int[] tempLikedYes = new int[12];
+        tempLikedYes[0] = 5;
+        tempLikedYes[1] = 0;
+        tempLikedYes[2] = 1;
+        tempLikedYes[3] = 1;
+
+        int[] tempLikedNo = new int[12];
+        tempLikedNo[0] = 0;
+        tempLikedNo[1] = 0;
+        tempLikedNo[2] = 1;
+        tempLikedNo[3] = 1;
+
+        songList.getEntry(3).setHeardYes(tempHeardYes);
+        songList.getEntry(3).setHeardNo(tempHeardNo);
+        songList.getEntry(3).setLikedYes(tempLikedYes);
+        songList.getEntry(3).setLikedNo(tempLikedNo);
+
     }
 
 
@@ -102,6 +132,31 @@ public class SorterTest extends TestCase {
         assertEquals(songList.getEntry(4).getGenre(), "pop");
         assertEquals(songList.getEntry(5).getGenre(), "pop");
         assertEquals(songList.getEntry(6).getGenre(), "rock");
+    }
+
+
+    /**
+     * tests repByHobby
+     */
+    public void testRepByHobby() {
+
+        int[] temp = new int[8];
+        temp[0] = 50;
+        temp[1] = 0;
+        temp[2] = 100;
+        temp[3] = 25;
+
+        temp[4] = 100;
+        temp[5] = 0;
+        temp[6] = 50;
+        temp[7] = 50;
+        sort.sortByTitle();
+
+        sort.repByHobby();
+        for (int i = 0; i < 8; i++) {
+            assertEquals(temp[i], songList.getEntry(1).getBarPercents()[i]);
+        }
+
     }
 
 }
