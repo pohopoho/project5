@@ -154,11 +154,13 @@ public class Sorter {
                 totalAnswered = tempHeardYes[j] + tempHeardNo[j];
                 if(totalAnswered != 0)
                 {
+                    //System.out.println(tempHeardYes[j] + "\n");
                     double num = (double)tempHeardYes[j];
+                    System.out.println( num + "\n");
                     double den = (double)totalAnswered;
-                    double percentHeard = (den) * 100;
+                    double percentHeard = (num/den) * 100;
                     num = (double)tempLikedYes[j];
-                    double percentLiked = (den) * 100;
+                    double percentLiked = (num/den) * 100;
                     temp[j] = (int)percentHeard;
                     temp[j + 4] = (int)percentLiked;
                 }
