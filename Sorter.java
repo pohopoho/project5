@@ -31,6 +31,15 @@ public class Sorter {
         songList = songs;
 
     }
+    
+    /**
+     * accessor for songList
+     * @return the list of songs
+     */
+    public LList<Song> getSongList()
+    {
+        return songList;
+    }
 
 
     /**

@@ -3,6 +3,13 @@
  */
 package prj5;
 
+// Virginia Tech Honor Code Pledge:
+//
+// As a Hokie, I will conduct myself with honor and integrity at all times.
+// I will not lie, cheat, or steal, nor will I accept the actions of those who
+// do.
+// -- Michael Cheung (michaelc97)
+
 import java.awt.Color;
 import CS2114.Button;
 import CS2114.Shape;
@@ -12,10 +19,8 @@ import CS2114.WindowSide;
 
 /**
  * @author Michael Cheung
- * @version 4.16.2019
- *          This is the GUIMusicWindow class. This class is used to create the
- *          visual
- *          representation of the data.
+ * @version 4/16/2019
+ *
  */
 public class GUIMusicWindow {
 
@@ -47,17 +52,22 @@ public class GUIMusicWindow {
     private TextShape greenText;
     private Shape divider;
 
-    // Glyph Shape
-    // private GUISongShape glyph;
+    // Glyph Shapes
+    private LList<GUISongShape> glyphs;
 
     // Public constants
 
+    // Sorter
+    private Sorter collection;
+
 
     /**
-     * This is the constructor of GUIMusicWindow.
+     * Constructor
      */
-    public GUIMusicWindow() {
+    public GUIMusicWindow(Sorter sorter) {
+        collection = sorter;
         window = new Window("Project 5");
+        glyphs = new LList<GUISongShape>();
 
         // Initialize top buttons
         prev = new Button("<-- Prev");
@@ -78,9 +88,9 @@ public class GUIMusicWindow {
 
         // Build legend
         buildLegend();
-
-        for (int i = 1; i < 4; i++) {
-            window.addShape(new GUISongShape(i * 150, 50, 5, 32, window));
+        buildGlyphs();
+        for (int i = 0; i < 6; i++) {
+            // window.addShape(new GUISongShape(i * 150, 50, 5, 32, window));
         }
         // glyph = new SongShape(200, 200, 5, 32, window);
         // window.addShape(glyph);
@@ -89,9 +99,6 @@ public class GUIMusicWindow {
     }
 
 
-    /**
-     * This is the linkButtons() method.
-     */
     private void linkButtons() {
         prev.onClick(this, "clickedPrev");
         next.onClick(this, "clickedNext");
@@ -119,9 +126,6 @@ public class GUIMusicWindow {
     }
 
 
-    /**
-     * This is the buildLegend() method.
-     */
     private void buildLegend() {
         // Legend
         legendBox = new Shape(570, 120, 150);
@@ -131,7 +135,7 @@ public class GUIMusicWindow {
         window.addShape(legendBox);
         window.moveToFront(legendBox);
 
-        legendTitle = new TextShape(620, 125, "Legend");
+        legendTitle = new TextShape(580, 125, "");
         legendTitle.setBackgroundColor(Color.white);
         window.addShape(legendTitle);
         window.moveToFront(legendTitle);
@@ -146,22 +150,22 @@ public class GUIMusicWindow {
         window.addShape(legendBottom2);
         window.moveToFront(legendBottom2);
 
-        pinkText = new TextShape(585, 140, "Pink");
+        pinkText = new TextShape(585, 140, "");
         pinkText.setForegroundColor(Color.pink);
         pinkText.setBackgroundColor(Color.WHITE);
         window.addShape(pinkText);
         window.moveToFront(pinkText);
-        blueText = new TextShape(585, 155, "Blue");
+        blueText = new TextShape(585, 155, "");
         blueText.setForegroundColor(Color.blue);
         blueText.setBackgroundColor(Color.WHITE);
         window.addShape(blueText);
         window.moveToFront(blueText);
-        yellowText = new TextShape(585, 170, "Yellow");
+        yellowText = new TextShape(585, 170, "");
         yellowText.setForegroundColor(Color.YELLOW);
         yellowText.setBackgroundColor(Color.WHITE);
         window.addShape(yellowText);
         window.moveToFront(yellowText);
-        greenText = new TextShape(585, 185, "Green");
+        greenText = new TextShape(585, 185, "");
         greenText.setForegroundColor(Color.green);
         greenText.setBackgroundColor(Color.white);
         window.addShape(greenText);
@@ -174,10 +178,9 @@ public class GUIMusicWindow {
 
 
     /**
-     * This clickedPrev() method provides functionality for the previous button.
+     * provides functionality for the previous button
      * 
      * @param button
-     *            this is the button parameter
      */
     public void clickedPrev(Button button) {
 
@@ -185,10 +188,9 @@ public class GUIMusicWindow {
 
 
     /**
-     * This clickedNext() method provides functionality for the next button.
+     * provides functionality for the next button
      * 
      * @param button
-     *            this is the button parameter
      */
     public void clickedNext(Button button) {
 
@@ -196,97 +198,128 @@ public class GUIMusicWindow {
 
 
     /**
-     * This method clickedSortByArtist() provides functionality for the
-     * sortByArtist button.
+     * provides functionality for the sortByArtist button
      * 
      * @param button
-     *            this is the button parameter
      */
     public void clickedSortByArtist(Button button) {
-        // This is supposed to be empty
+        collection.sortByArtist();
     }
 
 
     /**
-     * This clickedSortByTitle() method provides functionality for the
-     * sortByTitle button.
+     * provides functionality for the sortByTitle button
      * 
      * @param button
-     *            this is the button parameter
      */
     public void clickedSortByTitle(Button button) {
-        // This is supposed to be empty
+        collection.sortByTitle();
     }
 
 
     /**
-     * This clickedSortByYear() method provides functionality for the sortByYear
-     * button.
+     * provides functionality for the sortByYear button
      * 
      * @param button
-     *            the parameter for button
      */
     public void clickedSortByYear(Button button) {
-        // This is supposed to be empty
+        collection.sortByYear();
     }
 
 
     /**
-     * This clickedSortByGenre() method provides functionality for the
-     * sortByGenre button.
+     * provides functionality for the sortByGenre button
      * 
      * @param button
-     *            this is the parameter for button
      */
     public void clickedSortByGenre(Button button) {
-        // This is supposed to be empty
+        collection.sortByGenre();
     }
 
 
     /**
-     * This clickedRepByHobby() method provides functionality for the repByHobby
-     * button.
+     * provides functionality for the repByHobby button
      * 
      * @param button
-     *            this is the parameter for button
      */
     public void clickedRepByHobby(Button button) {
-        // This is supposed to be empty
+        legendTitle.setText("Hobby Legend");
+        pinkText.setText("Read");
+        blueText.setText("Art");
+        yellowText.setText("Sports");
+        greenText.setText("Music");
     }
 
 
     /**
-     * This clickedRepByMajor() method provides functionality for the repByMajor
-     * button.
+     * provides functionality for the repByMajor button
      * 
      * @param button
-     *            this is the parameter for button.
      */
     public void clickedRepByMajor(Button button) {
-        // This is supposed to be empty
+        legendTitle.setText("Major Legend");
+        pinkText.setText("Comp Sci");
+        blueText.setText("Other Eng");
+        yellowText.setText("Math/CMDA");
+        greenText.setText("Other");
     }
 
 
     /**
-     * This clickedRepByRegion() method provides functionality for the
-     * repByRegion button.
+     * provides functionality for the repByRegion button
      * 
      * @param button
-     *            this is the parameter for button.
      */
     public void clickedRepByRegion(Button button) {
-        // This is supposed to be empty
+        legendTitle.setText("Region Legend");
+        pinkText.setText("Northeast US");
+        blueText.setText("Southeast US");
+        yellowText.setText("Rest of US");
+        greenText.setText("Outside of US");
     }
 
 
     /**
-     * This clickedQuit() method provides functionality for the quit button.
+     * provides functionality for the quit button
      * 
      * @param button
-     *            this is the parameter for button
      */
     public void clickedQuit(Button button) {
         System.exit(0);
     }
+
+
+    /**
+     * builds glyphs
+     */
+    private void buildGlyphs() {
+        int xPosition = 1;
+        int yPosition = 1;
+        int yTracker = 1;
+        for (int i = 1; i <= collection.getSongList().getLength(); i++) {
+            glyphs.add(new GUISongShape(xPosition * 150, yPosition * 50, 5, 32, window, collection.getSongList().getEntry(i)));
+            if (xPosition % 3 == 0) {
+                xPosition = 1;
+            }
+            else {
+                xPosition++;
+            }
+            if (yTracker == 3) {
+                yTracker = 1;
+                if(yPosition == 1)
+                {
+                    yPosition = 3;
+                }
+                else
+                {
+                    yPosition = 1;
+                }
+            }
+            else {
+                yTracker++;
+            }
+        }
+    }
+
 
 }

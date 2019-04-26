@@ -44,7 +44,7 @@ public class InputReader {
         sorter.repByHobby();
         sorter.sortByGenre();
         sorter.sortByTitle();
-        GUIMusicWindow mWin = new GUIMusicWindow();
+        GUIMusicWindow mWin = new GUIMusicWindow(sorter);
     }
 
 
