@@ -54,6 +54,7 @@ public class GUIMusicWindow {
 
     // Glyph Shapes
     private LList<GUISongShape> glyphs;
+    //private LListIterator iterator;
 
     // Public constants
 
@@ -68,6 +69,7 @@ public class GUIMusicWindow {
         collection = sorter;
         window = new Window("Project 5");
         glyphs = new LList<GUISongShape>();
+        buildGlyphs();
 
         // Initialize top buttons
         prev = new Button("<-- Prev");
@@ -88,7 +90,7 @@ public class GUIMusicWindow {
 
         // Build legend
         buildLegend();
-        buildGlyphs();
+
         for (int i = 0; i < 6; i++) {
             // window.addShape(new GUISongShape(i * 150, 50, 5, 32, window));
         }
@@ -204,6 +206,11 @@ public class GUIMusicWindow {
      */
     public void clickedSortByArtist(Button button) {
         collection.sortByArtist();
+        for(int i = 1; i <= glyphs.getLength(); i++)
+        {
+            glyphs.getEntry(i).setSong(collection.getSongList().getEntry(i));
+        }
+        buildGlyphs();
     }
 
 
@@ -214,6 +221,11 @@ public class GUIMusicWindow {
      */
     public void clickedSortByTitle(Button button) {
         collection.sortByTitle();
+        for(int i = 1; i <= glyphs.getLength(); i++)
+        {
+            glyphs.getEntry(i).setSong(collection.getSongList().getEntry(i));
+        }
+        buildGlyphs();
     }
 
 
@@ -224,6 +236,11 @@ public class GUIMusicWindow {
      */
     public void clickedSortByYear(Button button) {
         collection.sortByYear();
+        for(int i = 1; i <= glyphs.getLength(); i++)
+        {
+            glyphs.getEntry(i).setSong(collection.getSongList().getEntry(i));
+        }
+        buildGlyphs();
     }
 
 
@@ -234,6 +251,11 @@ public class GUIMusicWindow {
      */
     public void clickedSortByGenre(Button button) {
         collection.sortByGenre();
+        for(int i = 1; i <= glyphs.getLength(); i++)
+        {
+            glyphs.getEntry(i).setSong(collection.getSongList().getEntry(i));
+        }
+        buildGlyphs();
     }
 
 
@@ -248,6 +270,7 @@ public class GUIMusicWindow {
         blueText.setText("Art");
         yellowText.setText("Sports");
         greenText.setText("Music");
+        collection.repByHobby();
     }
 
 
@@ -262,6 +285,7 @@ public class GUIMusicWindow {
         blueText.setText("Other Eng");
         yellowText.setText("Math/CMDA");
         greenText.setText("Other");
+        collection.repByMajor();
     }
 
 
@@ -276,6 +300,7 @@ public class GUIMusicWindow {
         blueText.setText("Southeast US");
         yellowText.setText("Rest of US");
         greenText.setText("Outside of US");
+        collection.repByRegion();
     }
 
 
@@ -297,7 +322,7 @@ public class GUIMusicWindow {
         int yPosition = 1;
         int yTracker = 1;
         for (int i = 1; i <= collection.getSongList().getLength(); i++) {
-            glyphs.add(new GUISongShape(xPosition * 150, yPosition * 50, 5, 32, window, collection.getSongList().getEntry(i)));
+            glyphs.add(new GUISongShape((xPosition * 100) + (xPosition-1) * 90, yPosition * 45, 5, 32, collection.getSongList().getEntry(i)));
             if (xPosition % 3 == 0) {
                 xPosition = 1;
             }
@@ -310,6 +335,10 @@ public class GUIMusicWindow {
                 {
                     yPosition = 3;
                 }
+                else if(yPosition == 3)
+                {
+                    yPosition = 5;
+                }
                 else
                 {
                     yPosition = 1;
@@ -318,7 +347,13 @@ public class GUIMusicWindow {
             else {
                 yTracker++;
             }
+            //glyphs.getEntry(i).addToWin(window);
         }
+    }
+    
+    private void display()
+    {
+        
     }
 
 

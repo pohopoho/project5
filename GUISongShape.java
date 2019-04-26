@@ -10,7 +10,7 @@ import CS2114.Window;
 
 /**
  * @author Michael Cheung
- * @version
+ * @version 4/26/2019
  *
  */
 public class GUISongShape extends Shape {
@@ -26,41 +26,55 @@ public class GUISongShape extends Shape {
     private Shape yLiked;
     private Shape gHeard;
     private Shape gLiked;
+    
+    private int x;
+    private int y;
+    private Song song;
 
     public static final int BAR_WIDTH = 8;
 
 
-    public GUISongShape(int x, int y, int width, int height, Window win, Song song) {
+    public GUISongShape(int x, int y, int width, int height, Song song) {
         super(x, y, width, height);
         setBackgroundColor(Color.BLACK);
         setForegroundColor(Color.BLACK);
+        this.song = song;
+        this.x = x;
+        this.y = y;
 
-        songTitle = new TextShape(x - 20, y - 40, song.getTitle());
-        songArtist = new TextShape(x - 20, y - 25, song.getArtist());
+       
+
+
+    }
+    
+    public void addToWin(Window win)
+    {
+        songTitle = new TextShape(x - 20, y - 40, this.song.getTitle());
+        songArtist = new TextShape(x - 20, y - 25, this.song.getArtist());
         songTitle.setBackgroundColor(Color.white);
         songArtist.setBackgroundColor(Color.white);
         songTitle.setX(x - songTitle.getWidth() / 2);
         songArtist.setX(x - songArtist.getWidth() / 2);
 
-        win.addShape(songArtist);
-        win.addShape(songTitle);
+
         // = new Shape(x+5, <y changes>, numberLiked, 5, color); x4
         // = new Shape(x-numberHeard, <y changes>, numberHeard, 5, color) x4
 
-        pHeard = new Shape(x - song.getBarPercents()[0], y, song.getBarPercents()[0], BAR_WIDTH, Color.PINK);
-        bHeard = new Shape(x - song.getBarPercents()[1], y + BAR_WIDTH, song.getBarPercents()[1], BAR_WIDTH, Color.BLUE);
-        yHeard = new Shape(x - song.getBarPercents()[2], y + (2 * BAR_WIDTH), song.getBarPercents()[2], BAR_WIDTH,
+        pHeard = new Shape(x - this.song.getBarPercents()[0], y, this.song.getBarPercents()[0], BAR_WIDTH, Color.PINK);
+        bHeard = new Shape(x - this.song.getBarPercents()[1], y + BAR_WIDTH, this.song.getBarPercents()[1], BAR_WIDTH, Color.BLUE);
+        yHeard = new Shape(x - this.song.getBarPercents()[2], y + (2 * BAR_WIDTH), this.song.getBarPercents()[2], BAR_WIDTH,
             Color.YELLOW);
-        gHeard = new Shape(x - song.getBarPercents()[3], y + (3 * BAR_WIDTH), song.getBarPercents()[3], BAR_WIDTH,
+        gHeard = new Shape(x - this.song.getBarPercents()[3], y + (3 * BAR_WIDTH), this.song.getBarPercents()[3], BAR_WIDTH,
             Color.GREEN);
 
-        pLiked = new Shape(x + 5, y, song.getBarPercents()[4], BAR_WIDTH, Color.PINK);
-        bLiked = new Shape(x + 5, y + BAR_WIDTH, song.getBarPercents()[5], BAR_WIDTH, Color.BLUE);
-        yLiked = new Shape(x + 5, y + (2 * BAR_WIDTH), song.getBarPercents()[6], BAR_WIDTH,
+        pLiked = new Shape(x + 5, y, this.song.getBarPercents()[4], BAR_WIDTH, Color.PINK);
+        bLiked = new Shape(x + 5, y + BAR_WIDTH, this.song.getBarPercents()[5], BAR_WIDTH, Color.BLUE);
+        yLiked = new Shape(x + 5, y + (2 * BAR_WIDTH), this.song.getBarPercents()[6], BAR_WIDTH,
             Color.YELLOW);
-        gLiked = new Shape(x + 5, y + (3 * BAR_WIDTH), song.getBarPercents()[7], BAR_WIDTH,
+        gLiked = new Shape(x + 5, y + (3 * BAR_WIDTH), this.song.getBarPercents()[7], BAR_WIDTH,
             Color.GREEN);
-
+        win.addShape(songArtist);
+        win.addShape(songTitle);
         win.addShape(pHeard);
         win.addShape(bHeard);
         win.addShape(yHeard);
@@ -70,6 +84,11 @@ public class GUISongShape extends Shape {
         win.addShape(yLiked);
         win.addShape(gLiked);
         win.addShape(this);
+    }
+    
+    public void setSong(Song song)
+    {
+        this.song = song;
     }
 
 }
