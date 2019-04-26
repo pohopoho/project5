@@ -140,7 +140,7 @@ public class Sorter {
 
     /**
      * Changes the int[] that contains the size of the bars in the songs in the
-     * songList
+     * songList based on hobbies
      */
     public void repByHobby() {
         int totalAnsweredHeard;
@@ -183,8 +183,102 @@ public class Sorter {
         }
 
     }
+    
+    /**
+     * Changes the int[] that contains the size of the bars in the songs in the
+     * songList based on majors
+     */
+    public void repByMajor()
+    {
+        int totalAnsweredHeard;
+        int totalAnsweredLiked;
+        int barIndex = 0;
+        Song tempSong;
+        for (int i = 1; i <= songList.getLength(); i++) {
+            tempSong = songList.getEntry(i);
+            // since this is repByHobby, index can only be 0, 1, 2, 3
+            for (int j = 4; j < 8; j++) {
+                // total answered for heard is equal to
+                // total # who answered yes + total # who answered no
+                totalAnsweredHeard = tempSong.getHeardYes()[j] + tempSong
+                    .getHeardNo()[j];
+                // total answered for liked is equal to
+                // total # who answered yes + total # who answered no
+                totalAnsweredLiked = tempSong.getLikedYes()[j] + tempSong
+                    .getLikedNo()[j];
+                // this if statement catches divide by zero
+                if (totalAnsweredHeard != 0) {
+                    // calls a helper method for calculating percentage
+                    double percentHeard = calc(tempSong.getHeardYes()[j],
+                        totalAnsweredHeard);
+                    tempSong.getBarPercents()[barIndex] = (int)percentHeard;
+                }
+                else {
+                    tempSong.getBarPercents()[barIndex] = 0;
+                }
+                // this if statement catches divide by zero
+                if (totalAnsweredLiked != 0) {
+                    // calls a helper method for calculating percentage
+                    double percentLiked = calc(tempSong.getLikedYes()[j],
+                        totalAnsweredLiked);
+                    tempSong.getBarPercents()[barIndex + 4] = (int)percentLiked;
+                }
+                else {
+                    tempSong.getBarPercents()[barIndex + 4] = 0;
+                }
+                barIndex++;
+            }
+            songList.replace(i, tempSong);
+        }
+    }
 
-
+    /**
+     * Changes the int[] that contains the size of the bars in the songs in the
+     * songList based on regions
+     */
+    public void repByRegion()
+    {
+        int totalAnsweredHeard;
+        int totalAnsweredLiked;
+        int barIndex = 0;
+        Song tempSong;
+        for (int i = 1; i <= songList.getLength(); i++) {
+            tempSong = songList.getEntry(i);
+            // since this is repByHobby, index can only be 0, 1, 2, 3
+            for (int j = 8; j < 12; j++) {
+                // total answered for heard is equal to
+                // total # who answered yes + total # who answered no
+                totalAnsweredHeard = tempSong.getHeardYes()[j] + tempSong
+                    .getHeardNo()[j];
+                // total answered for liked is equal to
+                // total # who answered yes + total # who answered no
+                totalAnsweredLiked = tempSong.getLikedYes()[j] + tempSong
+                    .getLikedNo()[j];
+                // this if statement catches divide by zero
+                if (totalAnsweredHeard != 0) {
+                    // calls a helper method for calculating percentage
+                    double percentHeard = calc(tempSong.getHeardYes()[j],
+                        totalAnsweredHeard);
+                    tempSong.getBarPercents()[barIndex] = (int)percentHeard;
+                }
+                else {
+                    tempSong.getBarPercents()[barIndex] = 0;
+                }
+                // this if statement catches divide by zero
+                if (totalAnsweredLiked != 0) {
+                    // calls a helper method for calculating percentage
+                    double percentLiked = calc(tempSong.getLikedYes()[j],
+                        totalAnsweredLiked);
+                    tempSong.getBarPercents()[barIndex + 4] = (int)percentLiked;
+                }
+                else {
+                    tempSong.getBarPercents()[barIndex + 4] = 0;
+                }
+                barIndex++;
+            }
+            songList.replace(i, tempSong);
+        }
+    }
     /**
      * helper method for calculating percentage
      * 
