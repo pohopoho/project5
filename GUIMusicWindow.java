@@ -63,12 +63,15 @@ public class GUIMusicWindow {
 
     // Page variable
     private int page;
-    
-    //FirstClick variable
+
+    // FirstClick variable
 
 
     /**
-     * Constructor
+     * This is the constructor for the GUIMusicWindow.
+     * 
+     * @param sorter
+     *            this is the parameter for sorter
      */
     public GUIMusicWindow(Sorter sorter) {
         collection = sorter;
@@ -101,6 +104,10 @@ public class GUIMusicWindow {
     }
 
 
+    /**
+     * This is the linkButtons() method. This method sets up buttons
+     * in the window.
+     */
     private void linkButtons() {
         prev.onClick(this, "clickedPrev");
         next.onClick(this, "clickedNext");
@@ -128,6 +135,10 @@ public class GUIMusicWindow {
     }
 
 
+    /**
+     * This is the buildlLegend() method. This method builds the legend
+     * on the window.
+     */
     private void buildLegend() {
         // Legend
         legendBox = new Shape(570, 120, 150);
@@ -180,9 +191,11 @@ public class GUIMusicWindow {
 
 
     /**
-     * provides functionality for the previous button
+     * This clickedPrev() method provides functionality for
+     * the previous button.
      * 
      * @param button
+     *            this the button parameter.
      */
     public void clickedPrev(Button button) {
         next.enable();
@@ -203,9 +216,10 @@ public class GUIMusicWindow {
 
 
     /**
-     * provides functionality for the next button
+     * This clickedNext() method provides functionality for the next button.
      * 
      * @param button
+     *            the parameter for button
      */
     public void clickedNext(Button button) {
         prev.enable();
@@ -228,16 +242,17 @@ public class GUIMusicWindow {
 
 
     /**
-     * provides functionality for the sortByArtist button
+     * The clickedSortByArtsit() method provides
+     * functionality for the sortByArtist button.
      * 
      * @param button
+     *            the parameter for button
      */
     public void clickedSortByArtist(Button button) {
         removePage();
         collection.sortByArtist();
         buildGlyphs();
-        for(int i = 1; i <= glyphs.getLength(); i++)
-        {
+        for (int i = 1; i <= glyphs.getLength(); i++) {
             glyphs.getEntry(i).setTextArtist();
         }
         updatePage();
@@ -245,15 +260,16 @@ public class GUIMusicWindow {
 
 
     /**
-     * provides functionality for the sortByTitle button
+     * This clickedSortByTitle() method provides
+     * functionality for the sortByTitle button.
      * 
      * @param button
+     *            the parameter for button
      */
     public void clickedSortByTitle(Button button) {
         removePage();
         collection.sortByTitle();
-        for(int i = 1; i <= glyphs.getLength(); i++)
-        {
+        for (int i = 1; i <= glyphs.getLength(); i++) {
             glyphs.getEntry(i).setTextArtist();
         }
         buildGlyphs();
@@ -262,16 +278,17 @@ public class GUIMusicWindow {
 
 
     /**
-     * provides functionality for the sortByYear button
+     * The clickedSortByYear() method provides
+     * functionality for the sortByYear button.
      * 
      * @param button
+     *            the parameter for button
      */
     public void clickedSortByYear(Button button) {
         removePage();
         collection.sortByYear();
         buildGlyphs();
-        for(int i = 1; i <= glyphs.getLength(); i++)
-        {
+        for (int i = 1; i <= glyphs.getLength(); i++) {
             glyphs.getEntry(i).setTextYear();
         }
         updatePage();
@@ -279,16 +296,17 @@ public class GUIMusicWindow {
 
 
     /**
-     * provides functionality for the sortByGenre button
+     * The clickedSortByGenre() method provides
+     * functionality for the sortByGenre button.
      * 
      * @param button
+     *            the parameter for button
      */
     public void clickedSortByGenre(Button button) {
         removePage();
         collection.sortByGenre();
         buildGlyphs();
-        for(int i = 1; i <= glyphs.getLength(); i++)
-        {
+        for (int i = 1; i <= glyphs.getLength(); i++) {
             glyphs.getEntry(i).setTextGenre();
         }
         updatePage();
@@ -296,9 +314,11 @@ public class GUIMusicWindow {
 
 
     /**
-     * provides functionality for the repByHobby button
+     * The clickedRepByHobby() method provides
+     * functionality for the repByHobby button.
      * 
      * @param button
+     *            the parameter for button
      */
     public void clickedRepByHobby(Button button) {
         removePage();
@@ -314,9 +334,11 @@ public class GUIMusicWindow {
 
 
     /**
-     * provides functionality for the repByMajor button
+     * The clickedRepByMajor() method provides
+     * functionality for the repByMajor button.
      * 
      * @param button
+     *            the parameter for button
      */
     public void clickedRepByMajor(Button button) {
         removePage();
@@ -332,9 +354,11 @@ public class GUIMusicWindow {
 
 
     /**
-     * provides functionality for the repByRegion button
+     * The clickedRepByRegion() provides
+     * functionality for the repByRegion button.
      * 
      * @param button
+     *            the parameter for button
      */
     public void clickedRepByRegion(Button button) {
         removePage();
@@ -350,9 +374,11 @@ public class GUIMusicWindow {
 
 
     /**
-     * provides functionality for the quit button
+     * The clickedQuit() provides functionality
+     * for the quit button.
      * 
      * @param button
+     *            the parameter for button
      */
     public void clickedQuit(Button button) {
         System.exit(0);
@@ -360,7 +386,8 @@ public class GUIMusicWindow {
 
 
     /**
-     * builds glyphs
+     * This is the buildGlyphs() method. It is used to create
+     * glyphs in the window.
      */
     private void buildGlyphs() {
         int xPosition = 1;
@@ -392,26 +419,31 @@ public class GUIMusicWindow {
             else {
                 yTracker++;
             }
-            //glyphs.getEntry(i).addToWin(window);
+            // glyphs.getEntry(i).addToWin(window);
         }
     }
 
 
+    /**
+     * This is the undatePage() method. This method is used to
+     * update the window.
+     */
     private void updatePage() {
         removePage();
-        for(int j = (page * 9) + 1; j <= (page * 9) + 9; j++)
-        {
-            if(j <= glyphs.getLength())
-            {
+        for (int j = (page * 9) + 1; j <= (page * 9) + 9; j++) {
+            if (j <= glyphs.getLength()) {
                 glyphs.getEntry(j).addToWin(window);
             }
         }
     }
-    
-    private void removePage()
-    {
-        for(int i = (page * 9) + 1; i <= (page * 9) + 9; i++)
-        {
+
+
+    /**
+     * This is the removePage() method. This method is used to remove
+     * page from window.
+     */
+    private void removePage() {
+        for (int i = (page * 9) + 1; i <= (page * 9) + 9; i++) {
             glyphs.getEntry(i).removeFromWin(window);
         }
     }
