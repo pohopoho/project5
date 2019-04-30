@@ -215,7 +215,7 @@ public class GUIMusicWindow {
         }
         page++;
         // add the shapes after incrementing page
-        for (int j = (page * 9)+ 1; j <= (page * 9) + 9; j++) {
+        for (int j = (page * 9) + 1; j <= (page * 9) + 9; j++) {
             if (j <= glyphs.getLength()) {
                 glyphs.getEntry(j).addToWin(window);
             }
@@ -233,8 +233,13 @@ public class GUIMusicWindow {
      * @param button
      */
     public void clickedSortByArtist(Button button) {
+        removePage();
         collection.sortByArtist();
         buildGlyphs();
+        for(int i = 1; i <= glyphs.getLength(); i++)
+        {
+            glyphs.getEntry(i).setTextArtist();
+        }
         updatePage();
     }
 
@@ -245,7 +250,12 @@ public class GUIMusicWindow {
      * @param button
      */
     public void clickedSortByTitle(Button button) {
+        removePage();
         collection.sortByTitle();
+        for(int i = 1; i <= glyphs.getLength(); i++)
+        {
+            glyphs.getEntry(i).setTextArtist();
+        }
         buildGlyphs();
         updatePage();
     }
@@ -257,8 +267,13 @@ public class GUIMusicWindow {
      * @param button
      */
     public void clickedSortByYear(Button button) {
+        removePage();
         collection.sortByYear();
         buildGlyphs();
+        for(int i = 1; i <= glyphs.getLength(); i++)
+        {
+            glyphs.getEntry(i).setTextYear();
+        }
         updatePage();
     }
 
@@ -269,8 +284,13 @@ public class GUIMusicWindow {
      * @param button
      */
     public void clickedSortByGenre(Button button) {
+        removePage();
         collection.sortByGenre();
         buildGlyphs();
+        for(int i = 1; i <= glyphs.getLength(); i++)
+        {
+            glyphs.getEntry(i).setTextGenre();
+        }
         updatePage();
     }
 
@@ -281,6 +301,7 @@ public class GUIMusicWindow {
      * @param button
      */
     public void clickedRepByHobby(Button button) {
+        removePage();
         legendTitle.setText("Hobby Legend");
         pinkText.setText("Read");
         blueText.setText("Art");
@@ -298,6 +319,7 @@ public class GUIMusicWindow {
      * @param button
      */
     public void clickedRepByMajor(Button button) {
+        removePage();
         legendTitle.setText("Major Legend");
         pinkText.setText("Comp Sci");
         blueText.setText("Other Eng");
@@ -315,6 +337,7 @@ public class GUIMusicWindow {
      * @param button
      */
     public void clickedRepByRegion(Button button) {
+        removePage();
         legendTitle.setText("Region Legend");
         pinkText.setText("Northeast US");
         blueText.setText("Southeast US");
@@ -375,16 +398,21 @@ public class GUIMusicWindow {
 
 
     private void updatePage() {
-        for(int i = (page * 9) + 1; i <= (page * 9) + 9; i++)
-        {
-            glyphs.getEntry(i).removeFromWin(window);
-        }
+        removePage();
         for(int j = (page * 9) + 1; j <= (page * 9) + 9; j++)
         {
             if(j <= glyphs.getLength())
             {
                 glyphs.getEntry(j).addToWin(window);
             }
+        }
+    }
+    
+    private void removePage()
+    {
+        for(int i = (page * 9) + 1; i <= (page * 9) + 9; i++)
+        {
+            glyphs.getEntry(i).removeFromWin(window);
         }
     }
 

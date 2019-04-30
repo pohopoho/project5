@@ -16,7 +16,7 @@ import CS2114.Window;
 public class GUISongShape extends Shape {
 
     private TextShape songTitle;
-    private TextShape songArtist;
+    private TextShape songText;
 
     private Shape pHeard;
     private Shape pLiked;
@@ -27,6 +27,7 @@ public class GUISongShape extends Shape {
     private Shape gHeard;
     private Shape gLiked;
     
+    private int x;
     private Song song;
 
     public static final int BAR_WIDTH = 8;
@@ -37,12 +38,13 @@ public class GUISongShape extends Shape {
         setBackgroundColor(Color.BLACK);
         setForegroundColor(Color.BLACK);
         this.song = song;
+        this.x = x;
         songTitle = new TextShape(x - 20, y - 40, this.song.getTitle());
-        songArtist = new TextShape(x - 20, y - 25, this.song.getArtist());
+        songText = new TextShape(x - 20, y - 25, "by " + this.song.getArtist());
         songTitle.setBackgroundColor(Color.white);
-        songArtist.setBackgroundColor(Color.white);
+        songText.setBackgroundColor(Color.white);
         songTitle.setX(x - songTitle.getWidth() / 2);
-        songArtist.setX(x - songArtist.getWidth() / 2);
+        songText.setX(x - songText.getWidth() / 2);
 
 
         // = new Shape(x+5, <y changes>, numberLiked, 5, color); x4
@@ -68,7 +70,7 @@ public class GUISongShape extends Shape {
     public void addToWin(Window win)
     {
         
-        win.addShape(songArtist);
+        win.addShape(songText);
         win.addShape(songTitle);
         win.addShape(pHeard);
         win.addShape(bHeard);
@@ -83,7 +85,7 @@ public class GUISongShape extends Shape {
     
     public void removeFromWin(Window win)
     {
-        win.removeShape(songArtist);
+        win.removeShape(songText);
         win.removeShape(songTitle);
         win.removeShape(pHeard);
         win.removeShape(bHeard);
@@ -94,6 +96,30 @@ public class GUISongShape extends Shape {
         win.removeShape(yLiked);
         win.removeShape(gLiked);
         win.removeShape(this);
+    }
+    
+    /**
+     * updates the text if artist or title was clicked on
+     */
+    public void setTextArtist()
+    {
+        songText.setText("by " + song.getArtist());
+        songText.setX(x - songText.getWidth() / 2);
+    }
+    
+    /**
+     * 
+     */
+    public void setTextYear()
+    {
+        songText.setText("year: " + Integer.toString(song.getYear()));
+        songText.setX(x - songText.getWidth() / 2);
+    }
+    
+    public void setTextGenre()
+    {
+        songText.setText("genre: " + song.getGenre());
+        songText.setX(x - songText.getWidth() / 2);
     }
 
 }
