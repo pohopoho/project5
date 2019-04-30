@@ -48,24 +48,56 @@ public class SorterTest extends TestCase {
         tempHeardYes[1] = 0;
         tempHeardYes[2] = 2;
         tempHeardYes[3] = 2;
+        tempHeardYes[4] = 5;
+        tempHeardYes[5] = 0;
+        tempHeardYes[6] = 2;
+        tempHeardYes[7] = 2;
+        tempHeardYes[8] = 5;
+        tempHeardYes[9] = 0;
+        tempHeardYes[10] = 2;
+        tempHeardYes[11] = 2;
 
         int[] tempHeardNo = new int[12];
         tempHeardNo[0] = 5;
         tempHeardNo[1] = 2;
         tempHeardNo[2] = 0;
         tempHeardNo[3] = 6;
+        tempHeardNo[4] = 5;
+        tempHeardNo[5] = 2;
+        tempHeardNo[6] = 0;
+        tempHeardNo[7] = 6;
+        tempHeardNo[8] = 5;
+        tempHeardNo[9] = 2;
+        tempHeardNo[10] = 0;
+        tempHeardNo[11] = 6;
 
         int[] tempLikedYes = new int[12];
         tempLikedYes[0] = 5;
         tempLikedYes[1] = 0;
         tempLikedYes[2] = 1;
         tempLikedYes[3] = 1;
+        tempLikedYes[4] = 5;
+        tempLikedYes[5] = 0;
+        tempLikedYes[6] = 1;
+        tempLikedYes[7] = 1;
+        tempLikedYes[8] = 5;
+        tempLikedYes[9] = 0;
+        tempLikedYes[10] = 1;
+        tempLikedYes[11] = 1;
 
         int[] tempLikedNo = new int[12];
         tempLikedNo[0] = 0;
         tempLikedNo[1] = 0;
         tempLikedNo[2] = 1;
         tempLikedNo[3] = 1;
+        tempLikedNo[4] = 0;
+        tempLikedNo[5] = 0;
+        tempLikedNo[6] = 1;
+        tempLikedNo[7] = 1;
+        tempLikedNo[8] = 0;
+        tempLikedNo[9] = 0;
+        tempLikedNo[10] = 1;
+        tempLikedNo[11] = 1;
 
         songList.getEntry(3).setHeardYes(tempHeardYes);
         songList.getEntry(3).setHeardNo(tempHeardNo);
@@ -157,6 +189,52 @@ public class SorterTest extends TestCase {
             assertEquals(temp[i], songList.getEntry(1).getBarPercents()[i]);
         }
 
+    }
+
+
+    /**
+     * tests repByMajor method
+     */
+    public void testRepByMajor() {
+        int[] temp = new int[8];
+        temp[0] = 50;
+        temp[1] = 0;
+        temp[2] = 100;
+        temp[3] = 25;
+
+        temp[4] = 100;
+        temp[5] = 0;
+        temp[6] = 50;
+        temp[7] = 50;
+        sort.sortByTitle();
+
+        sort.repByMajor();
+        for (int i = 0; i < 8; i++) {
+            assertEquals(temp[i], songList.getEntry(1).getBarPercents()[i]);
+        }
+    }
+
+
+    /**
+     * tests repByRegion method
+     */
+    public void testRepByRegion() {
+        int[] temp = new int[8];
+        temp[0] = 50;
+        temp[1] = 0;
+        temp[2] = 100;
+        temp[3] = 25;
+
+        temp[4] = 100;
+        temp[5] = 0;
+        temp[6] = 50;
+        temp[7] = 50;
+        sort.sortByTitle();
+
+        sort.repByRegion();
+        for (int i = 0; i < 8; i++) {
+            assertEquals(temp[i], songList.getEntry(1).getBarPercents()[i]);
+        }
     }
 
 }
