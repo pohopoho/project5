@@ -65,7 +65,6 @@ public class GUIMusicWindow {
     private int page;
     
     //FirstClick variable
-    private boolean clicked;
 
 
     /**
@@ -99,7 +98,6 @@ public class GUIMusicWindow {
 
         prev.disable();
         page = 0;
-        clicked = false;
     }
 
 
@@ -189,15 +187,14 @@ public class GUIMusicWindow {
     public void clickedPrev(Button button) {
         next.enable();
         // remove the current shapes
-        for (int i = page + 1; i <= page * 9; i++) {
+        for (int i = (page * 9) + 1; i <= (page * 9) + 9; i++) {
             glyphs.getEntry(i).removeFromWin(window);
         }
         page--;
         // add the shapes after decrementing page
-        for (int j = page + 1; j <= page * 9; j++) {
+        for (int j = (page * 9) + 1; j <= (page * 9) + 9; j++) {
             glyphs.getEntry(j).addToWin(window);
         }
-
         if (page == 0) {
             button.disable();
         }
@@ -213,17 +210,17 @@ public class GUIMusicWindow {
     public void clickedNext(Button button) {
         prev.enable();
         // remove the current shapes
-        for (int i = page + 1; i <= page * 9; i++) {
+        for (int i = (page * 9) + 1; i <= (page * 9) + 9; i++) {
             glyphs.getEntry(i).removeFromWin(window);
         }
         page++;
         // add the shapes after incrementing page
-        for (int j = page + 1; j <= page * 9; j++) {
+        for (int j = (page * 9)+ 1; j <= (page * 9) + 9; j++) {
             if (j <= glyphs.getLength()) {
                 glyphs.getEntry(j).addToWin(window);
             }
         }
-        if (page * 9 >= glyphs.getLength()) {
+        if ((page + 1) * 9 >= glyphs.getLength()) {
             button.disable();
         }
 
@@ -289,7 +286,6 @@ public class GUIMusicWindow {
         blueText.setText("Art");
         yellowText.setText("Sports");
         greenText.setText("Music");
-
         collection.repByHobby();
         buildGlyphs();
         updatePage();
@@ -379,11 +375,11 @@ public class GUIMusicWindow {
 
 
     private void updatePage() {
-        for(int i = page + 1; i <= page * 9; i++)
+        for(int i = (page * 9) + 1; i <= (page * 9) + 9; i++)
         {
             glyphs.getEntry(i).removeFromWin(window);
         }
-        for(int j = page + 1; j <= page * 9; j++)
+        for(int j = (page * 9) + 1; j <= (page * 9) + 9; j++)
         {
             if(j <= glyphs.getLength())
             {
