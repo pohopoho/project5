@@ -201,11 +201,12 @@ public class Sorter {
     {
         int totalAnsweredHeard;
         int totalAnsweredLiked;
-        int barIndex = 0;
+
         Song tempSong;
         for (int i = 1; i <= songList.getLength(); i++) {
             tempSong = songList.getEntry(i);
-            // since this is repByHobby, index can only be 0, 1, 2, 3
+            // since this is repByMajor, index can only be 4, 5, 6, 7
+            int barIndex = 0;
             for (int j = 4; j < 8; j++) {
                 // total answered for heard is equal to
                 // total # who answered yes + total # who answered no
@@ -249,11 +250,12 @@ public class Sorter {
     {
         int totalAnsweredHeard;
         int totalAnsweredLiked;
-        int barIndex = 0;
+
         Song tempSong;
         for (int i = 1; i <= songList.getLength(); i++) {
             tempSong = songList.getEntry(i);
-            // since this is repByHobby, index can only be 0, 1, 2, 3
+            // since this is repByRegion, index can only be 8, 9, 10, 11
+            int barIndex = 0;
             for (int j = 8; j < 12; j++) {
                 // total answered for heard is equal to
                 // total # who answered yes + total # who answered no

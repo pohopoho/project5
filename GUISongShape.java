@@ -27,8 +27,6 @@ public class GUISongShape extends Shape {
     private Shape gHeard;
     private Shape gLiked;
     
-    private int x;
-    private int y;
     private Song song;
 
     public static final int BAR_WIDTH = 8;
@@ -39,16 +37,6 @@ public class GUISongShape extends Shape {
         setBackgroundColor(Color.BLACK);
         setForegroundColor(Color.BLACK);
         this.song = song;
-        this.x = x;
-        this.y = y;
-
-       
-
-
-    }
-    
-    public void addToWin(Window win)
-    {
         songTitle = new TextShape(x - 20, y - 40, this.song.getTitle());
         songArtist = new TextShape(x - 20, y - 25, this.song.getArtist());
         songTitle.setBackgroundColor(Color.white);
@@ -73,6 +61,13 @@ public class GUISongShape extends Shape {
             Color.YELLOW);
         gLiked = new Shape(x + 5, y + (3 * BAR_WIDTH), this.song.getBarPercents()[7], BAR_WIDTH,
             Color.GREEN);
+
+
+    }
+    
+    public void addToWin(Window win)
+    {
+        
         win.addShape(songArtist);
         win.addShape(songTitle);
         win.addShape(pHeard);
@@ -86,9 +81,19 @@ public class GUISongShape extends Shape {
         win.addShape(this);
     }
     
-    public void setSong(Song song)
+    public void removeFromWin(Window win)
     {
-        this.song = song;
+        win.removeShape(songArtist);
+        win.removeShape(songTitle);
+        win.removeShape(pHeard);
+        win.removeShape(bHeard);
+        win.removeShape(yHeard);
+        win.removeShape(gHeard);
+        win.removeShape(pLiked);
+        win.removeShape(bLiked);
+        win.removeShape(yLiked);
+        win.removeShape(gLiked);
+        win.removeShape(this);
     }
 
 }

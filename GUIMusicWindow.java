@@ -54,12 +54,18 @@ public class GUIMusicWindow {
 
     // Glyph Shapes
     private LList<GUISongShape> glyphs;
-    //private LListIterator iterator;
+    // private LListIterator iterator;
 
     // Public constants
 
     // Sorter
     private Sorter collection;
+
+    // Page variable
+    private int page;
+    
+    //FirstClick variable
+    private boolean clicked;
 
 
     /**
@@ -91,13 +97,9 @@ public class GUIMusicWindow {
         // Build legend
         buildLegend();
 
-        for (int i = 0; i < 6; i++) {
-            // window.addShape(new GUISongShape(i * 150, 50, 5, 32, window));
-        }
-        // glyph = new SongShape(200, 200, 5, 32, window);
-        // window.addShape(glyph);
-        // window.moveToFront(glyph);
-
+        prev.disable();
+        page = 0;
+        clicked = false;
     }
 
 
@@ -185,6 +187,20 @@ public class GUIMusicWindow {
      * @param button
      */
     public void clickedPrev(Button button) {
+        next.enable();
+        // remove the current shapes
+        for (int i = page + 1; i <= page * 9; i++) {
+            glyphs.getEntry(i).removeFromWin(window);
+        }
+        page--;
+        // add the shapes after decrementing page
+        for (int j = page + 1; j <= page * 9; j++) {
+            glyphs.getEntry(j).addToWin(window);
+        }
+
+        if (page == 0) {
+            button.disable();
+        }
 
     }
 
@@ -195,6 +211,21 @@ public class GUIMusicWindow {
      * @param button
      */
     public void clickedNext(Button button) {
+        prev.enable();
+        // remove the current shapes
+        for (int i = page + 1; i <= page * 9; i++) {
+            glyphs.getEntry(i).removeFromWin(window);
+        }
+        page++;
+        // add the shapes after incrementing page
+        for (int j = page + 1; j <= page * 9; j++) {
+            if (j <= glyphs.getLength()) {
+                glyphs.getEntry(j).addToWin(window);
+            }
+        }
+        if (page * 9 >= glyphs.getLength()) {
+            button.disable();
+        }
 
     }
 
@@ -206,11 +237,8 @@ public class GUIMusicWindow {
      */
     public void clickedSortByArtist(Button button) {
         collection.sortByArtist();
-        for(int i = 1; i <= glyphs.getLength(); i++)
-        {
-            glyphs.getEntry(i).setSong(collection.getSongList().getEntry(i));
-        }
         buildGlyphs();
+        updatePage();
     }
 
 
@@ -221,11 +249,8 @@ public class GUIMusicWindow {
      */
     public void clickedSortByTitle(Button button) {
         collection.sortByTitle();
-        for(int i = 1; i <= glyphs.getLength(); i++)
-        {
-            glyphs.getEntry(i).setSong(collection.getSongList().getEntry(i));
-        }
         buildGlyphs();
+        updatePage();
     }
 
 
@@ -236,11 +261,8 @@ public class GUIMusicWindow {
      */
     public void clickedSortByYear(Button button) {
         collection.sortByYear();
-        for(int i = 1; i <= glyphs.getLength(); i++)
-        {
-            glyphs.getEntry(i).setSong(collection.getSongList().getEntry(i));
-        }
         buildGlyphs();
+        updatePage();
     }
 
 
@@ -251,11 +273,8 @@ public class GUIMusicWindow {
      */
     public void clickedSortByGenre(Button button) {
         collection.sortByGenre();
-        for(int i = 1; i <= glyphs.getLength(); i++)
-        {
-            glyphs.getEntry(i).setSong(collection.getSongList().getEntry(i));
-        }
         buildGlyphs();
+        updatePage();
     }
 
 
@@ -270,7 +289,10 @@ public class GUIMusicWindow {
         blueText.setText("Art");
         yellowText.setText("Sports");
         greenText.setText("Music");
+
         collection.repByHobby();
+        buildGlyphs();
+        updatePage();
     }
 
 
@@ -286,6 +308,8 @@ public class GUIMusicWindow {
         yellowText.setText("Math/CMDA");
         greenText.setText("Other");
         collection.repByMajor();
+        buildGlyphs();
+        updatePage();
     }
 
 
@@ -301,6 +325,8 @@ public class GUIMusicWindow {
         yellowText.setText("Rest of US");
         greenText.setText("Outside of US");
         collection.repByRegion();
+        buildGlyphs();
+        updatePage();
     }
 
 
@@ -321,8 +347,11 @@ public class GUIMusicWindow {
         int xPosition = 1;
         int yPosition = 1;
         int yTracker = 1;
+        glyphs.clear();
         for (int i = 1; i <= collection.getSongList().getLength(); i++) {
-            glyphs.add(new GUISongShape((xPosition * 100) + (xPosition-1) * 90, yPosition * 45, 5, 32, collection.getSongList().getEntry(i)));
+            glyphs.add(new GUISongShape((xPosition * 100) + (xPosition - 1)
+                * 90, yPosition * 45, 5, 32, collection.getSongList().getEntry(
+                    i)));
             if (xPosition % 3 == 0) {
                 xPosition = 1;
             }
@@ -331,16 +360,13 @@ public class GUIMusicWindow {
             }
             if (yTracker == 3) {
                 yTracker = 1;
-                if(yPosition == 1)
-                {
+                if (yPosition == 1) {
                     yPosition = 3;
                 }
-                else if(yPosition == 3)
-                {
+                else if (yPosition == 3) {
                     yPosition = 5;
                 }
-                else
-                {
+                else {
                     yPosition = 1;
                 }
             }
@@ -350,11 +376,20 @@ public class GUIMusicWindow {
             //glyphs.getEntry(i).addToWin(window);
         }
     }
-    
-    private void display()
-    {
-        
-    }
 
+
+    private void updatePage() {
+        for(int i = page + 1; i <= page * 9; i++)
+        {
+            glyphs.getEntry(i).removeFromWin(window);
+        }
+        for(int j = page + 1; j <= page * 9; j++)
+        {
+            if(j <= glyphs.getLength())
+            {
+                glyphs.getEntry(j).addToWin(window);
+            }
+        }
+    }
 
 }
