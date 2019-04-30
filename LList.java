@@ -59,7 +59,7 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
             tail = newNode;
 
             Node curr = head;
-            for (int i = 1; i < size(); i++) {
+            for (int i = 1; i < getLength(); i++) {
                 curr = curr.nextNode;
             }
             curr.setNext(newNode);
@@ -180,9 +180,6 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
             if (position == 1) {
                 result = head.getData();
                 head = head.getNext();
-                if (numberOfEntries == 1) {
-                    tail = null;
-                }
             }
             else {
                 Node before = getNodeAt(position - 1);
@@ -241,16 +238,6 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
 
 
     /**
-     * This is the size() method.
-     * 
-     * @return numberOfEntries returns numberOfEntries
-     */
-    public int size() {
-        return numberOfEntries;
-    }
-
-
-    /**
      * This is the the getNodeAt(int index)
      * 
      * @param index
@@ -286,7 +273,7 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
         if (this.getClass() == obj.getClass()) {
             @SuppressWarnings("unchecked")
             LList<T> other = ((LList<T>)obj);
-            if (other.size() == this.size()) {
+            if (other.getLength() == this.getLength()) {
                 Node otherCurrent = other.head;
                 Node current = head;
                 while (current != null) {
@@ -417,10 +404,9 @@ public class LList<T> implements ListInterface<T>, Iterable<T> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            T temp = curr.getData();
             curr = curr.getNext();
+            T temp = curr.getData();
             return temp;
-
         }
 
     }
