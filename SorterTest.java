@@ -237,4 +237,11 @@ public class SorterTest extends TestCase {
         }
     }
 
+
+    /**
+     * tests songList accessor method
+     */
+    public void testGetSongList() {
+        assertEquals(songList, sort.getSongList());
+    }
 }

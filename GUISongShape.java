@@ -74,6 +74,9 @@ public class GUISongShape extends Shape {
         songTitle.setBackgroundColor(Color.white);
         songText.setBackgroundColor(Color.white);
         songTitle.setX(x - songTitle.getWidth() / 2);
+        if (songTitle.getX() < 0) {
+            songTitle.setX(0);
+        }
         songText.setX(x - songText.getWidth() / 2);
 
         // = new Shape(x+5, <y changes>, numberLiked, 5, color); x4

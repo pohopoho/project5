@@ -248,7 +248,8 @@ public class LListTest extends student.TestCase {
         list2.remove(1);
         list2.add("wiggles");
         assertTrue(list.equals(list2));
-        assertFalse(list.equals(null));
+        LList<String> nullList = null;
+        assertEquals(false, list.equals(nullList));
     }
 
 

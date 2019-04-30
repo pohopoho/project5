@@ -141,50 +141,50 @@ public class GUIMusicWindow {
      */
     private void buildLegend() {
         // Legend
-        legendBox = new Shape(570, 120, 150);
+        legendBox = new Shape(590, 130, 130);
         legendBox.setForegroundColor(Color.BLACK);
         legendBox.setBackgroundColor(Color.white);
 
         window.addShape(legendBox);
         window.moveToFront(legendBox);
 
-        legendTitle = new TextShape(580, 125, "");
+        legendTitle = new TextShape(600, 135, "");
         legendTitle.setBackgroundColor(Color.white);
         window.addShape(legendTitle);
         window.moveToFront(legendTitle);
 
-        legendBottom1 = new TextShape(600, 210, "   Song Title");
+        legendBottom1 = new TextShape(610, 215, "   Song Title");
         legendBottom1.setBackgroundColor(Color.white);
         window.addShape(legendBottom1);
         window.moveToFront(legendBottom1);
 
-        legendBottom2 = new TextShape(600, 240, "Heard   Liked");
+        legendBottom2 = new TextShape(610, 240, "Heard   Liked");
         legendBottom2.setBackgroundColor(Color.white);
         window.addShape(legendBottom2);
         window.moveToFront(legendBottom2);
 
-        pinkText = new TextShape(585, 140, "");
+        pinkText = new TextShape(610, 150, "");
         pinkText.setForegroundColor(Color.pink);
         pinkText.setBackgroundColor(Color.WHITE);
         window.addShape(pinkText);
         window.moveToFront(pinkText);
-        blueText = new TextShape(585, 155, "");
+        blueText = new TextShape(610, 165, "");
         blueText.setForegroundColor(Color.blue);
         blueText.setBackgroundColor(Color.WHITE);
         window.addShape(blueText);
         window.moveToFront(blueText);
-        yellowText = new TextShape(585, 170, "");
+        yellowText = new TextShape(610, 180, "");
         yellowText.setForegroundColor(Color.YELLOW);
         yellowText.setBackgroundColor(Color.WHITE);
         window.addShape(yellowText);
         window.moveToFront(yellowText);
-        greenText = new TextShape(585, 185, "");
+        greenText = new TextShape(610, 195, "");
         greenText.setForegroundColor(Color.green);
         greenText.setBackgroundColor(Color.white);
         window.addShape(greenText);
         window.moveToFront(greenText);
 
-        divider = new Shape(645, 235, 5, 25, Color.BLACK);
+        divider = new Shape(655, 235, 5, 25, Color.BLACK);
         window.addShape(divider);
         window.moveToFront(divider);
     }
@@ -395,7 +395,7 @@ public class GUIMusicWindow {
         int yTracker = 1;
         glyphs.clear();
         for (int i = 1; i <= collection.getSongList().getLength(); i++) {
-            glyphs.add(new GUISongShape((xPosition * 100) + (xPosition - 1)
+            glyphs.add(new GUISongShape((xPosition * 106) + (xPosition - 1)
                 * 90, yPosition * 45, 5, 32, collection.getSongList().getEntry(
                     i)));
             if (xPosition % 3 == 0) {
