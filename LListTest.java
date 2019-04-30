@@ -248,7 +248,7 @@ public class LListTest extends student.TestCase {
         list2.remove(1);
         list2.add("wiggles");
         assertTrue(list.equals(list2));
-
+        assertFalse(list.equals(null));
     }
 
 
@@ -280,6 +280,6 @@ public class LListTest extends student.TestCase {
         list.clear();
         iter = list.iterator();
         assertFalse(iter.hasNext());
-
+        
     }
 }
